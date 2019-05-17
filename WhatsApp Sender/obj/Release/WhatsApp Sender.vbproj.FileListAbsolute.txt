@@ -1,0 +1,23 @@
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WhatsApp Sender.exe.config
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WhatsApp Sender.exe
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WhatsApp Sender.pdb
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WhatsApp Sender.xml
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WebDriver.dll
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WebDriver.Support.dll
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WebDriver.xml
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WebDriver.Support.xml
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp_Sender.Resources.resources
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.vbproj.GenerateResource.cache
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.vbproj.CoreCompileInputs.cache
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.vbproj.CopyComplete
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.exe
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.xml
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.pdb
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.vbprojAssemblyReference.cache
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp_Sender.FormPrincipal.resources
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WhatsApp Sender.exe.manifest
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WhatsApp Sender.application
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp_Sender.FormColumnas.resources
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.exe.manifest
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.application
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp_Sender.FormAgregarNumero.resources
