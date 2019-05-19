@@ -43,6 +43,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SeleniumExtras.WaitHelpers.dll" size="12800">
+      <assemblyIdentity name="SeleniumExtras.WaitHelpers" version="3.11.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Tdsbk0gxByXC60rwj2jNJsKddCB4r1sDCjq7lwPUyUU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WebDriver.dll" size="1783808">
       <assemblyIdentity name="WebDriver" version="3.141.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -74,7 +86,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/MQ4cRwAGUxhxnh0m6mft+r3+WiiKLWAba8wbEnx8nw=</dsig:DigestValue>
+        <dsig:DigestValue>irtwEM3FZQ7wDuq/s6nmZ1VKHi92bI0TNoRD351myOI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

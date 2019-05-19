@@ -1,6 +1,7 @@
 ﻿Imports OpenQA.Selenium
 Imports OpenQA.Selenium.Chrome
 Imports OpenQA.Selenium.Support.UI
+Imports SeleniumExtras.WaitHelpers
 Imports System.Data.OleDb
 Imports System.Text.RegularExpressions
 
@@ -10,8 +11,6 @@ Public Class FormPrincipal
 
     'Public nombrePublic As String
     'Public numeroPublic As String
-
-
 
     Private Sub ButtonEnviarTexto_Click(sender As Object, e As EventArgs) Handles ButtonEnviarTexto.Click
         '----------------------------------------------------------'ENVIAR TEXTO PLANO --------------------------------------------
@@ -24,7 +23,6 @@ Public Class FormPrincipal
             RichTextBox1.Clear()
             RadioButtonTextoPlano.Checked = False
         Else
-
             Dim driver As IWebDriver
             driver = New ChromeDriver
             driver.Manage().Window.Maximize()
@@ -46,8 +44,19 @@ Public Class FormPrincipal
                 For Each item As Object In ListBox1.Items 'Recorre la lista y envia a los destinatarios en la lista que coinciden con los contactos almacenados
                     Dim url As String = a + item + encabezado + mensaje 'Crea la Url de la api
                     driver.Navigate().GoToUrl(url) 'Abre la url generada con la MISMA SESION!!!!
-                    Threading.Thread.Sleep(3000) 'Espera 5 segundos a que se abra la URL en la API
-                    Dim send As IWebElement = driver.FindElement(By.XPath("//*[@id='action-button']")) 'Encuentra el boton SEND para iniciar el chat
+                    '--------------------------------------------
+                    'EXPLICIT WAITS: 'Con esto no sería necesario usar los Threading Sleep
+                    Dim send As IWebElement
+                    Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(5))
+                    send = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='action-button']")))
+
+
+
+
+
+                    '--------------------------------------------
+                    'Threading.Thread.Sleep(3000) 'Espera 3 segundos a que se abra la URL en la API
+                    'Dim send As IWebElement = driver.FindElement(By.XPath("//*[@id='action-button']")) 'Encuentra el boton SEND para iniciar el chat
                     Threading.Thread.Sleep(1000)
                     send.Click() 'Iniciar chat
                     Threading.Thread.Sleep(10000) 'Espera 10 segundos a que se abra Web Whatsapp e inicie un chat
@@ -455,7 +464,7 @@ Public Class FormPrincipal
                         End If
 
                     Else
-                        If NumeroApi.First = "3" Then 'Con NumeroApi.First = "3" entra al IF
+                        If NumeroApi.First <> "5" Then 'Con NumeroApi.First = "3" o distinto a 5 (O sea para cualquier numero fuera de Santiago o Argentina) entra al IF
                             NumeroApi54 = "54" + NumeroApi
                             If ListBox1.Items.Contains(NumeroApi54) Then
                                 MessageBox.Show(NumeroApi + " " + "Ya se encuentra en la lista SEGUNDO IF")
