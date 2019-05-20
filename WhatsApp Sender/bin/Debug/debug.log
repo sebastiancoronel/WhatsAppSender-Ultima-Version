@@ -22,3 +22,15 @@
 [0407/204241.849:ERROR:exception_snapshot_win.cc(98)] thread ID 2896 not found in process
 [0411/223717.863:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
 [0411/223717.883:ERROR:exception_snapshot_win.cc(98)] thread ID 11868 not found in process
+[0519/181049.885:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0519/181049.886:ERROR:exception_snapshot_win.cc(98)] thread ID 3240 not found in process
+[0519/183757.693:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0519/183757.694:ERROR:exception_snapshot_win.cc(98)] thread ID 15392 not found in process
+[0519/183759.457:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0519/183759.462:ERROR:exception_snapshot_win.cc(98)] thread ID 4796 not found in process
+[0519/183800.951:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0519/183800.952:ERROR:exception_snapshot_win.cc(98)] thread ID 3244 not found in process
+[0519/201922.419:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0519/201922.420:ERROR:exception_snapshot_win.cc(98)] thread ID 12484 not found in process
+[0519/201924.008:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0519/201924.009:ERROR:exception_snapshot_win.cc(98)] thread ID 16508 not found in process

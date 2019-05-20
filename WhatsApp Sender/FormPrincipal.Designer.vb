@@ -23,9 +23,9 @@ Partial Class FormPrincipal
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPrincipal))
         Me.Button2 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -134,6 +134,8 @@ Partial Class FormPrincipal
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialogImagenes = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialogDocumentos = New System.Windows.Forms.OpenFileDialog()
+        Me.PictureBoxImagenAEnviar = New System.Windows.Forms.PictureBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -156,6 +158,7 @@ Partial Class FormPrincipal
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBoxTextoPlano.SuspendLayout()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBoxImagenAEnviar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button2
@@ -178,37 +181,37 @@ Partial Class FormPrincipal
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25, Me.Column26, Me.Column27, Me.Column28, Me.Column29, Me.Column30, Me.Column31, Me.Column32, Me.Column33, Me.Column34, Me.Column35, Me.Column36, Me.Column37, Me.Column38, Me.Column39, Me.Column40, Me.Column41, Me.Column42, Me.Column43, Me.Column44, Me.Column45, Me.Column46, Me.Column47, Me.Column48, Me.Column49, Me.Column50})
         Me.DataGridView1.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView1.GridColor = System.Drawing.Color.Black
         Me.DataGridView1.Location = New System.Drawing.Point(192, 6)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect
         Me.DataGridView1.Size = New System.Drawing.Size(747, 539)
@@ -1012,6 +1015,8 @@ Partial Class FormPrincipal
         'GroupBoxImagenesYVideo
         '
         Me.GroupBoxImagenesYVideo.BackColor = System.Drawing.Color.Gainsboro
+        Me.GroupBoxImagenesYVideo.Controls.Add(Me.Label6)
+        Me.GroupBoxImagenesYVideo.Controls.Add(Me.PictureBoxImagenAEnviar)
         Me.GroupBoxImagenesYVideo.Controls.Add(Me.PictureBox11)
         Me.GroupBoxImagenesYVideo.Controls.Add(Me.ButtonEnviarImagen)
         Me.GroupBoxImagenesYVideo.Controls.Add(Me.RichTextBoxPieDeFoto)
@@ -1057,7 +1062,7 @@ Partial Class FormPrincipal
         Me.RichTextBoxPieDeFoto.Location = New System.Drawing.Point(9, 86)
         Me.RichTextBoxPieDeFoto.MaxLength = 900
         Me.RichTextBoxPieDeFoto.Name = "RichTextBoxPieDeFoto"
-        Me.RichTextBoxPieDeFoto.Size = New System.Drawing.Size(844, 100)
+        Me.RichTextBoxPieDeFoto.Size = New System.Drawing.Size(455, 100)
         Me.RichTextBoxPieDeFoto.TabIndex = 21
         Me.RichTextBoxPieDeFoto.Text = ""
         '
@@ -1078,7 +1083,7 @@ Partial Class FormPrincipal
         Me.TextBoxRuta.Location = New System.Drawing.Point(9, 37)
         Me.TextBoxRuta.Name = "TextBoxRuta"
         Me.TextBoxRuta.ReadOnly = True
-        Me.TextBoxRuta.Size = New System.Drawing.Size(574, 20)
+        Me.TextBoxRuta.Size = New System.Drawing.Size(414, 20)
         Me.TextBoxRuta.TabIndex = 19
         '
         'ButtonFolder
@@ -1088,7 +1093,7 @@ Partial Class FormPrincipal
         Me.ButtonFolder.Enabled = False
         Me.ButtonFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonFolder.ForeColor = System.Drawing.Color.White
-        Me.ButtonFolder.Location = New System.Drawing.Point(589, 32)
+        Me.ButtonFolder.Location = New System.Drawing.Point(429, 32)
         Me.ButtonFolder.Name = "ButtonFolder"
         Me.ButtonFolder.Size = New System.Drawing.Size(35, 25)
         Me.ButtonFolder.TabIndex = 18
@@ -1188,6 +1193,27 @@ Partial Class FormPrincipal
         '
         Me.OpenFileDialogDocumentos.FileName = "OpenFileDialog2"
         '
+        'PictureBoxImagenAEnviar
+        '
+        Me.PictureBoxImagenAEnviar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PictureBoxImagenAEnviar.Location = New System.Drawing.Point(470, 37)
+        Me.PictureBoxImagenAEnviar.Name = "PictureBoxImagenAEnviar"
+        Me.PictureBoxImagenAEnviar.Size = New System.Drawing.Size(383, 149)
+        Me.PictureBoxImagenAEnviar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBoxImagenAEnviar.TabIndex = 31
+        Me.PictureBoxImagenAEnviar.TabStop = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.Label6.ForeColor = System.Drawing.Color.Gray
+        Me.Label6.Location = New System.Drawing.Point(624, 13)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(75, 13)
+        Me.Label6.TabIndex = 32
+        Me.Label6.Text = "Vista Previa"
+        '
         'FormPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1229,6 +1255,7 @@ Partial Class FormPrincipal
         Me.GroupBoxTextoPlano.ResumeLayout(False)
         Me.GroupBoxTextoPlano.PerformLayout()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBoxImagenAEnviar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1339,4 +1366,6 @@ Partial Class FormPrincipal
     Friend WithEvents Column49 As DataGridViewTextBoxColumn
     Friend WithEvents Column50 As DataGridViewTextBoxColumn
     Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents PictureBoxImagenAEnviar As PictureBox
+    Friend WithEvents Label6 As Label
 End Class

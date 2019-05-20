@@ -13,6 +13,7 @@ Public Class FormPrincipal
     'Public numeroPublic As String
 
     Private Sub ButtonEnviarTexto_Click(sender As Object, e As EventArgs) Handles ButtonEnviarTexto.Click
+
         '----------------------------------------------------------'ENVIAR TEXTO PLANO --------------------------------------------
         If ListBox1.Items.Count = 0 Then
             MessageBox.Show("La lista de destinatrios se encuentra vacía. Agregue destinatarios para comenzar a enviar mensajes")
@@ -34,45 +35,48 @@ Public Class FormPrincipal
             driver.Navigate().GoToUrl("https://web.whatsapp.com/")
 
             If MessageBox.Show("1° PASO: ESCANEAR CODIGO QR " & vbCrLf & "" & vbCrLf & "2° PASO: PRESIONE ACEPTAR PARA CONTINUAR", "IMPORTANTE!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
-                'Vacío
+
             End If
 
             If MessageBox.Show("Si ya inició sesión en WhtasApp web haga click en Aceptar para comenzar a enviar.", "ATENCIÓN!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                 Threading.Thread.Sleep(5000) 'Espera 10 segundos a que se regrese a web whatsapp
 
-                'GENERAR URL PARA ENVIAR A NUMEROS SIN AGENDAR-----------------------------------------------------------------------------------------------------------
+                'GENERAR URL PARA ENVIAR A NUMEROS SIN AGENDAR
                 For Each item As Object In ListBox1.Items 'Recorre la lista y envia a los destinatarios en la lista que coinciden con los contactos almacenados
                     Dim url As String = a + item + encabezado + mensaje 'Crea la Url de la api
                     driver.Navigate().GoToUrl(url) 'Abre la url generada con la MISMA SESION!!!!
-                    '--------------------------------------------
-                    'EXPLICIT WAITS: 'Con esto no sería necesario usar los Threading Sleep
+
+                    'EXPLICIT WAITS: 'Con esto no sería necesario usar los Threading Sleep-------------------------------------------------------------------------------
                     Dim send As IWebElement
-                    Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(5))
+                    Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(60))
                     send = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='action-button']")))
+                    '----------------------------------------------------------------------------------------------------------------------------------------------------
+                    'INICIA EL CHAT
+                    send.Click() 'Iniciar chat
+                    Dim enviarMensaje As IWebElement
+                    enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/footer/div[1]/div[3]/button")))
+                    enviarMensaje.Click()
+
+                    Dim EsperarEntregado As New WebDriverWait(driver, TimeSpan.FromSeconds(10))
+
+                    'ControlarMensajeEnviado
 
 
-
-
-
-                    '--------------------------------------------
+                    '-----Forma antigua que no anda pero se puede seguir explorando--
+                    'Dim tickEnviado As IWebElement
+                    'tickEnviado = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.ClassName(classNameToFind:="_32uRw")))
+                    '----------------------------------------------------------------------
+                    'CODIGO VIEJO//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     'Threading.Thread.Sleep(3000) 'Espera 3 segundos a que se abra la URL en la API
                     'Dim send As IWebElement = driver.FindElement(By.XPath("//*[@id='action-button']")) 'Encuentra el boton SEND para iniciar el chat
-                    Threading.Thread.Sleep(1000)
-                    send.Click() 'Iniciar chat
-                    Threading.Thread.Sleep(10000) 'Espera 10 segundos a que se abra Web Whatsapp e inicie un chat
-                    Dim enviarMensaje As IWebElement = driver.FindElement(By.XPath("//*[@id='main']/footer/div[1]/div[3]/button"))
-                    Threading.Thread.Sleep(1000)
-                    'enviarMensaje.Click()
-                    Threading.Thread.Sleep(5000) ' Espera 5 segundos a que se envíe para luego volver a abrir proxima URL
+                    'Threading.Thread.Sleep(1000)
+                    'Threading.Thread.Sleep(10000) 'Espera 10 segundos a que se abra Web Whatsapp e inicie un chat
+                    'Dim enviarMensaje As IWebElement = driver.FindElement(By.XPath("//*[@id='main']/footer/div[1]/div[3]/button"))
+                    '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
                 Next
-                ''-----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
                 If MessageBox.Show("FINALIZADO", "FINALIZADO", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
 
                 End If
-
 
             End If
 
@@ -121,10 +125,6 @@ Public Class FormPrincipal
             'End Try
         End If
 
-
-
-
-
     End Sub
 
     Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
@@ -140,6 +140,7 @@ Public Class FormPrincipal
         If (OpenFileDialogImagenes.ShowDialog() = DialogResult.OK) Then
 
             TextBoxRuta.Text = OpenFileDialogImagenes.FileName
+            PictureBoxImagenAEnviar.Image = Image.FromFile(OpenFileDialogImagenes.FileName)
         End If
 
     End Sub
@@ -408,6 +409,7 @@ Public Class FormPrincipal
     Private Sub ButtonFolderDocumento_Click(sender As Object, e As EventArgs) Handles ButtonFolderDocumento.Click
         If (OpenFileDialogDocumentos.ShowDialog() = DialogResult.OK) Then
             TextBoxRutaDocumento.Text = OpenFileDialogDocumentos.FileName
+
         End If
     End Sub
 
