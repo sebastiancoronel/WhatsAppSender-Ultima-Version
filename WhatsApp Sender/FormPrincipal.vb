@@ -9,12 +9,17 @@ Imports System.Text.RegularExpressions
 
 Public Class FormPrincipal
 
-    'Public nombrePublic As String
-    'Public numeroPublic As String
+
+    Dim i As Integer
+
+    Dim intervalo As Integer
 
     Private Sub ButtonEnviarTexto_Click(sender As Object, e As EventArgs) Handles ButtonEnviarTexto.Click
 
         '----------------------------------------------------------'ENVIAR TEXTO PLANO --------------------------------------------
+
+        intervalo = MaskedTextBoxIntervaloEntreChats.Text * 1000 'Convertir lo del Masked textbox a milisegundos
+
         If ListBox1.Items.Count = 0 Then
             MessageBox.Show("La lista de destinatrios se encuentra vacía. Agregue destinatarios para comenzar a enviar mensajes")
             Label11.ForeColor = Color.Gray
@@ -39,7 +44,10 @@ Public Class FormPrincipal
             End If
 
             If MessageBox.Show("Si ya inició sesión en WhtasApp web haga click en Aceptar para comenzar a enviar.", "ATENCIÓN!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
-                Threading.Thread.Sleep(5000) 'Espera 10 segundos a que se regrese a web whatsapp
+                Dim whatsappWebListo As IWebElement
+                Dim EsperarSesion As New WebDriverWait(driver, TimeSpan.FromSeconds(120))
+                whatsappWebListo = EsperarSesion.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[4]/div/div/div[2]/h1")))
+                'Threading.Thread.Sleep(5000) 'Espera 10 segundos a que se regrese a web whatsapp
 
                 'GENERAR URL PARA ENVIAR A NUMEROS SIN AGENDAR
                 For Each item As Object In ListBox1.Items 'Recorre la lista y envia a los destinatarios en la lista que coinciden con los contactos almacenados
@@ -48,18 +56,59 @@ Public Class FormPrincipal
 
                     'EXPLICIT WAITS: 'Con esto no sería necesario usar los Threading Sleep-------------------------------------------------------------------------------
                     Dim send As IWebElement
-                    Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(60))
+                    Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(120))
                     send = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='action-button']")))
                     '----------------------------------------------------------------------------------------------------------------------------------------------------
                     'INICIA EL CHAT
                     send.Click() 'Iniciar chat
-                    Dim enviarMensaje As IWebElement
-                    enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/footer/div[1]/div[3]/button")))
-                    enviarMensaje.Click()
 
-                    Dim EsperarEntregado As New WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                    'CONTROLAR INEXISTENTES---------------------------------------------
 
-                    'ControlarMensajeEnviado
+                    'Con esto espera 120 segundos hasta que lo encuentra y se asegura que existe, luego entra al IF existiendo
+                    'Dim ok As IWebElement
+                    'ok = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.ClassName(classNameToFind:="_1CnF3")))
+                    Threading.Thread.Sleep(10000)
+                    Try
+                        If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then 'Si encuentra la parte de Chat
+                            Dim enviarMensaje As IWebElement
+                            enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/footer/div[1]/div[3]/button")))
+                            'enviarMensaje.Click()
+                            Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000) 'Transforma el tiempo de espera entre chats del maskedtextbox a milisegundos
+                        Else
+                            'Parece que hay que borrar todo esto hasta el END IF
+                            'Try
+                            '    If driver.FindElement(By.ClassName("_1CnF3")).Displayed Then 'Funciona solo para numeros inexistentes, el resto salta una exception pero es el mismo modal que el que muestra Iniciando chat
+
+                            '        If MessageBox.Show("NO EXISTE EL NUMERO" & vbCrLf & "" & vbCrLf & "", "NO EXISTE", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+
+                            '        End If
+
+                            '    Else
+                            '        If MessageBox.Show("EXISTE" & vbCrLf & "" & vbCrLf & "", "EXISTE", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+
+                            '        End If
+
+                            '    End If
+                            'Catch ex As Exception
+                            '    If MessageBox.Show("El numero existe, pero no tiene que saltar esta exepcion" & vbCrLf & "" & vbCrLf & "", "NO EXISTE", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+
+                            '    End If
+                            'End Try
+
+                        End If
+                    Catch ex As Exception
+                        'If MessageBox.Show("NO EXISTE EL NUMERO" & vbCrLf & "" & vbCrLf & "", "NO EXISTE", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+
+                        'End If
+                    End Try
+
+
+
+
+
+
+
+
 
 
                     '-----Forma antigua que no anda pero se puede seguir explorando--
@@ -140,7 +189,12 @@ Public Class FormPrincipal
         If (OpenFileDialogImagenes.ShowDialog() = DialogResult.OK) Then
 
             TextBoxRuta.Text = OpenFileDialogImagenes.FileName
-            PictureBoxImagenAEnviar.Image = Image.FromFile(OpenFileDialogImagenes.FileName)
+            Try
+                PictureBoxImagenAEnviar.Image = Image.FromFile(OpenFileDialogImagenes.FileName)
+            Catch ex As Exception
+
+            End Try
+
         End If
 
     End Sub
@@ -591,5 +645,9 @@ Public Class FormPrincipal
 
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
 
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        i = i + 1000
     End Sub
 End Class
