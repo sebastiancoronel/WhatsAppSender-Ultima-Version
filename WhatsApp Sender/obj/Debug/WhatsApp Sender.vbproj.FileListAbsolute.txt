@@ -19,6 +19,5 @@ B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\D
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.application
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.exe.manifest
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.application
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp_Sender.FormColumnas.resources
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp_Sender.FormAgregarNumero.resources
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\SeleniumExtras.WaitHelpers.dll

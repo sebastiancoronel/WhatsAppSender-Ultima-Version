@@ -17,7 +17,6 @@ B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\R
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp_Sender.FormPrincipal.resources
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WhatsApp Sender.exe.manifest
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Release\WhatsApp Sender.application
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp_Sender.FormColumnas.resources
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.exe.manifest
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp Sender.application
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Release\WhatsApp_Sender.FormAgregarNumero.resources
