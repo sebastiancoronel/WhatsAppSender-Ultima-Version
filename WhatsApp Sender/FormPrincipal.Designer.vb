@@ -24,9 +24,9 @@ Partial Class FormPrincipal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPrincipal))
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
@@ -50,6 +50,10 @@ Partial Class FormPrincipal
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.PictureBox5 = New System.Windows.Forms.PictureBox()
         Me.Label17 = New System.Windows.Forms.Label()
+        Me.PictureBoxError = New System.Windows.Forms.PictureBox()
+        Me.PictureBoxSuccess = New System.Windows.Forms.PictureBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.MaskedTextBoxEsperarParteChat = New System.Windows.Forms.MaskedTextBox()
         Me.OpenFileDialogImagenes = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialogDocumentos = New System.Windows.Forms.OpenFileDialog()
         Me.BackgroundWorkerEnviarTextoPlano = New System.ComponentModel.BackgroundWorker()
@@ -154,8 +158,8 @@ Partial Class FormPrincipal
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.BackgroundWorkerEnviarMultimedia = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerEnviarDocumentos = New System.ComponentModel.BackgroundWorker()
-        Me.PictureBoxError = New System.Windows.Forms.PictureBox()
-        Me.PictureBoxSuccess = New System.Windows.Forms.PictureBox()
+        Me.PictureBox14 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox15 = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -164,6 +168,8 @@ Partial Class FormPrincipal
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBoxError, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBoxSuccess, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -181,8 +187,8 @@ Partial Class FormPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
-        CType(Me.PictureBoxError, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBoxSuccess, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -338,7 +344,7 @@ Partial Class FormPrincipal
         '
         'MaskedTextBoxIntervaloEntreChats
         '
-        Me.MaskedTextBoxIntervaloEntreChats.Location = New System.Drawing.Point(116, 372)
+        Me.MaskedTextBoxIntervaloEntreChats.Location = New System.Drawing.Point(175, 368)
         Me.MaskedTextBoxIntervaloEntreChats.Mask = "999"
         Me.MaskedTextBoxIntervaloEntreChats.Name = "MaskedTextBoxIntervaloEntreChats"
         Me.MaskedTextBoxIntervaloEntreChats.Size = New System.Drawing.Size(25, 20)
@@ -353,15 +359,17 @@ Partial Class FormPrincipal
         Me.Label14.ForeColor = System.Drawing.Color.White
         Me.Label14.Location = New System.Drawing.Point(6, 375)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(104, 13)
+        Me.Label14.Size = New System.Drawing.Size(163, 13)
         Me.Label14.TabIndex = 54
-        Me.Label14.Text = "Intervalo entre chats"
-        Me.ToolTip1.SetToolTip(Me.Label14, "Tiempo a esperar para enviar")
+        Me.Label14.Text = "Espera para el envío de mensaje"
+        Me.ToolTip1.SetToolTip(Me.Label14, "Tiempo hasta que el mensaje enviado sea recibido por el destinatario antes que se" &
+        " pase al siguiente contacto" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & ". Para videos o documentos pesados se recomiendan m" &
+        "as de 20 segundos")
         '
         'MaskedTextBoxExploradorDeArchivos
         '
         Me.MaskedTextBoxExploradorDeArchivos.Enabled = False
-        Me.MaskedTextBoxExploradorDeArchivos.Location = New System.Drawing.Point(146, 80)
+        Me.MaskedTextBoxExploradorDeArchivos.Location = New System.Drawing.Point(146, 89)
         Me.MaskedTextBoxExploradorDeArchivos.Mask = "999"
         Me.MaskedTextBoxExploradorDeArchivos.Name = "MaskedTextBoxExploradorDeArchivos"
         Me.MaskedTextBoxExploradorDeArchivos.Size = New System.Drawing.Size(25, 20)
@@ -374,7 +382,7 @@ Partial Class FormPrincipal
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.Color.Gray
-        Me.Label10.Location = New System.Drawing.Point(3, 83)
+        Me.Label10.Location = New System.Drawing.Point(3, 92)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(138, 13)
         Me.Label10.TabIndex = 60
@@ -385,41 +393,42 @@ Partial Class FormPrincipal
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.Color.Gray
-        Me.Label16.Location = New System.Drawing.Point(223, 83)
+        Me.Label16.Location = New System.Drawing.Point(213, 92)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(164, 13)
+        Me.Label16.Size = New System.Drawing.Size(170, 13)
         Me.Label16.TabIndex = 62
-        Me.Label16.Text = "Esperar carga de imagen en chat"
+        Me.Label16.Text = "Esperar procesamiento del archivo"
         Me.ToolTip1.SetToolTip(Me.Label16, "Tiempo a esperar para enviar")
         '
         'MaskedTextBoxTiempoCargaImagenVideo
         '
         Me.MaskedTextBoxTiempoCargaImagenVideo.Enabled = False
-        Me.MaskedTextBoxTiempoCargaImagenVideo.Location = New System.Drawing.Point(393, 80)
+        Me.MaskedTextBoxTiempoCargaImagenVideo.Location = New System.Drawing.Point(383, 89)
         Me.MaskedTextBoxTiempoCargaImagenVideo.Mask = "999"
         Me.MaskedTextBoxTiempoCargaImagenVideo.Name = "MaskedTextBoxTiempoCargaImagenVideo"
         Me.MaskedTextBoxTiempoCargaImagenVideo.Size = New System.Drawing.Size(25, 20)
         Me.MaskedTextBoxTiempoCargaImagenVideo.TabIndex = 63
         Me.MaskedTextBoxTiempoCargaImagenVideo.Text = "5"
-        Me.ToolTip1.SetToolTip(Me.MaskedTextBoxTiempoCargaImagenVideo, "Tiempo a esperar para entregar un mensaje")
+        Me.ToolTip1.SetToolTip(Me.MaskedTextBoxTiempoCargaImagenVideo, "Tiempo a esperar para entregar un mensaje. Para videos se recomienda como minimo " &
+        "10 segundos")
         Me.MaskedTextBoxTiempoCargaImagenVideo.ValidatingType = GetType(Integer)
         '
         'PictureBox4
         '
         Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
-        Me.PictureBox4.Location = New System.Drawing.Point(424, 79)
+        Me.PictureBox4.Location = New System.Drawing.Point(414, 89)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(20, 20)
         Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox4.TabIndex = 64
         Me.PictureBox4.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox4, "Los archivos de video tardarán mas tiempo dependiendo de la velocidad a internet " &
-        "y el tamaño del archivo")
+        Me.ToolTip1.SetToolTip(Me.PictureBox4, "Los archivos de video tardarán mas tiempo en procesarse dependiendo de la velocid" &
+        "ad a internet y el tamaño del archivo")
         '
         'PictureBox5
         '
         Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
-        Me.PictureBox5.Location = New System.Drawing.Point(177, 79)
+        Me.PictureBox5.Location = New System.Drawing.Point(177, 89)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(20, 20)
         Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -432,12 +441,60 @@ Partial Class FormPrincipal
         '
         Me.Label17.AutoSize = True
         Me.Label17.ForeColor = System.Drawing.Color.Black
-        Me.Label17.Location = New System.Drawing.Point(6, 49)
+        Me.Label17.Location = New System.Drawing.Point(6, 61)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(47, 13)
         Me.Label17.TabIndex = 66
         Me.Label17.Text = "Tiempos"
         Me.ToolTip1.SetToolTip(Me.Label17, "Tiempo a esperar para enviar")
+        '
+        'PictureBoxError
+        '
+        Me.PictureBoxError.Image = CType(resources.GetObject("PictureBoxError.Image"), System.Drawing.Image)
+        Me.PictureBoxError.Location = New System.Drawing.Point(6, 6)
+        Me.PictureBoxError.Name = "PictureBoxError"
+        Me.PictureBoxError.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBoxError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBoxError.TabIndex = 68
+        Me.PictureBoxError.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBoxError, "Tiempo de espera hasta que el explorador de archivos de windows esté listo para b" &
+        "uscar el archivo")
+        Me.PictureBoxError.Visible = False
+        '
+        'PictureBoxSuccess
+        '
+        Me.PictureBoxSuccess.Image = CType(resources.GetObject("PictureBoxSuccess.Image"), System.Drawing.Image)
+        Me.PictureBoxSuccess.Location = New System.Drawing.Point(6, 6)
+        Me.PictureBoxSuccess.Name = "PictureBoxSuccess"
+        Me.PictureBoxSuccess.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBoxSuccess.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBoxSuccess.TabIndex = 68
+        Me.PictureBoxSuccess.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBoxSuccess, "Tiempo de espera hasta que el explorador de archivos de windows esté listo para b" &
+        "uscar el archivo")
+        Me.PictureBoxSuccess.Visible = False
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.ForeColor = System.Drawing.Color.White
+        Me.Label18.Location = New System.Drawing.Point(9, 413)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(133, 13)
+        Me.Label18.TabIndex = 58
+        Me.Label18.Text = "Espera para iniciar un chat"
+        Me.ToolTip1.SetToolTip(Me.Label18, "Tiempo de espera al iniciar un nuevo chat" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " en whatsapp web")
+        '
+        'MaskedTextBoxEsperarParteChat
+        '
+        Me.MaskedTextBoxEsperarParteChat.Location = New System.Drawing.Point(175, 410)
+        Me.MaskedTextBoxEsperarParteChat.Mask = "999"
+        Me.MaskedTextBoxEsperarParteChat.Name = "MaskedTextBoxEsperarParteChat"
+        Me.MaskedTextBoxEsperarParteChat.Size = New System.Drawing.Size(25, 20)
+        Me.MaskedTextBoxEsperarParteChat.TabIndex = 59
+        Me.MaskedTextBoxEsperarParteChat.Text = "10"
+        Me.ToolTip1.SetToolTip(Me.MaskedTextBoxEsperarParteChat, "Tiempo a esperar para entregar un mensaje")
+        Me.MaskedTextBoxEsperarParteChat.ValidatingType = GetType(Integer)
         '
         'OpenFileDialogImagenes
         '
@@ -496,7 +553,7 @@ Partial Class FormPrincipal
         '
         'ButtonCancelarEnvio
         '
-        Me.ButtonCancelarEnvio.BackColor = System.Drawing.Color.Red
+        Me.ButtonCancelarEnvio.BackColor = System.Drawing.Color.Gray
         Me.ButtonCancelarEnvio.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ButtonCancelarEnvio.Enabled = False
         Me.ButtonCancelarEnvio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
@@ -701,7 +758,7 @@ Partial Class FormPrincipal
         'PictureBox13
         '
         Me.PictureBox13.Image = CType(resources.GetObject("PictureBox13.Image"), System.Drawing.Image)
-        Me.PictureBox13.Location = New System.Drawing.Point(59, 46)
+        Me.PictureBox13.Location = New System.Drawing.Point(59, 58)
         Me.PictureBox13.Name = "PictureBox13"
         Me.PictureBox13.Size = New System.Drawing.Size(20, 20)
         Me.PictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -746,10 +803,11 @@ Partial Class FormPrincipal
         'RichTextBoxPieDeFoto
         '
         Me.RichTextBoxPieDeFoto.Enabled = False
-        Me.RichTextBoxPieDeFoto.Location = New System.Drawing.Point(9, 125)
+        Me.RichTextBoxPieDeFoto.Location = New System.Drawing.Point(6, 154)
         Me.RichTextBoxPieDeFoto.MaxLength = 900
+        Me.RichTextBoxPieDeFoto.Multiline = False
         Me.RichTextBoxPieDeFoto.Name = "RichTextBoxPieDeFoto"
-        Me.RichTextBoxPieDeFoto.Size = New System.Drawing.Size(419, 72)
+        Me.RichTextBoxPieDeFoto.Size = New System.Drawing.Size(425, 42)
         Me.RichTextBoxPieDeFoto.TabIndex = 21
         Me.RichTextBoxPieDeFoto.Text = ""
         '
@@ -758,7 +816,7 @@ Partial Class FormPrincipal
         Me.CheckBoxPieDeFoto.AutoSize = True
         Me.CheckBoxPieDeFoto.Enabled = False
         Me.CheckBoxPieDeFoto.ForeColor = System.Drawing.Color.Gray
-        Me.CheckBoxPieDeFoto.Location = New System.Drawing.Point(9, 102)
+        Me.CheckBoxPieDeFoto.Location = New System.Drawing.Point(156, 131)
         Me.CheckBoxPieDeFoto.Name = "CheckBoxPieDeFoto"
         Me.CheckBoxPieDeFoto.Size = New System.Drawing.Size(107, 17)
         Me.CheckBoxPieDeFoto.TabIndex = 20
@@ -895,6 +953,10 @@ Partial Class FormPrincipal
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(94, Byte), Integer), CType(CType(84, Byte), Integer))
+        Me.GroupBox2.Controls.Add(Me.PictureBox15)
+        Me.GroupBox2.Controls.Add(Me.PictureBox14)
+        Me.GroupBox2.Controls.Add(Me.MaskedTextBoxEsperarParteChat)
+        Me.GroupBox2.Controls.Add(Me.Label18)
         Me.GroupBox2.Controls.Add(Me.Label15)
         Me.GroupBox2.Controls.Add(Me.PictureBox3)
         Me.GroupBox2.Controls.Add(Me.MaskedTextBoxIntervaloEntreChats)
@@ -920,9 +982,9 @@ Partial Class FormPrincipal
         Me.Label15.AutoSize = True
         Me.Label15.Location = New System.Drawing.Point(39, 339)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(50, 13)
+        Me.Label15.Size = New System.Drawing.Size(96, 13)
         Me.Label15.TabIndex = 57
-        Me.Label15.Text = "Tiempos "
+        Me.Label15.Text = "Tiempos generales"
         '
         'PictureBox3
         '
@@ -1009,37 +1071,37 @@ Partial Class FormPrincipal
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25, Me.Column26, Me.Column27, Me.Column28, Me.Column29, Me.Column30, Me.Column31, Me.Column32, Me.Column33, Me.Column34, Me.Column35, Me.Column36, Me.Column37, Me.Column38, Me.Column39, Me.Column40, Me.Column41, Me.Column42, Me.Column43, Me.Column44, Me.Column45, Me.Column46, Me.Column47, Me.Column48, Me.Column49, Me.Column50})
         Me.DataGridView1.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle14
         Me.DataGridView1.GridColor = System.Drawing.Color.Black
         Me.DataGridView1.Location = New System.Drawing.Point(251, 6)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect
         Me.DataGridView1.Size = New System.Drawing.Size(714, 621)
@@ -1428,31 +1490,28 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerEnviarDocumentos.WorkerReportsProgress = True
         Me.BackgroundWorkerEnviarDocumentos.WorkerSupportsCancellation = True
         '
-        'PictureBoxError
+        'PictureBox14
         '
-        Me.PictureBoxError.Image = CType(resources.GetObject("PictureBoxError.Image"), System.Drawing.Image)
-        Me.PictureBoxError.Location = New System.Drawing.Point(6, 6)
-        Me.PictureBoxError.Name = "PictureBoxError"
-        Me.PictureBoxError.Size = New System.Drawing.Size(20, 20)
-        Me.PictureBoxError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBoxError.TabIndex = 68
-        Me.PictureBoxError.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBoxError, "Tiempo de espera hasta que el explorador de archivos de windows esté listo para b" &
-        "uscar el archivo")
-        Me.PictureBoxError.Visible = False
+        Me.PictureBox14.Image = CType(resources.GetObject("PictureBox14.Image"), System.Drawing.Image)
+        Me.PictureBox14.Location = New System.Drawing.Point(205, 368)
+        Me.PictureBox14.Name = "PictureBox14"
+        Me.PictureBox14.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox14.TabIndex = 65
+        Me.PictureBox14.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox14, "Los archivos de video tardarán mas tiempo en recibirse por el contacto dependiend" &
+        "o de la velocidad a internet y el tamaño del archivo")
         '
-        'PictureBoxSuccess
+        'PictureBox15
         '
-        Me.PictureBoxSuccess.Image = CType(resources.GetObject("PictureBoxSuccess.Image"), System.Drawing.Image)
-        Me.PictureBoxSuccess.Location = New System.Drawing.Point(6, 6)
-        Me.PictureBoxSuccess.Name = "PictureBoxSuccess"
-        Me.PictureBoxSuccess.Size = New System.Drawing.Size(20, 20)
-        Me.PictureBoxSuccess.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBoxSuccess.TabIndex = 68
-        Me.PictureBoxSuccess.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBoxSuccess, "Tiempo de espera hasta que el explorador de archivos de windows esté listo para b" &
-        "uscar el archivo")
-        Me.PictureBoxSuccess.Visible = False
+        Me.PictureBox15.Image = CType(resources.GetObject("PictureBox15.Image"), System.Drawing.Image)
+        Me.PictureBox15.Location = New System.Drawing.Point(205, 410)
+        Me.PictureBox15.Name = "PictureBox15"
+        Me.PictureBox15.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox15.TabIndex = 66
+        Me.PictureBox15.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox15, "Tiempo de espera hasta entrar a la pantalla de WhatsApp web")
         '
         'FormPrincipal
         '
@@ -1474,6 +1533,8 @@ Partial Class FormPrincipal
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBoxError, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBoxSuccess, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
@@ -1499,8 +1560,8 @@ Partial Class FormPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
-        CType(Me.PictureBoxError, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBoxSuccess, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1633,4 +1694,8 @@ Partial Class FormPrincipal
     Friend WithEvents Label17 As Label
     Friend WithEvents PictureBoxSuccess As PictureBox
     Friend WithEvents PictureBoxError As PictureBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents MaskedTextBoxEsperarParteChat As MaskedTextBox
+    Friend WithEvents PictureBox14 As PictureBox
+    Friend WithEvents PictureBox15 As PictureBox
 End Class
