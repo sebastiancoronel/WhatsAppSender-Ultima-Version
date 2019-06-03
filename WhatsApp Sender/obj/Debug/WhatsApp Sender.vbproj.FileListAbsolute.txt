@@ -1,23 +1,23 @@
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.exe.config
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.exe.manifest
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.application
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.exe
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.pdb
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.xml
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\SeleniumExtras.WaitHelpers.dll
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WebDriver.dll
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WebDriver.Support.dll
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WebDriver.xml
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WebDriver.Support.xml
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.vbprojAssemblyReference.cache
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp_Sender.FormAgregarNumero.resources
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp_Sender.FormPrincipal.resources
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp_Sender.Resources.resources
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.vbproj.GenerateResource.cache
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.vbproj.CoreCompileInputs.cache
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.exe.manifest
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.application
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.vbproj.CopyComplete
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.exe
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.xml
 B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.pdb
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp_Sender.FormPrincipal.resources
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.exe.manifest
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\WhatsApp Sender.application
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.exe.manifest
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.application
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp_Sender.FormAgregarNumero.resources
-B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\bin\Debug\SeleniumExtras.WaitHelpers.dll
+B:\Proyectos Visual Studio\WhatsApp Sender\WhatsApp Sender\WhatsApp Sender\obj\Debug\WhatsApp Sender.vbprojAssemblyReference.cache

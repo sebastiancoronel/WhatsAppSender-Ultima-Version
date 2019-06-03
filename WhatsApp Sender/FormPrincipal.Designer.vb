@@ -24,9 +24,9 @@ Partial Class FormPrincipal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPrincipal))
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
@@ -38,7 +38,6 @@ Partial Class FormPrincipal
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
         Me.CheckBoxSeleccionar29 = New System.Windows.Forms.CheckBox()
         Me.RadioButtonQuitar = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonAgregarNombre = New System.Windows.Forms.RadioButton()
         Me.CheckBoxSeleccionar31 = New System.Windows.Forms.CheckBox()
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.MaskedTextBoxIntervaloEntreChats = New System.Windows.Forms.MaskedTextBox()
@@ -54,15 +53,22 @@ Partial Class FormPrincipal
         Me.PictureBoxSuccess = New System.Windows.Forms.PictureBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.MaskedTextBoxEsperarParteChat = New System.Windows.Forms.MaskedTextBox()
+        Me.PictureBox14 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox15 = New System.Windows.Forms.PictureBox()
+        Me.ButtonReenviarFallidos = New System.Windows.Forms.Button()
+        Me.PictureBoxLoading = New System.Windows.Forms.PictureBox()
+        Me.ListBoxFallidos = New System.Windows.Forms.ListBox()
+        Me.ListBoxReenviadosFallidos = New System.Windows.Forms.ListBox()
+        Me.ButtonCancelarReenvio = New System.Windows.Forms.Button()
         Me.OpenFileDialogImagenes = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialogDocumentos = New System.Windows.Forms.OpenFileDialog()
         Me.BackgroundWorkerEnviarTextoPlano = New System.ComponentModel.BackgroundWorker()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ButtonCancelarEnvio = New System.Windows.Forms.Button()
         Me.LabelStatus = New System.Windows.Forms.Label()
-        Me.ListViewFallidos = New System.Windows.Forms.ListView()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -158,8 +164,9 @@ Partial Class FormPrincipal
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.BackgroundWorkerEnviarMultimedia = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerEnviarDocumentos = New System.ComponentModel.BackgroundWorker()
-        Me.PictureBox14 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox15 = New System.Windows.Forms.PictureBox()
+        Me.BackgroundWorkerFallidosTextoPlano = New System.ComponentModel.BackgroundWorker()
+        Me.BackgroundWorkerFallidosMultimedia = New System.ComponentModel.BackgroundWorker()
+        Me.BackgroundWorkerFallidosDocumentos = New System.ComponentModel.BackgroundWorker()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -170,6 +177,9 @@ Partial Class FormPrincipal
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBoxError, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBoxSuccess, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBoxLoading, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -187,13 +197,21 @@ Partial Class FormPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
-        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'ToolTip1
+        '
+        Me.ToolTip1.AutomaticDelay = 100
+        Me.ToolTip1.AutoPopDelay = 15000
+        Me.ToolTip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.ToolTip1.ForeColor = System.Drawing.Color.Black
+        Me.ToolTip1.InitialDelay = 100
+        Me.ToolTip1.ReshowDelay = 20
+        Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         '
         'PictureBox12
         '
@@ -240,8 +258,7 @@ Partial Class FormPrincipal
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(154, 576)
         Me.ListBox1.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.ListBox1, "Se deben agregar solo Nombres o Numeros de teléfonos para que funcione correctame" &
-        "nte")
+        Me.ToolTip1.SetToolTip(Me.ListBox1, "Lista de destinatarios a los que se enviarán los mensajes")
         '
         'Button2
         '
@@ -267,7 +284,8 @@ Partial Class FormPrincipal
         Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox7.TabIndex = 26
         Me.PictureBox7.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox7, "Desarrollado por Sebastian Coronel: sebastiancoronel.a@gmail.com" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
+        Me.ToolTip1.SetToolTip(Me.PictureBox7, "Desarrollado por Sebastian Coronel para Senna Automotores: sebastiancoronel.a@gma" &
+        "il.com" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10))
         '
         'PictureBox10
         '
@@ -296,27 +314,14 @@ Partial Class FormPrincipal
         '
         Me.RadioButtonQuitar.AutoSize = True
         Me.RadioButtonQuitar.ForeColor = System.Drawing.Color.White
-        Me.RadioButtonQuitar.Location = New System.Drawing.Point(31, 288)
+        Me.RadioButtonQuitar.Location = New System.Drawing.Point(31, 277)
         Me.RadioButtonQuitar.Name = "RadioButtonQuitar"
-        Me.RadioButtonQuitar.Size = New System.Drawing.Size(53, 17)
+        Me.RadioButtonQuitar.Size = New System.Drawing.Size(115, 17)
         Me.RadioButtonQuitar.TabIndex = 13
         Me.RadioButtonQuitar.TabStop = True
-        Me.RadioButtonQuitar.Text = "Quitar"
+        Me.RadioButtonQuitar.Text = "Quitar destinatarios"
         Me.ToolTip1.SetToolTip(Me.RadioButtonQuitar, "Quita un elemento de la lista de destinatarios")
         Me.RadioButtonQuitar.UseVisualStyleBackColor = True
-        '
-        'RadioButtonAgregarNombre
-        '
-        Me.RadioButtonAgregarNombre.AutoSize = True
-        Me.RadioButtonAgregarNombre.ForeColor = System.Drawing.Color.White
-        Me.RadioButtonAgregarNombre.Location = New System.Drawing.Point(31, 265)
-        Me.RadioButtonAgregarNombre.Name = "RadioButtonAgregarNombre"
-        Me.RadioButtonAgregarNombre.Size = New System.Drawing.Size(122, 17)
-        Me.RadioButtonAgregarNombre.TabIndex = 12
-        Me.RadioButtonAgregarNombre.TabStop = True
-        Me.RadioButtonAgregarNombre.Text = "Agregar solo nombre"
-        Me.ToolTip1.SetToolTip(Me.RadioButtonAgregarNombre, "Agrega solo el contenido de la columna 1 (nombre)")
-        Me.RadioButtonAgregarNombre.UseVisualStyleBackColor = True
         '
         'CheckBoxSeleccionar31
         '
@@ -369,7 +374,7 @@ Partial Class FormPrincipal
         'MaskedTextBoxExploradorDeArchivos
         '
         Me.MaskedTextBoxExploradorDeArchivos.Enabled = False
-        Me.MaskedTextBoxExploradorDeArchivos.Location = New System.Drawing.Point(146, 89)
+        Me.MaskedTextBoxExploradorDeArchivos.Location = New System.Drawing.Point(146, 80)
         Me.MaskedTextBoxExploradorDeArchivos.Mask = "999"
         Me.MaskedTextBoxExploradorDeArchivos.Name = "MaskedTextBoxExploradorDeArchivos"
         Me.MaskedTextBoxExploradorDeArchivos.Size = New System.Drawing.Size(25, 20)
@@ -382,7 +387,7 @@ Partial Class FormPrincipal
         '
         Me.Label10.AutoSize = True
         Me.Label10.ForeColor = System.Drawing.Color.Gray
-        Me.Label10.Location = New System.Drawing.Point(3, 92)
+        Me.Label10.Location = New System.Drawing.Point(3, 83)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(138, 13)
         Me.Label10.TabIndex = 60
@@ -393,17 +398,18 @@ Partial Class FormPrincipal
         '
         Me.Label16.AutoSize = True
         Me.Label16.ForeColor = System.Drawing.Color.Gray
-        Me.Label16.Location = New System.Drawing.Point(213, 92)
+        Me.Label16.Location = New System.Drawing.Point(213, 83)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(170, 13)
         Me.Label16.TabIndex = 62
         Me.Label16.Text = "Esperar procesamiento del archivo"
-        Me.ToolTip1.SetToolTip(Me.Label16, "Tiempo a esperar para enviar")
+        Me.ToolTip1.SetToolTip(Me.Label16, "Tiempo para que Whatsapp Web procese el archivo luego de seleccionarlo del explor" &
+        "ador de archivos de windows y antes de enviarlo")
         '
         'MaskedTextBoxTiempoCargaImagenVideo
         '
         Me.MaskedTextBoxTiempoCargaImagenVideo.Enabled = False
-        Me.MaskedTextBoxTiempoCargaImagenVideo.Location = New System.Drawing.Point(383, 89)
+        Me.MaskedTextBoxTiempoCargaImagenVideo.Location = New System.Drawing.Point(383, 80)
         Me.MaskedTextBoxTiempoCargaImagenVideo.Mask = "999"
         Me.MaskedTextBoxTiempoCargaImagenVideo.Name = "MaskedTextBoxTiempoCargaImagenVideo"
         Me.MaskedTextBoxTiempoCargaImagenVideo.Size = New System.Drawing.Size(25, 20)
@@ -416,7 +422,7 @@ Partial Class FormPrincipal
         'PictureBox4
         '
         Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
-        Me.PictureBox4.Location = New System.Drawing.Point(414, 89)
+        Me.PictureBox4.Location = New System.Drawing.Point(414, 80)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(20, 20)
         Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -428,7 +434,7 @@ Partial Class FormPrincipal
         'PictureBox5
         '
         Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
-        Me.PictureBox5.Location = New System.Drawing.Point(177, 89)
+        Me.PictureBox5.Location = New System.Drawing.Point(177, 80)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(20, 20)
         Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -441,7 +447,7 @@ Partial Class FormPrincipal
         '
         Me.Label17.AutoSize = True
         Me.Label17.ForeColor = System.Drawing.Color.Black
-        Me.Label17.Location = New System.Drawing.Point(6, 61)
+        Me.Label17.Location = New System.Drawing.Point(6, 52)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(47, 13)
         Me.Label17.TabIndex = 66
@@ -492,9 +498,100 @@ Partial Class FormPrincipal
         Me.MaskedTextBoxEsperarParteChat.Name = "MaskedTextBoxEsperarParteChat"
         Me.MaskedTextBoxEsperarParteChat.Size = New System.Drawing.Size(25, 20)
         Me.MaskedTextBoxEsperarParteChat.TabIndex = 59
-        Me.MaskedTextBoxEsperarParteChat.Text = "10"
+        Me.MaskedTextBoxEsperarParteChat.Text = "15"
         Me.ToolTip1.SetToolTip(Me.MaskedTextBoxEsperarParteChat, "Tiempo a esperar para entregar un mensaje")
         Me.MaskedTextBoxEsperarParteChat.ValidatingType = GetType(Integer)
+        '
+        'PictureBox14
+        '
+        Me.PictureBox14.Image = CType(resources.GetObject("PictureBox14.Image"), System.Drawing.Image)
+        Me.PictureBox14.Location = New System.Drawing.Point(205, 368)
+        Me.PictureBox14.Name = "PictureBox14"
+        Me.PictureBox14.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox14.TabIndex = 65
+        Me.PictureBox14.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox14, "Los archivos de video tardarán mas tiempo en recibirse por el contacto dependiend" &
+        "o de la velocidad a internet y el tamaño del archivo")
+        '
+        'PictureBox15
+        '
+        Me.PictureBox15.Image = CType(resources.GetObject("PictureBox15.Image"), System.Drawing.Image)
+        Me.PictureBox15.Location = New System.Drawing.Point(205, 410)
+        Me.PictureBox15.Name = "PictureBox15"
+        Me.PictureBox15.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox15.TabIndex = 66
+        Me.PictureBox15.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox15, "Tiempo de espera hasta entrar a la pantalla de WhatsApp web")
+        '
+        'ButtonReenviarFallidos
+        '
+        Me.ButtonReenviarFallidos.BackColor = System.Drawing.Color.Gray
+        Me.ButtonReenviarFallidos.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonReenviarFallidos.Enabled = False
+        Me.ButtonReenviarFallidos.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonReenviarFallidos.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonReenviarFallidos.Location = New System.Drawing.Point(1011, 97)
+        Me.ButtonReenviarFallidos.Name = "ButtonReenviarFallidos"
+        Me.ButtonReenviarFallidos.Size = New System.Drawing.Size(115, 35)
+        Me.ButtonReenviarFallidos.TabIndex = 69
+        Me.ButtonReenviarFallidos.Text = "Reenviar fallidos"
+        Me.ToolTip1.SetToolTip(Me.ButtonReenviarFallidos, "Intenta reenviar a los contactos que fallaron. Se mostrarán con rojo en la lista " &
+        "los que fallaron 2 veces")
+        Me.ButtonReenviarFallidos.UseVisualStyleBackColor = False
+        '
+        'PictureBoxLoading
+        '
+        Me.PictureBoxLoading.Image = CType(resources.GetObject("PictureBoxLoading.Image"), System.Drawing.Image)
+        Me.PictureBoxLoading.Location = New System.Drawing.Point(6, 6)
+        Me.PictureBoxLoading.Name = "PictureBoxLoading"
+        Me.PictureBoxLoading.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBoxLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBoxLoading.TabIndex = 71
+        Me.PictureBoxLoading.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBoxLoading, "Tiempo de espera hasta que el explorador de archivos de windows esté listo para b" &
+        "uscar el archivo")
+        Me.PictureBoxLoading.Visible = False
+        '
+        'ListBoxFallidos
+        '
+        Me.ListBoxFallidos.FormattingEnabled = True
+        Me.ListBoxFallidos.Location = New System.Drawing.Point(9, 97)
+        Me.ListBoxFallidos.MultiColumn = True
+        Me.ListBoxFallidos.Name = "ListBoxFallidos"
+        Me.ListBoxFallidos.Size = New System.Drawing.Size(505, 82)
+        Me.ListBoxFallidos.TabIndex = 70
+        Me.ToolTip1.SetToolTip(Me.ListBoxFallidos, "Los números en esta lista pueden que no tengan whatsapp o fallaron por problemas " &
+        "de conexion entre el telefono y la sesion de whatsapp web")
+        '
+        'ListBoxReenviadosFallidos
+        '
+        Me.ListBoxReenviadosFallidos.ForeColor = System.Drawing.Color.Red
+        Me.ListBoxReenviadosFallidos.FormattingEnabled = True
+        Me.ListBoxReenviadosFallidos.Location = New System.Drawing.Point(520, 97)
+        Me.ListBoxReenviadosFallidos.MultiColumn = True
+        Me.ListBoxReenviadosFallidos.Name = "ListBoxReenviadosFallidos"
+        Me.ListBoxReenviadosFallidos.Size = New System.Drawing.Size(487, 82)
+        Me.ListBoxReenviadosFallidos.TabIndex = 72
+        Me.ToolTip1.SetToolTip(Me.ListBoxReenviadosFallidos, "Es probable que los elementos en esta lista no tengan whatsapp")
+        '
+        'ButtonCancelarReenvio
+        '
+        Me.ButtonCancelarReenvio.BackColor = System.Drawing.Color.Gray
+        Me.ButtonCancelarReenvio.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonCancelarReenvio.Enabled = False
+        Me.ButtonCancelarReenvio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonCancelarReenvio.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ButtonCancelarReenvio.ForeColor = System.Drawing.Color.White
+        Me.ButtonCancelarReenvio.Location = New System.Drawing.Point(1011, 139)
+        Me.ButtonCancelarReenvio.Name = "ButtonCancelarReenvio"
+        Me.ButtonCancelarReenvio.Size = New System.Drawing.Size(115, 35)
+        Me.ButtonCancelarReenvio.TabIndex = 74
+        Me.ButtonCancelarReenvio.Text = "Cancelar reenvío"
+        Me.ToolTip1.SetToolTip(Me.ButtonCancelarReenvio, "Intenta reenviar a los contactos que fallaron. Se mostrarán con rojo en la lista " &
+        "los que fallaron 2 veces")
+        Me.ButtonCancelarReenvio.UseVisualStyleBackColor = False
         '
         'OpenFileDialogImagenes
         '
@@ -527,12 +624,17 @@ Partial Class FormPrincipal
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(221, Byte), Integer))
+        Me.GroupBox3.Controls.Add(Me.ButtonCancelarReenvio)
+        Me.GroupBox3.Controls.Add(Me.Label19)
+        Me.GroupBox3.Controls.Add(Me.ListBoxReenviadosFallidos)
+        Me.GroupBox3.Controls.Add(Me.PictureBoxLoading)
+        Me.GroupBox3.Controls.Add(Me.ListBoxFallidos)
+        Me.GroupBox3.Controls.Add(Me.ButtonReenviarFallidos)
         Me.GroupBox3.Controls.Add(Me.PictureBoxSuccess)
         Me.GroupBox3.Controls.Add(Me.PictureBoxError)
         Me.GroupBox3.Controls.Add(Me.Label2)
         Me.GroupBox3.Controls.Add(Me.ButtonCancelarEnvio)
         Me.GroupBox3.Controls.Add(Me.LabelStatus)
-        Me.GroupBox3.Controls.Add(Me.ListViewFallidos)
         Me.GroupBox3.Controls.Add(Me.ProgressBar1)
         Me.GroupBox3.Location = New System.Drawing.Point(0, 453)
         Me.GroupBox3.Name = "GroupBox3"
@@ -540,16 +642,27 @@ Partial Class FormPrincipal
         Me.GroupBox3.TabIndex = 40
         Me.GroupBox3.TabStop = False
         '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.Black
+        Me.Label19.Location = New System.Drawing.Point(699, 78)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(112, 16)
+        Me.Label19.TabIndex = 73
+        Me.Label19.Text = "Reenvíos fallidos"
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(3, 79)
+        Me.Label2.Location = New System.Drawing.Point(206, 78)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(243, 16)
+        Me.Label2.Size = New System.Drawing.Size(95, 16)
         Me.Label2.TabIndex = 38
-        Me.Label2.Text = "Numeros sin whatsapp/ Intentos fallidos"
+        Me.Label2.Text = "Envíos fallidos"
         '
         'ButtonCancelarEnvio
         '
@@ -559,9 +672,9 @@ Partial Class FormPrincipal
         Me.ButtonCancelarEnvio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonCancelarEnvio.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCancelarEnvio.ForeColor = System.Drawing.Color.White
-        Me.ButtonCancelarEnvio.Location = New System.Drawing.Point(1002, 29)
+        Me.ButtonCancelarEnvio.Location = New System.Drawing.Point(1011, 29)
         Me.ButtonCancelarEnvio.Name = "ButtonCancelarEnvio"
-        Me.ButtonCancelarEnvio.Size = New System.Drawing.Size(115, 37)
+        Me.ButtonCancelarEnvio.Size = New System.Drawing.Size(115, 35)
         Me.ButtonCancelarEnvio.TabIndex = 34
         Me.ButtonCancelarEnvio.Text = "Cancelar Envíos"
         Me.ButtonCancelarEnvio.UseVisualStyleBackColor = False
@@ -569,28 +682,22 @@ Partial Class FormPrincipal
         'LabelStatus
         '
         Me.LabelStatus.AutoSize = True
-        Me.LabelStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelStatus.BackColor = System.Drawing.Color.Transparent
+        Me.LabelStatus.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelStatus.ForeColor = System.Drawing.Color.Black
-        Me.LabelStatus.Location = New System.Drawing.Point(29, 10)
+        Me.LabelStatus.Location = New System.Drawing.Point(29, 8)
         Me.LabelStatus.Name = "LabelStatus"
-        Me.LabelStatus.Size = New System.Drawing.Size(45, 16)
+        Me.LabelStatus.Size = New System.Drawing.Size(56, 18)
         Me.LabelStatus.TabIndex = 36
         Me.LabelStatus.Text = "Status"
         '
-        'ListViewFallidos
-        '
-        Me.ListViewFallidos.Location = New System.Drawing.Point(3, 98)
-        Me.ListViewFallidos.Name = "ListViewFallidos"
-        Me.ListViewFallidos.Size = New System.Drawing.Size(1114, 84)
-        Me.ListViewFallidos.TabIndex = 37
-        Me.ListViewFallidos.UseCompatibleStateImageBehavior = False
-        Me.ListViewFallidos.View = System.Windows.Forms.View.List
-        '
         'ProgressBar1
         '
+        Me.ProgressBar1.BackColor = System.Drawing.Color.White
         Me.ProgressBar1.Location = New System.Drawing.Point(3, 29)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(992, 47)
+        Me.ProgressBar1.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ProgressBar1.Size = New System.Drawing.Size(1004, 35)
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.ProgressBar1.TabIndex = 35
         '
@@ -685,7 +792,7 @@ Partial Class FormPrincipal
         '
         'TextBoxRutaDocumento
         '
-        Me.TextBoxRutaDocumento.Location = New System.Drawing.Point(6, 26)
+        Me.TextBoxRutaDocumento.Location = New System.Drawing.Point(6, 40)
         Me.TextBoxRutaDocumento.Name = "TextBoxRutaDocumento"
         Me.TextBoxRutaDocumento.ReadOnly = True
         Me.TextBoxRutaDocumento.Size = New System.Drawing.Size(796, 20)
@@ -697,8 +804,9 @@ Partial Class FormPrincipal
         Me.ButtonEnviarDocumento.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ButtonEnviarDocumento.Enabled = False
         Me.ButtonEnviarDocumento.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonEnviarDocumento.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonEnviarDocumento.ForeColor = System.Drawing.Color.White
-        Me.ButtonEnviarDocumento.Location = New System.Drawing.Point(852, 26)
+        Me.ButtonEnviarDocumento.Location = New System.Drawing.Point(849, 20)
         Me.ButtonEnviarDocumento.Name = "ButtonEnviarDocumento"
         Me.ButtonEnviarDocumento.Size = New System.Drawing.Size(115, 70)
         Me.ButtonEnviarDocumento.TabIndex = 27
@@ -711,7 +819,7 @@ Partial Class FormPrincipal
         Me.ButtonFolderDocumento.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ButtonFolderDocumento.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonFolderDocumento.ForeColor = System.Drawing.Color.White
-        Me.ButtonFolderDocumento.Location = New System.Drawing.Point(808, 23)
+        Me.ButtonFolderDocumento.Location = New System.Drawing.Point(808, 37)
         Me.ButtonFolderDocumento.Name = "ButtonFolderDocumento"
         Me.ButtonFolderDocumento.Size = New System.Drawing.Size(35, 25)
         Me.ButtonFolderDocumento.TabIndex = 26
@@ -758,7 +866,7 @@ Partial Class FormPrincipal
         'PictureBox13
         '
         Me.PictureBox13.Image = CType(resources.GetObject("PictureBox13.Image"), System.Drawing.Image)
-        Me.PictureBox13.Location = New System.Drawing.Point(59, 58)
+        Me.PictureBox13.Location = New System.Drawing.Point(59, 49)
         Me.PictureBox13.Name = "PictureBox13"
         Me.PictureBox13.Size = New System.Drawing.Size(20, 20)
         Me.PictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -792,6 +900,7 @@ Partial Class FormPrincipal
         Me.ButtonEnviarImagen.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ButtonEnviarImagen.Enabled = False
         Me.ButtonEnviarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonEnviarImagen.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonEnviarImagen.ForeColor = System.Drawing.Color.White
         Me.ButtonEnviarImagen.Location = New System.Drawing.Point(852, 63)
         Me.ButtonEnviarImagen.Name = "ButtonEnviarImagen"
@@ -803,11 +912,11 @@ Partial Class FormPrincipal
         'RichTextBoxPieDeFoto
         '
         Me.RichTextBoxPieDeFoto.Enabled = False
-        Me.RichTextBoxPieDeFoto.Location = New System.Drawing.Point(6, 154)
+        Me.RichTextBoxPieDeFoto.Location = New System.Drawing.Point(6, 139)
         Me.RichTextBoxPieDeFoto.MaxLength = 900
         Me.RichTextBoxPieDeFoto.Multiline = False
         Me.RichTextBoxPieDeFoto.Name = "RichTextBoxPieDeFoto"
-        Me.RichTextBoxPieDeFoto.Size = New System.Drawing.Size(425, 42)
+        Me.RichTextBoxPieDeFoto.Size = New System.Drawing.Size(425, 57)
         Me.RichTextBoxPieDeFoto.TabIndex = 21
         Me.RichTextBoxPieDeFoto.Text = ""
         '
@@ -816,7 +925,7 @@ Partial Class FormPrincipal
         Me.CheckBoxPieDeFoto.AutoSize = True
         Me.CheckBoxPieDeFoto.Enabled = False
         Me.CheckBoxPieDeFoto.ForeColor = System.Drawing.Color.Gray
-        Me.CheckBoxPieDeFoto.Location = New System.Drawing.Point(156, 131)
+        Me.CheckBoxPieDeFoto.Location = New System.Drawing.Point(156, 116)
         Me.CheckBoxPieDeFoto.Name = "CheckBoxPieDeFoto"
         Me.CheckBoxPieDeFoto.Size = New System.Drawing.Size(107, 17)
         Me.CheckBoxPieDeFoto.TabIndex = 20
@@ -967,7 +1076,6 @@ Partial Class FormPrincipal
         Me.GroupBox2.Controls.Add(Me.CheckBoxAgregarTodos)
         Me.GroupBox2.Controls.Add(Me.PictureBox9)
         Me.GroupBox2.Controls.Add(Me.CheckBoxSeleccionar31)
-        Me.GroupBox2.Controls.Add(Me.RadioButtonAgregarNombre)
         Me.GroupBox2.Controls.Add(Me.RadioButtonQuitar)
         Me.GroupBox2.Controls.Add(Me.CheckBoxSeleccionar29)
         Me.GroupBox2.ForeColor = System.Drawing.Color.White
@@ -1018,7 +1126,7 @@ Partial Class FormPrincipal
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(42, 38)
+        Me.Label12.Location = New System.Drawing.Point(36, 38)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(129, 13)
         Me.Label12.TabIndex = 51
@@ -1030,15 +1138,17 @@ Partial Class FormPrincipal
         Me.CheckBoxAgregarTodos.ForeColor = System.Drawing.Color.White
         Me.CheckBoxAgregarTodos.Location = New System.Drawing.Point(31, 242)
         Me.CheckBoxAgregarTodos.Name = "CheckBoxAgregarTodos"
-        Me.CheckBoxAgregarTodos.Size = New System.Drawing.Size(111, 17)
+        Me.CheckBoxAgregarTodos.Size = New System.Drawing.Size(134, 17)
         Me.CheckBoxAgregarTodos.TabIndex = 16
-        Me.CheckBoxAgregarTodos.Text = "Seleccion múltiple"
+        Me.CheckBoxAgregarTodos.Text = "Seleccionar y convertir"
+        Me.ToolTip1.SetToolTip(Me.CheckBoxAgregarTodos, "Selecciona y convierte los contactos a numeros válidos para ser enviados a través" &
+        " de una API de WhatsApp")
         Me.CheckBoxAgregarTodos.UseVisualStyleBackColor = True
         '
         'PictureBox9
         '
         Me.PictureBox9.Image = CType(resources.GetObject("PictureBox9.Image"), System.Drawing.Image)
-        Me.PictureBox9.Location = New System.Drawing.Point(12, 29)
+        Me.PictureBox9.Location = New System.Drawing.Point(6, 29)
         Me.PictureBox9.Name = "PictureBox9"
         Me.PictureBox9.Size = New System.Drawing.Size(24, 31)
         Me.PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -1071,37 +1181,37 @@ Partial Class FormPrincipal
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle31
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25, Me.Column26, Me.Column27, Me.Column28, Me.Column29, Me.Column30, Me.Column31, Me.Column32, Me.Column33, Me.Column34, Me.Column35, Me.Column36, Me.Column37, Me.Column38, Me.Column39, Me.Column40, Me.Column41, Me.Column42, Me.Column43, Me.Column44, Me.Column45, Me.Column46, Me.Column47, Me.Column48, Me.Column49, Me.Column50})
         Me.DataGridView1.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle32.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle32.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle32
         Me.DataGridView1.GridColor = System.Drawing.Color.Black
         Me.DataGridView1.Location = New System.Drawing.Point(251, 6)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle33.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle33
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect
         Me.DataGridView1.Size = New System.Drawing.Size(714, 621)
@@ -1490,28 +1600,20 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerEnviarDocumentos.WorkerReportsProgress = True
         Me.BackgroundWorkerEnviarDocumentos.WorkerSupportsCancellation = True
         '
-        'PictureBox14
+        'BackgroundWorkerFallidosTextoPlano
         '
-        Me.PictureBox14.Image = CType(resources.GetObject("PictureBox14.Image"), System.Drawing.Image)
-        Me.PictureBox14.Location = New System.Drawing.Point(205, 368)
-        Me.PictureBox14.Name = "PictureBox14"
-        Me.PictureBox14.Size = New System.Drawing.Size(20, 20)
-        Me.PictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox14.TabIndex = 65
-        Me.PictureBox14.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox14, "Los archivos de video tardarán mas tiempo en recibirse por el contacto dependiend" &
-        "o de la velocidad a internet y el tamaño del archivo")
+        Me.BackgroundWorkerFallidosTextoPlano.WorkerReportsProgress = True
+        Me.BackgroundWorkerFallidosTextoPlano.WorkerSupportsCancellation = True
         '
-        'PictureBox15
+        'BackgroundWorkerFallidosMultimedia
         '
-        Me.PictureBox15.Image = CType(resources.GetObject("PictureBox15.Image"), System.Drawing.Image)
-        Me.PictureBox15.Location = New System.Drawing.Point(205, 410)
-        Me.PictureBox15.Name = "PictureBox15"
-        Me.PictureBox15.Size = New System.Drawing.Size(20, 20)
-        Me.PictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox15.TabIndex = 66
-        Me.PictureBox15.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox15, "Tiempo de espera hasta entrar a la pantalla de WhatsApp web")
+        Me.BackgroundWorkerFallidosMultimedia.WorkerReportsProgress = True
+        Me.BackgroundWorkerFallidosMultimedia.WorkerSupportsCancellation = True
+        '
+        'BackgroundWorkerFallidosDocumentos
+        '
+        Me.BackgroundWorkerFallidosDocumentos.WorkerReportsProgress = True
+        Me.BackgroundWorkerFallidosDocumentos.WorkerSupportsCancellation = True
         '
         'FormPrincipal
         '
@@ -1535,6 +1637,9 @@ Partial Class FormPrincipal
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBoxError, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBoxSuccess, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBoxLoading, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
@@ -1560,8 +1665,6 @@ Partial Class FormPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
-        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox15, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1572,7 +1675,6 @@ Partial Class FormPrincipal
     Friend WithEvents BackgroundWorkerEnviarTextoPlano As System.ComponentModel.BackgroundWorker
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents Label2 As Label
-    Friend WithEvents ListViewFallidos As ListView
     Friend WithEvents ButtonCancelarEnvio As Button
     Friend WithEvents LabelStatus As Label
     Friend WithEvents GroupBox5 As GroupBox
@@ -1612,7 +1714,6 @@ Partial Class FormPrincipal
     Friend WithEvents CheckBoxAgregarTodos As CheckBox
     Friend WithEvents PictureBox9 As PictureBox
     Friend WithEvents CheckBoxSeleccionar31 As CheckBox
-    Friend WithEvents RadioButtonAgregarNombre As RadioButton
     Friend WithEvents RadioButtonQuitar As RadioButton
     Friend WithEvents CheckBoxSeleccionar29 As CheckBox
     Friend WithEvents PictureBox10 As PictureBox
@@ -1698,4 +1799,13 @@ Partial Class FormPrincipal
     Friend WithEvents MaskedTextBoxEsperarParteChat As MaskedTextBox
     Friend WithEvents PictureBox14 As PictureBox
     Friend WithEvents PictureBox15 As PictureBox
+    Friend WithEvents ButtonReenviarFallidos As Button
+    Friend WithEvents BackgroundWorkerFallidosTextoPlano As System.ComponentModel.BackgroundWorker
+    Friend WithEvents BackgroundWorkerFallidosMultimedia As System.ComponentModel.BackgroundWorker
+    Friend WithEvents BackgroundWorkerFallidosDocumentos As System.ComponentModel.BackgroundWorker
+    Friend WithEvents ListBoxFallidos As ListBox
+    Friend WithEvents PictureBoxLoading As PictureBox
+    Friend WithEvents Label19 As Label
+    Friend WithEvents ListBoxReenviadosFallidos As ListBox
+    Friend WithEvents ButtonCancelarReenvio As Button
 End Class
