@@ -167,6 +167,9 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerFallidosTextoPlano = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerFallidosMultimedia = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerFallidosDocumentos = New System.ComponentModel.BackgroundWorker()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.MaskedTextBoxEsperaMaximaDOM = New System.Windows.Forms.MaskedTextBox()
+        Me.PictureBox16 = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -197,6 +200,7 @@ Partial Class FormPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
+        CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -362,7 +366,7 @@ Partial Class FormPrincipal
         '
         Me.Label14.AutoSize = True
         Me.Label14.ForeColor = System.Drawing.Color.White
-        Me.Label14.Location = New System.Drawing.Point(6, 375)
+        Me.Label14.Location = New System.Drawing.Point(9, 375)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(163, 13)
         Me.Label14.TabIndex = 54
@@ -1075,6 +1079,9 @@ Partial Class FormPrincipal
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(94, Byte), Integer), CType(CType(84, Byte), Integer))
+        Me.GroupBox2.Controls.Add(Me.PictureBox16)
+        Me.GroupBox2.Controls.Add(Me.MaskedTextBoxEsperaMaximaDOM)
+        Me.GroupBox2.Controls.Add(Me.Label20)
         Me.GroupBox2.Controls.Add(Me.PictureBox15)
         Me.GroupBox2.Controls.Add(Me.PictureBox14)
         Me.GroupBox2.Controls.Add(Me.MaskedTextBoxEsperarParteChat)
@@ -1615,6 +1622,39 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerFallidosDocumentos.WorkerReportsProgress = True
         Me.BackgroundWorkerFallidosDocumentos.WorkerSupportsCancellation = True
         '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.ForeColor = System.Drawing.Color.White
+        Me.Label20.Location = New System.Drawing.Point(9, 448)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(123, 13)
+        Me.Label20.TabIndex = 67
+        Me.Label20.Text = "Espera máxima del DOM"
+        Me.ToolTip1.SetToolTip(Me.Label20, "Tiempo de espera al iniciar un nuevo chat" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " en whatsapp web")
+        '
+        'MaskedTextBoxEsperaMaximaDOM
+        '
+        Me.MaskedTextBoxEsperaMaximaDOM.Location = New System.Drawing.Point(175, 441)
+        Me.MaskedTextBoxEsperaMaximaDOM.Mask = "999"
+        Me.MaskedTextBoxEsperaMaximaDOM.Name = "MaskedTextBoxEsperaMaximaDOM"
+        Me.MaskedTextBoxEsperaMaximaDOM.Size = New System.Drawing.Size(25, 20)
+        Me.MaskedTextBoxEsperaMaximaDOM.TabIndex = 68
+        Me.MaskedTextBoxEsperaMaximaDOM.Text = "30"
+        Me.ToolTip1.SetToolTip(Me.MaskedTextBoxEsperaMaximaDOM, "Tiempo a esperar para entregar un mensaje")
+        Me.MaskedTextBoxEsperaMaximaDOM.ValidatingType = GetType(Integer)
+        '
+        'PictureBox16
+        '
+        Me.PictureBox16.Image = CType(resources.GetObject("PictureBox16.Image"), System.Drawing.Image)
+        Me.PictureBox16.Location = New System.Drawing.Point(205, 441)
+        Me.PictureBox16.Name = "PictureBox16"
+        Me.PictureBox16.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox16.TabIndex = 69
+        Me.PictureBox16.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox16, "Tiempo de espera máximo para encontrar los elementos clickeables del DOM")
+        '
         'FormPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1665,6 +1705,7 @@ Partial Class FormPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
+        CType(Me.PictureBox16, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1808,4 +1849,7 @@ Partial Class FormPrincipal
     Friend WithEvents Label19 As Label
     Friend WithEvents ListBoxReenviadosFallidos As ListBox
     Friend WithEvents ButtonCancelarReenvio As Button
+    Friend WithEvents MaskedTextBoxEsperaMaximaDOM As MaskedTextBox
+    Friend WithEvents Label20 As Label
+    Friend WithEvents PictureBox16 As PictureBox
 End Class

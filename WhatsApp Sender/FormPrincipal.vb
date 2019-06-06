@@ -214,14 +214,18 @@ Public Class FormPrincipal
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
         If CheckBoxAgregarTodos.Checked = True Then
-            Try
-                'Recorro cada item y quito el signo +,- y los espacios
-                For Each item As DataGridViewCell In DataGridView1.SelectedCells
+
+            'Recorro cada item y quito el signo +,- y los espacios
+            For Each item As DataGridViewCell In DataGridView1.SelectedCells
                     Dim NumeroApi As String = item.Value
                     Dim NumeroApi54 As String = item.Value 'SACAR SI ESTA DE MAS
                     NumeroApi = NumeroApi.Replace("+", "") 'Borra el +
                     NumeroApi = NumeroApi.Replace(" ", "") 'Borra espacios
                     NumeroApi = NumeroApi.Replace("-", "") 'Borra guiones
+                Try
+                    If NumeroApi = Nothing Then
+                        MessageBox.Show("Se omitió una celda vacía")
+                    End If
 
                     If NumeroApi.First = "5" Then 'Evita que se agregue 5454 (dos veces) la caracteristica 54 a la lista.
                         If ListBox1.Items.Contains(NumeroApi) Then
@@ -239,18 +243,18 @@ Public Class FormPrincipal
                             Else
                                 ListBox1.Items.Add(NumeroApi54)
                             End If
+                        Else
+
                         End If
+
                     End If
+                Catch ex As Exception
+                    'MessageBox.Show("Seleccione una columna que contenga números de teléfonos y no celdas vacías")
 
 
+                End Try
+            Next
 
-
-
-
-                Next
-            Catch ex As Exception
-                MessageBox.Show("Seleccione una columna que contenga números de teléfonos y no celdas vacías")
-            End Try
 
 
 
@@ -625,11 +629,13 @@ Public Class FormPrincipal
                             End If
                             'BOTON ADJUNTAR
                             Dim adjuntar As IWebElement
-                            adjuntar = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
+                            Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
+                            adjuntar = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
                             adjuntar.Click() 'Click en el boton Adjuntar
                             'BOTON FOTOS Y VIDEOS
                             Dim foto As IWebElement
-                            foto = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
+
+                            foto = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
                             foto.Click() 'Abre el buscador de archivos
                             Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
                             'EXPLORADOR DE ARCHIVOS
@@ -641,7 +647,7 @@ Public Class FormPrincipal
                             'Pie de foto
                             If CheckBoxPieDeFoto.Checked Then
                                 Dim inputPie As IWebElement
-                                inputPie = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
+                                inputPie = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
                                 inputPie.SendKeys(RichTextBoxPieDeFoto.Text)
                             End If
                             If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
@@ -650,7 +656,7 @@ Public Class FormPrincipal
                             End If
                             'BOTON ENVIAR DE WHATSAPP WEB
                             Dim enviarMensaje As IWebElement
-                            enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
+                            enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
                             'enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                         End If
@@ -763,11 +769,12 @@ Public Class FormPrincipal
                             End If
                             'BOTON ADJUNTAR
                             Dim adjuntar As IWebElement
-                            adjuntar = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
+                            Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
+                            adjuntar = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
                             adjuntar.Click() 'Click en el boton Adjuntar
                             'BOTON DOCUMENTOS
                             Dim documento As IWebElement
-                            documento = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[3]/button")))
+                            documento = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[3]/button")))
                             documento.Click() 'Abre el buscador de archivos
                             Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
                             'EXPLORADOR DE ARCHIVOS
@@ -783,7 +790,7 @@ Public Class FormPrincipal
                             End If
                             'BOTON ENVIAR DE WHATSAPP WEB
                             Dim enviarMensaje As IWebElement
-                            enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
+                            enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
                             'enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                         End If
@@ -1168,11 +1175,12 @@ Public Class FormPrincipal
                             End If
                             'BOTON ADJUNTAR
                             Dim adjuntar As IWebElement
-                            adjuntar = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
+                            Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
+                            adjuntar = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
                             adjuntar.Click() 'Click en el boton Adjuntar
                             'BOTON FOTOS Y VIDEOS
                             Dim foto As IWebElement
-                            foto = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
+                            foto = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
                             foto.Click() 'Abre el buscador de archivos
                             Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
                             'EXPLORADOR DE ARCHIVOS
@@ -1184,7 +1192,7 @@ Public Class FormPrincipal
                             'Pie de foto
                             If CheckBoxPieDeFoto.Checked Then
                                 Dim inputPie As IWebElement
-                                inputPie = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
+                                inputPie = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
                                 inputPie.SendKeys(RichTextBoxPieDeFoto.Text)
                             End If
                             If BackgroundWorkerFallidosMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
@@ -1193,7 +1201,7 @@ Public Class FormPrincipal
                             End If
                             'BOTON ENVIAR DE WHATSAPP WEB
                             Dim enviarMensaje As IWebElement
-                            enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
+                            enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
                             'enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                         End If
@@ -1323,11 +1331,12 @@ Public Class FormPrincipal
                             End If
                             'BOTON ADJUNTAR
                             Dim adjuntar As IWebElement
+                            Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
                             adjuntar = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
                             adjuntar.Click() 'Click en el boton Adjuntar
                             'BOTON FOTOS Y VIDEOS
                             Dim foto As IWebElement
-                            foto = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
+                            foto = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
                             foto.Click() 'Abre el buscador de archivos
                             Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
                             'EXPLORADOR DE ARCHIVOS
@@ -1343,7 +1352,7 @@ Public Class FormPrincipal
                             End If
                             'BOTON ENVIAR DE WHATSAPP WEB
                             Dim enviarMensaje As IWebElement
-                            enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
+                            enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
                             'enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                         End If
