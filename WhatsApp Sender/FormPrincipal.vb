@@ -10,12 +10,14 @@ Imports System.Text.RegularExpressions
 Public Class FormPrincipal
     Dim i As Integer
     Dim intervalo As Integer
+    Dim TamañoProgressBar As Integer
 
 
     'Delegate Sub RichtextboxMensaje(ByVal mensaje As String)
 
     Private Sub ButtonEnviarTexto_Click(sender As Object, e As EventArgs) Handles ButtonEnviarTexto.Click
         Try
+            ListBoxFallidos.Items.Clear()
             PictureBoxLoading.Visible = True
             BackgroundWorkerEnviarTextoPlano.RunWorkerAsync() 'Inicia el trabajo en segundo plano
         Catch ex As Exception
@@ -70,6 +72,7 @@ Public Class FormPrincipal
 
         Else
             Try
+                ListBoxFallidos.Items.Clear()
                 PictureBoxLoading.Visible = True
                 BackgroundWorkerEnviarMultimedia.RunWorkerAsync()
             Catch ex As Exception
@@ -86,6 +89,7 @@ Public Class FormPrincipal
         Else
             'ENVIAR DOCUMENTOS
             Try
+                ListBoxFallidos.Items.Clear()
                 PictureBoxLoading.Visible = True
                 BackgroundWorkerEnviarDocumentos.RunWorkerAsync()
             Catch ex As Exception
@@ -112,6 +116,7 @@ Public Class FormPrincipal
             RichTextBox1.Enabled = False
             GroupBoxTextoPlano.BackColor = Color.Gainsboro
             ButtonEnviarTexto.BackColor = Color.Gray
+            ListBoxFallidos.Items.Clear()
             RichTextBox1.Clear()
         End If
         'End If
@@ -148,6 +153,7 @@ Public Class FormPrincipal
             MaskedTextBoxExploradorDeArchivos.Enabled = False
             MaskedTextBoxTiempoCargaImagenVideo.Enabled = False
             PictureBoxImagenAEnviar.Image = Nothing
+            ListBoxFallidos.Items.Clear()
             TextBoxRuta.Clear()
 
 
@@ -172,6 +178,7 @@ Public Class FormPrincipal
             ButtonFolderDocumento.BackColor = Color.Gray
             ButtonEnviarDocumento.BackColor = Color.Gray
             GroupBoxDocumentos.BackColor = Color.Gainsboro
+            ListBoxFallidos.Items.Clear()
             TextBoxRutaDocumento.Clear()
         End If
         'End If
@@ -223,9 +230,9 @@ Public Class FormPrincipal
                     NumeroApi = NumeroApi.Replace(" ", "") 'Borra espacios
                     NumeroApi = NumeroApi.Replace("-", "") 'Borra guiones
                 Try
-                    If NumeroApi = Nothing Then
-                        MessageBox.Show("Se omitió una celda vacía")
-                    End If
+                    'If NumeroApi = Nothing Then
+                    '    MessageBox.Show("Se omitió una celda vacía")
+                    'End If
 
                     If NumeroApi.First = "5" Then 'Evita que se agregue 5454 (dos veces) la caracteristica 54 a la lista.
                         If ListBox1.Items.Contains(NumeroApi) Then
@@ -405,6 +412,7 @@ Public Class FormPrincipal
                 'PROGRESSBAR//////////////////////////////////////////////////////////////////////////////////////////////////////
                 Dim totalContactos As Integer = ListBox1.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
+                TamañoProgressBar = totalContactos
                 '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR/////////////////////////////////////////////////////////////////////////////
                 For Each item As Object In ListBox1.Items 'Recorre la lista y envia a los destinatarios en la lista que coinciden con los contactos almacenados
@@ -443,7 +451,7 @@ Public Class FormPrincipal
                         If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then
                             Dim enviarMensaje As IWebElement
                             enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/footer/div[1]/div[3]/button")))
-                            'enviarMensaje.Click()
+                            enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000) 'Transforma el tiempo de espera entre chats del maskedtextbox a milisegundos
                         End If
                     Catch ex As Exception
@@ -496,6 +504,7 @@ Public Class FormPrincipal
         Else
             If ListBoxFallidos.Items.Count > 0 Then
                 LabelStatus.Text = "Envío finalizado!  Algunos numeros fallaron al enviarse"
+                ProgressBar1.Value = TamañoProgressBar
             Else
                 LabelStatus.Text = "Envío finalizado!"
             End If
@@ -595,6 +604,7 @@ Public Class FormPrincipal
                 'PROGRESSBAR/////////////////////////////////////////////////////////////////////////////
                 Dim totalContactos As Integer = ListBox1.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
+                TamañoProgressBar = totalContactos
                 '///////////////////////////////////////////////////////////////////////////////////////
 
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR////////////////////
@@ -657,7 +667,7 @@ Public Class FormPrincipal
                             'BOTON ENVIAR DE WHATSAPP WEB
                             Dim enviarMensaje As IWebElement
                             enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                            'enviarMensaje.Click()
+                            enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                         End If
                     Catch ex As Exception
@@ -734,6 +744,7 @@ Public Class FormPrincipal
                 'PROGRESSBAR//////////////////////////////////////////////////////////////////////////////////////////////////////
                 Dim totalContactos As Integer = ListBox1.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
+                TamañoProgressBar = totalContactos
                 '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR///////////////////////////////////////////////
@@ -791,7 +802,7 @@ Public Class FormPrincipal
                             'BOTON ENVIAR DE WHATSAPP WEB
                             Dim enviarMensaje As IWebElement
                             enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                            'enviarMensaje.Click()
+                            enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                         End If
                     Catch ex As Exception
@@ -845,6 +856,7 @@ Public Class FormPrincipal
         Else
             If ListBoxFallidos.Items.Count > 0 Then
                 LabelStatus.Text = "Envío finalizado!  Algunos numeros fallaron al enviarse"
+                ProgressBar1.Value = TamañoProgressBar
             Else
                 LabelStatus.Text = "Envío finalizado!"
             End If
@@ -874,6 +886,7 @@ Public Class FormPrincipal
         Else
             If ListBoxFallidos.Items.Count > 0 Then
                 LabelStatus.Text = "Envío finalizado!  Algunos numeros fallaron al enviarse"
+                ProgressBar1.Value = TamañoProgressBar
             Else
                 LabelStatus.Text = "Envío finalizado!"
             End If
@@ -951,6 +964,9 @@ Public Class FormPrincipal
     'REENVIO TEXTO PLANO///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Private Sub BackgroundWorkerFallidosTextoPlano_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorkerFallidosTextoPlano.DoWork
         CheckForIllegalCrossThreadCalls = False 'Se desactiva el checkeo de llamadas ilegales entre los diferentes hilos de ejecucion
+        ButtonCancelarReenvio.Enabled = True
+        ButtonCancelarReenvio.BackColor = Color.Red
+        ButtonCancelarEnvio.Enabled = False
         LabelStatus.ForeColor = Color.Red
         ButtonCancelarEnvio.Enabled = True
         ButtonCancelarEnvio.BackColor = Color.Red
@@ -1004,7 +1020,8 @@ Public Class FormPrincipal
                 'PROGRESSBAR//////////////////////////////////////////////////////////////////////////////////////////////////////
                 Dim totalContactos As Integer = ListBoxFallidos.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
-                ProgressBar1.ForeColor = Color.Yellow
+                TamañoProgressBar = totalContactos
+
                 '/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR/////////////////////////////////////////////////////////////////////////////
                 For Each item As Object In ListBoxFallidos.Items
@@ -1043,7 +1060,7 @@ Public Class FormPrincipal
                         If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then
                             Dim enviarMensaje As IWebElement
                             enviarMensaje = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/footer/div[1]/div[3]/button")))
-                            'enviarMensaje.Click()
+                            enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000) 'Transforma el tiempo de espera entre chats del maskedtextbox a milisegundos
                         End If
                     Catch ex As Exception
@@ -1075,6 +1092,7 @@ Public Class FormPrincipal
 
     Private Sub BackgroundWorkerFallidosTextoPlano_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosTextoPlano.RunWorkerCompleted
         ButtonCancelarReenvio.Enabled = False
+        ButtonReenviarFallidos.Enabled = True
         ButtonCancelarReenvio.BackColor = Color.Gray
         ButtonReenviarFallidos.Enabled = True
         PictureBoxLoading.Visible = False
@@ -1099,6 +1117,9 @@ Public Class FormPrincipal
 
     Private Sub BackgroundWorkerFallidosMultimedia_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorkerFallidosMultimedia.DoWork
         CheckForIllegalCrossThreadCalls = False 'Se desactiva el checkeo de llamadas ilegales entre los diferentes hilos de ejecucion
+        ButtonCancelarReenvio.Enabled = True
+        ButtonCancelarReenvio.BackColor = Color.Red
+        ButtonCancelarEnvio.Enabled = False
         LabelStatus.ForeColor = Color.Red
         ButtonCancelarEnvio.Enabled = True
         ButtonCancelarEnvio.BackColor = Color.Red
@@ -1141,6 +1162,7 @@ Public Class FormPrincipal
                 'PROGRESSBAR/////////////////////////////////////////////////////////////////////////////
                 Dim totalContactos As Integer = ListBoxFallidos.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
+                TamañoProgressBar = totalContactos
                 '///////////////////////////////////////////////////////////////////////////////////////
 
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR////////////////////
@@ -1202,7 +1224,7 @@ Public Class FormPrincipal
                             'BOTON ENVIAR DE WHATSAPP WEB
                             Dim enviarMensaje As IWebElement
                             enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                            'enviarMensaje.Click()
+                            enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                         End If
                     Catch ex As Exception
@@ -1235,6 +1257,7 @@ Public Class FormPrincipal
 
     Private Sub BackgroundWorkerFallidosMultimedia_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosMultimedia.RunWorkerCompleted
         ButtonCancelarReenvio.Enabled = False
+        ButtonReenviarFallidos.Enabled = True
         ButtonCancelarReenvio.BackColor = Color.Gray
         PictureBoxLoading.Visible = False
         ButtonReenviarFallidos.Enabled = True
@@ -1255,6 +1278,9 @@ Public Class FormPrincipal
 
     Private Sub BackgroundWorkerFallidosDocumentos_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorkerFallidosDocumentos.DoWork
         CheckForIllegalCrossThreadCalls = False 'Se desactiva el checkeo de llamadas ilegales entre los diferentes hilos de ejecucion
+        ButtonCancelarReenvio.Enabled = True
+        ButtonCancelarReenvio.BackColor = Color.Red
+        ButtonCancelarEnvio.Enabled = False
         LabelStatus.ForeColor = Color.Red
         ButtonCancelarEnvio.Enabled = True
         ButtonCancelarEnvio.BackColor = Color.Red
@@ -1297,6 +1323,7 @@ Public Class FormPrincipal
                 'PROGRESSBAR/////////////////////////////////////////////////////////////////////////////
                 Dim totalContactos As Integer = ListBoxFallidos.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
+                TamañoProgressBar = totalContactos
                 '///////////////////////////////////////////////////////////////////////////////////////
 
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR////////////////////
@@ -1334,10 +1361,10 @@ Public Class FormPrincipal
                             Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
                             adjuntar = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
                             adjuntar.Click() 'Click en el boton Adjuntar
-                            'BOTON FOTOS Y VIDEOS
-                            Dim foto As IWebElement
-                            foto = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
-                            foto.Click() 'Abre el buscador de archivos
+                            'BOTON DOCUMENTOS
+                            Dim documento As IWebElement
+                            documento = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[3]/button")))
+                            documento.Click() 'Abre el buscador de archivos
                             Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
                             'EXPLORADOR DE ARCHIVOS
                             SendKeys.SendWait(TextBoxRutaDocumento.Text)
@@ -1353,7 +1380,7 @@ Public Class FormPrincipal
                             'BOTON ENVIAR DE WHATSAPP WEB
                             Dim enviarMensaje As IWebElement
                             enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                            'enviarMensaje.Click()
+                            enviarMensaje.Click()
                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                         End If
                     Catch ex As Exception
@@ -1386,6 +1413,7 @@ Public Class FormPrincipal
 
     Private Sub BackgroundWorkerFallidosDocumentos_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosDocumentos.RunWorkerCompleted
         ButtonCancelarReenvio.Enabled = False
+        ButtonReenviarFallidos.Enabled = True
         ButtonCancelarReenvio.BackColor = Color.Gray
         PictureBoxLoading.Visible = False
         If e.Cancelled Then
@@ -1404,6 +1432,34 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub ButtonCancelarReenvio_Click(sender As Object, e As EventArgs) Handles ButtonCancelarReenvio.Click
+        'Cancela el Background Worker de fallidos
+        If BackgroundWorkerFallidosTextoPlano.IsBusy Then
+            If BackgroundWorkerFallidosTextoPlano.WorkerSupportsCancellation Then
+                If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                    BackgroundWorkerFallidosTextoPlano.CancelAsync()
+                End If
 
+            End If
+        Else
+            If BackgroundWorkerFallidosMultimedia.IsBusy Then
+                If BackgroundWorkerFallidosMultimedia.WorkerSupportsCancellation Then
+                    If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                        BackgroundWorkerFallidosMultimedia.CancelAsync()
+                    End If
+
+                End If
+            Else
+                If BackgroundWorkerFallidosDocumentos.IsBusy Then
+                    If BackgroundWorkerFallidosDocumentos.WorkerSupportsCancellation Then
+                        If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                            BackgroundWorkerFallidosDocumentos.CancelAsync()
+                        End If
+
+                    End If
+
+                End If
+            End If
+
+        End If
     End Sub
 End Class
