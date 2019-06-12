@@ -212,6 +212,7 @@ Public Class FormPrincipal
         'If DataGridView1.Rows.Count <> 0 Then
         '    DataGridView1.Rows(0).Visible = False
         'End If
+        ListBox1.Items.Clear()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -580,8 +581,8 @@ Public Class FormPrincipal
         intervalo = MaskedTextBoxIntervaloEntreChats.Text * 1000 'Convertir lo del Masked textbox a milisegundos
         PictureBoxSuccess.Visible = False
         PictureBoxError.Visible = False
-
         LabelStatus.Text = "Esperando Inicio de sesión en WhatsApp Web"
+
         'PROCESO DE ENVÍO////////////////////////////////////////////////////////////////////////////////
         Try
             Dim driver As IWebDriver
@@ -592,6 +593,7 @@ Public Class FormPrincipal
             Dim encabezado As String = "?text="
             Dim mensaje As String = RichTextBox1.Text
             driver.Navigate().GoToUrl("https://web.whatsapp.com/")
+
             '////////////////////////////////////////////////////////////////////////////////////////////
             If MessageBox.Show("1° PASO: ESCANEAR CODIGO QR " & vbCrLf & "" & vbCrLf & "2° PASO: PRESIONE ACEPTAR PARA CONTINUAR", "IMPORTANTE!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
             End If
@@ -619,80 +621,101 @@ Public Class FormPrincipal
                         e.Cancel = True
                         Exit For
                     End If
+
                     Try
                         Dim url As String = a + item + encabezado + mensaje 'Crea la Url de la api
-                        driver.Navigate().GoToUrl(url) 'Abre la url generada con la MISMA SESION!!!!
+                        driver.Navigate().GoToUrl(url)
                         Dim send As IWebElement
                         Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(120))
                         send = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='action-button']")))
                         send.Click()
                     Catch ex As Exception
-
                     End Try
-                    ':) :) :) :) :) :) :) :) :) :) :) :) :) CODIGO NUEVO PARA NO ESPERAR MUCHO PARA INVALIDOS Y PARA VALIDOS :) :) :) :) :) :) :) :) :) :) 
 
-                    Dim Interfacewhatsappweb As IWebElement
-                    Dim waitInterfacewhatsappwebWait As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperarParteChat.Text))
-                    Interfacewhatsappweb = waitInterfacewhatsappwebWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]")))
-                    If Interfacewhatsappweb.Displayed Then
-                        Threading.Thread.Sleep(1000)
+                    'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
+                    Try
+                        Dim PaginaOficial As IWebElement
+                        Dim waitPaginaOficial As New WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                        PaginaOficial = waitPaginaOficial.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='hide_till_load']/div[1]/div[2]")))
+                        If PaginaOficial.Displayed Then
+                            Continue For
+                        End If
+                    Catch ex As Exception
+                        'MessageBox.Show(ex.Message)
+                        'MessageBox.Show("Pagina oficial")
+                        'Continue For
+                    End Try
 
-                        'PARA NUMEROS INVALIDOS
-                        Try
-                            If driver.FindElement(By.XPath("//*[contains(text(), 'El número de teléfono compartido a través de la dirección URL es inválido')]")).Displayed Then 'Invalido
-                                'Agregar a una lista sin whatsapp
-                                Continue For
-                            End If
-                        Catch ex As Exception
+                    'CONTROLAR INVALIDOS Y VÁLIDOS
+                    Try
+                        Dim Interfacewhatsappweb As IWebElement
+                        Dim waitInterfacewhatsappweb As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperarParteChat.Text))
+                        Interfacewhatsappweb = waitInterfacewhatsappweb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]")))
+                        If Interfacewhatsappweb.Displayed Then
+                            Threading.Thread.Sleep(1000)
 
-                        End Try
-
-                        'PARA NUMEROS VALIDOS
-                        Try
-                            If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then 'Parte del chat
-                                Threading.Thread.Sleep(1000) 'Espera necesaria????
-                                'PROCESO PARA ADJUNTAR ARCHIVOS//////////////////////////////////////////////////////////////////////////////
-                                If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
-                                    e.Cancel = True
-                                    Exit For
+                            'PARA NUMEROS INVALIDOS
+                            Try
+                                If driver.FindElement(By.XPath("//*[contains(text(), 'El número de teléfono compartido a través de la dirección URL es inválido')]")).Displayed Then 'Invalido
+                                    'Agregar a una lista sin whatsapp
+                                    Continue For
                                 End If
-                                'BOTON ADJUNTAR
-                                Dim adjuntar As IWebElement
-                                Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
-                                adjuntar = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
-                                adjuntar.Click() 'Click en el boton Adjuntar
-                                'BOTON FOTOS Y VIDEOS
-                                Dim foto As IWebElement
-                                foto = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
-                                foto.Click() 'Abre el buscador de archivos
-                                Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
-                                'EXPLORADOR DE ARCHIVOS
-                                SendKeys.SendWait(TextBoxRuta.Text)
-                                Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000)
-                                SendKeys.SendWait("{Enter}") ' Click en Aceptar del explorador
-                                Threading.Thread.Sleep(MaskedTextBoxTiempoCargaImagenVideo.Text * 1000) 'Espera que se carguen todas las fotos 'PROBAR DE ESPERAR MAS TIEMPO PARA CARGAR VIDEOS
+                            Catch ex As Exception
+                                'MessageBox.Show(ex.Message)
+                                'MessageBox.Show("NUMEOR INVALIDO")
+                            End Try
 
-                                'Pie de foto
-                                If CheckBoxPieDeFoto.Checked Then
-                                    Dim inputPie As IWebElement
-                                    inputPie = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
-                                    inputPie.SendKeys(RichTextBoxPieDeFoto.Text)
-                                End If
-                                If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
-                                    e.Cancel = True
-                                    Exit For
-                                End If
-                                'BOTON ENVIAR DE WHATSAPP WEB
-                                Dim enviarMensaje As IWebElement
-                                enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                                'enviarMensaje.Click()
-                                Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
-                            End If
-                        Catch ex As Exception
-                            ListBoxFallidos.Items.Add(item)
-                        End Try
+                            'PARA NUMEROS VALIDOS
+                            Try
+                                If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then 'Parte del chat
+                                    Threading.Thread.Sleep(1000)
+                                    'PROCESO PARA ADJUNTAR ARCHIVOS//////////////////////////////////////////////////////////////////////////////
+                                    If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                                        e.Cancel = True
+                                        Exit For
+                                    End If
+                                    'BOTON ADJUNTAR
+                                    Dim adjuntar As IWebElement
+                                    Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
+                                    adjuntar = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
+                                    adjuntar.Click() 'Click en el boton Adjuntar
+                                    'BOTON FOTOS Y VIDEOS
+                                    Dim foto As IWebElement
+                                    foto = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
+                                    foto.Click() 'Abre el buscador de archivos
+                                    Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
+                                    'EXPLORADOR DE ARCHIVOS
+                                    SendKeys.SendWait(TextBoxRuta.Text)
+                                    Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000)
+                                    SendKeys.SendWait("{Enter}") ' Click en Aceptar del explorador
+                                    Threading.Thread.Sleep(MaskedTextBoxTiempoCargaImagenVideo.Text * 1000) 'Espera que se carguen todas las fotos 'PROBAR DE ESPERAR MAS TIEMPO PARA CARGAR VIDEOS
 
-                    End If
+                                    'Pie de foto
+                                    If CheckBoxPieDeFoto.Checked Then
+                                        Dim inputPie As IWebElement
+                                        inputPie = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
+                                        inputPie.SendKeys(RichTextBoxPieDeFoto.Text)
+                                    End If
+                                    If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                                        e.Cancel = True
+                                        Exit For
+                                    End If
+                                    'BOTON ENVIAR DE WHATSAPP WEB
+                                    Dim enviarMensaje As IWebElement
+                                    enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
+                                    'enviarMensaje.Click()
+                                    Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
+                                End If
+                            Catch ex As Exception
+                                ListBoxFallidos.Items.Add(item)
+                                'MessageBox.Show(ex.Message)
+                                ' MessageBox.Show("numero valido")
+                            End Try
+                        End If
+                    Catch ex As Exception
+                        Continue For
+                    End Try
+
                     'INCREMENTAR PROGRESSBAR
                     Try
                         ProgressBar1.Value = ProgressBar1.Value + 1 'Se va incrementando llenando la barra de progreso
@@ -703,8 +726,9 @@ Public Class FormPrincipal
             End If
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
-            MessageBox.Show("Fallo en try principal del envio de multimedia")
+            'MessageBox.Show(ex.Message)
+            'MessageBox.Show("Fallo en try principal del envio de multimedia")
+
         End Try
         RadioButtonQuitar.Enabled = True
         CheckBoxAgregarTodos.Enabled = True
