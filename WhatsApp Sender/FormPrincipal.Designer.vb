@@ -172,6 +172,8 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerFallidosTextoPlano = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerFallidosMultimedia = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerFallidosDocumentos = New System.ComponentModel.BackgroundWorker()
+        Me.ListBoxSinWhatsapp = New System.Windows.Forms.ListBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -553,10 +555,10 @@ Partial Class FormPrincipal
         'ListBoxFallidos
         '
         Me.ListBoxFallidos.FormattingEnabled = True
-        Me.ListBoxFallidos.Location = New System.Drawing.Point(9, 97)
+        Me.ListBoxFallidos.Location = New System.Drawing.Point(296, 97)
         Me.ListBoxFallidos.MultiColumn = True
         Me.ListBoxFallidos.Name = "ListBoxFallidos"
-        Me.ListBoxFallidos.Size = New System.Drawing.Size(505, 82)
+        Me.ListBoxFallidos.Size = New System.Drawing.Size(312, 82)
         Me.ListBoxFallidos.TabIndex = 70
         Me.ToolTip1.SetToolTip(Me.ListBoxFallidos, "Los números en esta lista pueden que no tengan whatsapp o fallaron por problemas " &
         "de conexion entre el telefono y la sesion de whatsapp web")
@@ -565,10 +567,10 @@ Partial Class FormPrincipal
         '
         Me.ListBoxReenviadosFallidos.ForeColor = System.Drawing.Color.Red
         Me.ListBoxReenviadosFallidos.FormattingEnabled = True
-        Me.ListBoxReenviadosFallidos.Location = New System.Drawing.Point(520, 97)
+        Me.ListBoxReenviadosFallidos.Location = New System.Drawing.Point(614, 97)
         Me.ListBoxReenviadosFallidos.MultiColumn = True
         Me.ListBoxReenviadosFallidos.Name = "ListBoxReenviadosFallidos"
-        Me.ListBoxReenviadosFallidos.Size = New System.Drawing.Size(487, 82)
+        Me.ListBoxReenviadosFallidos.Size = New System.Drawing.Size(393, 82)
         Me.ListBoxReenviadosFallidos.TabIndex = 72
         Me.ToolTip1.SetToolTip(Me.ListBoxReenviadosFallidos, "Es probable que los elementos en esta lista no tengan whatsapp")
         '
@@ -676,6 +678,8 @@ Partial Class FormPrincipal
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(221, Byte), Integer))
+        Me.GroupBox3.Controls.Add(Me.Label21)
+        Me.GroupBox3.Controls.Add(Me.ListBoxSinWhatsapp)
         Me.GroupBox3.Controls.Add(Me.ButtonCancelarReenvio)
         Me.GroupBox3.Controls.Add(Me.Label19)
         Me.GroupBox3.Controls.Add(Me.ListBoxReenviadosFallidos)
@@ -699,7 +703,7 @@ Partial Class FormPrincipal
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.Black
-        Me.Label19.Location = New System.Drawing.Point(700, 81)
+        Me.Label19.Location = New System.Drawing.Point(759, 81)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(89, 13)
         Me.Label19.TabIndex = 73
@@ -710,11 +714,11 @@ Partial Class FormPrincipal
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(206, 81)
+        Me.Label2.Location = New System.Drawing.Point(399, 81)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(117, 13)
+        Me.Label2.Size = New System.Drawing.Size(84, 13)
         Me.Label2.TabIndex = 38
-        Me.Label2.Text = "Numeros sin Whatsapp"
+        Me.Label2.Text = "Numeros fallidos"
         '
         'ButtonCancelarEnvio
         '
@@ -1679,6 +1683,27 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerFallidosDocumentos.WorkerReportsProgress = True
         Me.BackgroundWorkerFallidosDocumentos.WorkerSupportsCancellation = True
         '
+        'ListBoxSinWhatsapp
+        '
+        Me.ListBoxSinWhatsapp.FormattingEnabled = True
+        Me.ListBoxSinWhatsapp.Location = New System.Drawing.Point(3, 97)
+        Me.ListBoxSinWhatsapp.MultiColumn = True
+        Me.ListBoxSinWhatsapp.Name = "ListBoxSinWhatsapp"
+        Me.ListBoxSinWhatsapp.Size = New System.Drawing.Size(287, 82)
+        Me.ListBoxSinWhatsapp.TabIndex = 75
+        Me.ToolTip1.SetToolTip(Me.ListBoxSinWhatsapp, "Los números de teléfono en esta lista no pueden recibir mensajes de whatsapp")
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ForeColor = System.Drawing.Color.Black
+        Me.Label21.Location = New System.Drawing.Point(53, 81)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(162, 13)
+        Me.Label21.TabIndex = 76
+        Me.Label21.Text = "Numeros inválidos/Sin whatsapp"
+        '
         'FormPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1882,4 +1907,6 @@ Partial Class FormPrincipal
     Friend WithEvents GroupBox7 As GroupBox
     Friend WithEvents GroupBox6 As GroupBox
     Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents ListBoxSinWhatsapp As ListBox
+    Friend WithEvents Label21 As Label
 End Class
