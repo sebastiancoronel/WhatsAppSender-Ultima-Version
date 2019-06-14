@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WhatsApp Sender.exe" size="767480">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WhatsApp Sender.exe" size="770040">
       <assemblyIdentity name="WhatsApp Sender" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oFik/cVaXevY82UIPoxBbr1kZJvD1NN8XZj3RXXN+JA=</dsig:DigestValue>
+        <dsig:DigestValue>+E68ifCqo2rgHnbnGdulTS0lTjTNehyZZet5mEJxcw8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

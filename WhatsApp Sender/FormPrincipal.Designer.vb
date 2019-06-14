@@ -24,9 +24,9 @@ Partial Class FormPrincipal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPrincipal))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
@@ -63,12 +63,14 @@ Partial Class FormPrincipal
         Me.Label20 = New System.Windows.Forms.Label()
         Me.MaskedTextBoxEsperaMaximaDOM = New System.Windows.Forms.MaskedTextBox()
         Me.PictureBox16 = New System.Windows.Forms.PictureBox()
+        Me.ListBoxSinWhatsapp = New System.Windows.Forms.ListBox()
         Me.PictureBox7 = New System.Windows.Forms.PictureBox()
         Me.OpenFileDialogImagenes = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialogDocumentos = New System.Windows.Forms.OpenFileDialog()
         Me.BackgroundWorkerEnviarTextoPlano = New System.ComponentModel.BackgroundWorker()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ButtonCancelarEnvio = New System.Windows.Forms.Button()
@@ -172,8 +174,6 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerFallidosTextoPlano = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerFallidosMultimedia = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerFallidosDocumentos = New System.ComponentModel.BackgroundWorker()
-        Me.ListBoxSinWhatsapp = New System.Windows.Forms.ListBox()
-        Me.Label21 = New System.Windows.Forms.Label()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -264,9 +264,9 @@ Partial Class FormPrincipal
         Me.ListBox1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ListBox1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(974, 24)
+        Me.ListBox1.Location = New System.Drawing.Point(971, 24)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(154, 537)
+        Me.ListBox1.Size = New System.Drawing.Size(160, 550)
         Me.ListBox1.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.ListBox1, "Lista de destinatarios a los que se enviarán los mensajes")
         '
@@ -337,7 +337,7 @@ Partial Class FormPrincipal
         'PictureBox6
         '
         Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
-        Me.PictureBox6.Location = New System.Drawing.Point(1119, 3)
+        Me.PictureBox6.Location = New System.Drawing.Point(1105, 3)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(15, 15)
         Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -637,6 +637,16 @@ Partial Class FormPrincipal
         Me.PictureBox16.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox16, "Tiempo de espera máximo para encontrar los elementos clickeables del DOM")
         '
+        'ListBoxSinWhatsapp
+        '
+        Me.ListBoxSinWhatsapp.FormattingEnabled = True
+        Me.ListBoxSinWhatsapp.Location = New System.Drawing.Point(3, 97)
+        Me.ListBoxSinWhatsapp.MultiColumn = True
+        Me.ListBoxSinWhatsapp.Name = "ListBoxSinWhatsapp"
+        Me.ListBoxSinWhatsapp.Size = New System.Drawing.Size(287, 82)
+        Me.ListBoxSinWhatsapp.TabIndex = 75
+        Me.ToolTip1.SetToolTip(Me.ListBoxSinWhatsapp, "Los números de teléfono en esta lista no pueden recibir mensajes de whatsapp")
+        '
         'PictureBox7
         '
         Me.PictureBox7.Image = CType(resources.GetObject("PictureBox7.Image"), System.Drawing.Image)
@@ -697,6 +707,17 @@ Partial Class FormPrincipal
         Me.GroupBox3.Size = New System.Drawing.Size(1134, 182)
         Me.GroupBox3.TabIndex = 40
         Me.GroupBox3.TabStop = False
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ForeColor = System.Drawing.Color.Black
+        Me.Label21.Location = New System.Drawing.Point(53, 81)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(162, 13)
+        Me.Label21.TabIndex = 76
+        Me.Label21.Text = "Numeros inválidos/Sin whatsapp"
         '
         'Label19
         '
@@ -1092,11 +1113,11 @@ Partial Class FormPrincipal
         Me.ButtonLimpiarLista.Cursor = System.Windows.Forms.Cursors.Hand
         Me.ButtonLimpiarLista.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ButtonLimpiarLista.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonLimpiarLista.Location = New System.Drawing.Point(974, 566)
+        Me.ButtonLimpiarLista.Location = New System.Drawing.Point(974, 578)
         Me.ButtonLimpiarLista.Name = "ButtonLimpiarLista"
-        Me.ButtonLimpiarLista.Size = New System.Drawing.Size(154, 40)
+        Me.ButtonLimpiarLista.Size = New System.Drawing.Size(154, 28)
         Me.ButtonLimpiarLista.TabIndex = 15
-        Me.ButtonLimpiarLista.Text = "Borrar todo"
+        Me.ButtonLimpiarLista.Text = "Limpiar lista"
         Me.ButtonLimpiarLista.UseVisualStyleBackColor = False
         '
         'GroupBox1
@@ -1249,37 +1270,37 @@ Partial Class FormPrincipal
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25, Me.Column26, Me.Column27, Me.Column28, Me.Column29, Me.Column30, Me.Column31, Me.Column32, Me.Column33, Me.Column34, Me.Column35, Me.Column36, Me.Column37, Me.Column38, Me.Column39, Me.Column40, Me.Column41, Me.Column42, Me.Column43, Me.Column44, Me.Column45, Me.Column46, Me.Column47, Me.Column48, Me.Column49, Me.Column50})
         Me.DataGridView1.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle8
         Me.DataGridView1.GridColor = System.Drawing.Color.Black
         Me.DataGridView1.Location = New System.Drawing.Point(251, 6)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect
         Me.DataGridView1.Size = New System.Drawing.Size(714, 600)
@@ -1638,11 +1659,11 @@ Partial Class FormPrincipal
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(140, Byte), Integer), CType(CType(126, Byte), Integer))
         Me.Label1.Location = New System.Drawing.Point(971, 3)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(148, 13)
+        Me.Label1.Size = New System.Drawing.Size(128, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Lista de destinatarios"
         '
@@ -1682,27 +1703,6 @@ Partial Class FormPrincipal
         '
         Me.BackgroundWorkerFallidosDocumentos.WorkerReportsProgress = True
         Me.BackgroundWorkerFallidosDocumentos.WorkerSupportsCancellation = True
-        '
-        'ListBoxSinWhatsapp
-        '
-        Me.ListBoxSinWhatsapp.FormattingEnabled = True
-        Me.ListBoxSinWhatsapp.Location = New System.Drawing.Point(3, 97)
-        Me.ListBoxSinWhatsapp.MultiColumn = True
-        Me.ListBoxSinWhatsapp.Name = "ListBoxSinWhatsapp"
-        Me.ListBoxSinWhatsapp.Size = New System.Drawing.Size(287, 82)
-        Me.ListBoxSinWhatsapp.TabIndex = 75
-        Me.ToolTip1.SetToolTip(Me.ListBoxSinWhatsapp, "Los números de teléfono en esta lista no pueden recibir mensajes de whatsapp")
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.ForeColor = System.Drawing.Color.Black
-        Me.Label21.Location = New System.Drawing.Point(53, 81)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(162, 13)
-        Me.Label21.TabIndex = 76
-        Me.Label21.Text = "Numeros inválidos/Sin whatsapp"
         '
         'FormPrincipal
         '

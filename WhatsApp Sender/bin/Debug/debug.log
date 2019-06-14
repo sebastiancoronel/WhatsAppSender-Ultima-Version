@@ -342,3 +342,15 @@
 [0613/175801.486:ERROR:exception_snapshot_win.cc(98)] thread ID 516 not found in process
 [0613/175837.605:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
 [0613/175837.606:ERROR:exception_snapshot_win.cc(98)] thread ID 10732 not found in process
+[0614/162033.641:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0614/162033.657:ERROR:exception_snapshot_win.cc(98)] thread ID 13880 not found in process
+[0614/162035.321:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0614/162035.321:ERROR:exception_snapshot_win.cc(98)] thread ID 6304 not found in process
+[0614/162211.523:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0614/162211.524:ERROR:exception_snapshot_win.cc(98)] thread ID 8388 not found in process
+[0614/162752.318:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0614/162752.319:ERROR:exception_snapshot_win.cc(98)] thread ID 13428 not found in process
+[0614/163916.931:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0614/163916.932:ERROR:exception_snapshot_win.cc(98)] thread ID 12192 not found in process
+[0614/171827.534:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
+[0614/171827.535:ERROR:exception_snapshot_win.cc(98)] thread ID 3760 not found in process
