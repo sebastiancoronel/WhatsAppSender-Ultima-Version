@@ -24,9 +24,9 @@ Partial Class FormPrincipal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPrincipal))
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
@@ -174,6 +174,13 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerFallidosTextoPlano = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerFallidosMultimedia = New System.ComponentModel.BackgroundWorker()
         Me.BackgroundWorkerFallidosDocumentos = New System.ComponentModel.BackgroundWorker()
+        Me.LabelCuenta = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
+        Me.PictureBox17 = New System.Windows.Forms.PictureBox()
+        Me.LabelCuentaSinWhatsapp = New System.Windows.Forms.Label()
+        Me.LabelCuentaFallidos = New System.Windows.Forms.Label()
+        Me.LabelCuentaReenviadosFallidos = New System.Windows.Forms.Label()
         CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -207,6 +214,7 @@ Partial Class FormPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
+        CType(Me.PictureBox17, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -594,6 +602,8 @@ Partial Class FormPrincipal
         'CheckBoxAgregarTodos
         '
         Me.CheckBoxAgregarTodos.AutoSize = True
+        Me.CheckBoxAgregarTodos.Checked = True
+        Me.CheckBoxAgregarTodos.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBoxAgregarTodos.ForeColor = System.Drawing.Color.White
         Me.CheckBoxAgregarTodos.Location = New System.Drawing.Point(36, 68)
         Me.CheckBoxAgregarTodos.Name = "CheckBoxAgregarTodos"
@@ -688,6 +698,10 @@ Partial Class FormPrincipal
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(236, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(221, Byte), Integer))
+        Me.GroupBox3.Controls.Add(Me.LabelCuentaReenviadosFallidos)
+        Me.GroupBox3.Controls.Add(Me.LabelCuentaFallidos)
+        Me.GroupBox3.Controls.Add(Me.LabelCuentaSinWhatsapp)
+        Me.GroupBox3.Controls.Add(Me.LabelCuenta)
         Me.GroupBox3.Controls.Add(Me.Label21)
         Me.GroupBox3.Controls.Add(Me.ListBoxSinWhatsapp)
         Me.GroupBox3.Controls.Add(Me.ButtonCancelarReenvio)
@@ -715,9 +729,9 @@ Partial Class FormPrincipal
         Me.Label21.ForeColor = System.Drawing.Color.Black
         Me.Label21.Location = New System.Drawing.Point(53, 81)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(162, 13)
+        Me.Label21.Size = New System.Drawing.Size(165, 13)
         Me.Label21.TabIndex = 76
-        Me.Label21.Text = "Numeros inválidos/Sin whatsapp"
+        Me.Label21.Text = "Numeros inválidos/Sin whatsapp:"
         '
         'Label19
         '
@@ -737,9 +751,9 @@ Partial Class FormPrincipal
         Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(399, 81)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(84, 13)
+        Me.Label2.Size = New System.Drawing.Size(87, 13)
         Me.Label2.TabIndex = 38
-        Me.Label2.Text = "Numeros fallidos"
+        Me.Label2.Text = "Numeros fallidos:"
         '
         'ButtonCancelarEnvio
         '
@@ -1140,6 +1154,9 @@ Partial Class FormPrincipal
         '
         'GroupBox7
         '
+        Me.GroupBox7.Controls.Add(Me.Label22)
+        Me.GroupBox7.Controls.Add(Me.MaskedTextBox1)
+        Me.GroupBox7.Controls.Add(Me.PictureBox17)
         Me.GroupBox7.Controls.Add(Me.PictureBox3)
         Me.GroupBox7.Controls.Add(Me.Label14)
         Me.GroupBox7.Controls.Add(Me.PictureBox16)
@@ -1151,9 +1168,9 @@ Partial Class FormPrincipal
         Me.GroupBox7.Controls.Add(Me.PictureBox15)
         Me.GroupBox7.Controls.Add(Me.MaskedTextBoxEsperarParteChat)
         Me.GroupBox7.Controls.Add(Me.PictureBox14)
-        Me.GroupBox7.Location = New System.Drawing.Point(6, 331)
+        Me.GroupBox7.Location = New System.Drawing.Point(6, 332)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(233, 174)
+        Me.GroupBox7.Size = New System.Drawing.Size(233, 193)
         Me.GroupBox7.TabIndex = 72
         Me.GroupBox7.TabStop = False
         '
@@ -1270,37 +1287,37 @@ Partial Class FormPrincipal
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25, Me.Column26, Me.Column27, Me.Column28, Me.Column29, Me.Column30, Me.Column31, Me.Column32, Me.Column33, Me.Column34, Me.Column35, Me.Column36, Me.Column37, Me.Column38, Me.Column39, Me.Column40, Me.Column41, Me.Column42, Me.Column43, Me.Column44, Me.Column45, Me.Column46, Me.Column47, Me.Column48, Me.Column49, Me.Column50})
         Me.DataGridView1.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.GridColor = System.Drawing.Color.Black
         Me.DataGridView1.Location = New System.Drawing.Point(251, 6)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect
         Me.DataGridView1.Size = New System.Drawing.Size(714, 600)
@@ -1704,6 +1721,81 @@ Partial Class FormPrincipal
         Me.BackgroundWorkerFallidosDocumentos.WorkerReportsProgress = True
         Me.BackgroundWorkerFallidosDocumentos.WorkerSupportsCancellation = True
         '
+        'LabelCuenta
+        '
+        Me.LabelCuenta.AutoSize = True
+        Me.LabelCuenta.BackColor = System.Drawing.Color.Transparent
+        Me.LabelCuenta.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelCuenta.ForeColor = System.Drawing.Color.Black
+        Me.LabelCuenta.Location = New System.Drawing.Point(955, 12)
+        Me.LabelCuenta.Name = "LabelCuenta"
+        Me.LabelCuenta.Size = New System.Drawing.Size(37, 14)
+        Me.LabelCuenta.TabIndex = 77
+        Me.LabelCuenta.Text = "Total"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.ForeColor = System.Drawing.Color.White
+        Me.Label22.Location = New System.Drawing.Point(10, 174)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(113, 13)
+        Me.Label22.TabIndex = 70
+        Me.Label22.Text = "T. máximo pagina web"
+        Me.ToolTip1.SetToolTip(Me.Label22, "Tiempo hasta que el mensaje enviado sea recibido por el destinatario antes que se" &
+        " pase al siguiente contacto" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & ". Para videos o documentos pesados se recomiendan m" &
+        "as de 20 segundos")
+        '
+        'MaskedTextBox1
+        '
+        Me.MaskedTextBox1.Location = New System.Drawing.Point(176, 167)
+        Me.MaskedTextBox1.Mask = "999"
+        Me.MaskedTextBox1.Name = "MaskedTextBox1"
+        Me.MaskedTextBox1.Size = New System.Drawing.Size(25, 20)
+        Me.MaskedTextBox1.TabIndex = 71
+        Me.MaskedTextBox1.Text = "10"
+        Me.ToolTip1.SetToolTip(Me.MaskedTextBox1, "Tiempo a esperar para entregar un mensaje")
+        Me.MaskedTextBox1.ValidatingType = GetType(Integer)
+        '
+        'PictureBox17
+        '
+        Me.PictureBox17.Image = CType(resources.GetObject("PictureBox17.Image"), System.Drawing.Image)
+        Me.PictureBox17.Location = New System.Drawing.Point(206, 167)
+        Me.PictureBox17.Name = "PictureBox17"
+        Me.PictureBox17.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBox17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox17.TabIndex = 72
+        Me.PictureBox17.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox17, "Tiempo máximo a esperar mientras la página está cargando hasta que pase al siguie" &
+        "nte destinatario. Debe ser mayor al tiempo para abrir un nuevo chat.")
+        '
+        'LabelCuentaSinWhatsapp
+        '
+        Me.LabelCuentaSinWhatsapp.AutoSize = True
+        Me.LabelCuentaSinWhatsapp.Location = New System.Drawing.Point(224, 81)
+        Me.LabelCuentaSinWhatsapp.Name = "LabelCuentaSinWhatsapp"
+        Me.LabelCuentaSinWhatsapp.Size = New System.Drawing.Size(13, 13)
+        Me.LabelCuentaSinWhatsapp.TabIndex = 78
+        Me.LabelCuentaSinWhatsapp.Text = "0"
+        '
+        'LabelCuentaFallidos
+        '
+        Me.LabelCuentaFallidos.AutoSize = True
+        Me.LabelCuentaFallidos.Location = New System.Drawing.Point(492, 81)
+        Me.LabelCuentaFallidos.Name = "LabelCuentaFallidos"
+        Me.LabelCuentaFallidos.Size = New System.Drawing.Size(13, 13)
+        Me.LabelCuentaFallidos.TabIndex = 79
+        Me.LabelCuentaFallidos.Text = "0"
+        '
+        'LabelCuentaReenviadosFallidos
+        '
+        Me.LabelCuentaReenviadosFallidos.AutoSize = True
+        Me.LabelCuentaReenviadosFallidos.Location = New System.Drawing.Point(854, 81)
+        Me.LabelCuentaReenviadosFallidos.Name = "LabelCuentaReenviadosFallidos"
+        Me.LabelCuentaReenviadosFallidos.Size = New System.Drawing.Size(13, 13)
+        Me.LabelCuentaReenviadosFallidos.TabIndex = 80
+        Me.LabelCuentaReenviadosFallidos.Text = "0"
+        '
         'FormPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1759,6 +1851,7 @@ Partial Class FormPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
+        CType(Me.PictureBox17, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1909,4 +2002,11 @@ Partial Class FormPrincipal
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents ListBoxSinWhatsapp As ListBox
     Friend WithEvents Label21 As Label
+    Friend WithEvents LabelCuenta As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents MaskedTextBox1 As MaskedTextBox
+    Friend WithEvents PictureBox17 As PictureBox
+    Friend WithEvents LabelCuentaReenviadosFallidos As Label
+    Friend WithEvents LabelCuentaFallidos As Label
+    Friend WithEvents LabelCuentaSinWhatsapp As Label
 End Class

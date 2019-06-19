@@ -328,34 +328,34 @@ Public Class FormPrincipal
 
     Private Sub ButtonCancelarEnvío_Click(sender As Object, e As EventArgs) Handles ButtonCancelarEnvio.Click
         'Cancela el Background Worker
-        If BackgroundWorkerEnviarTextoPlano.IsBusy Then
-            If BackgroundWorkerEnviarTextoPlano.WorkerSupportsCancellation Then
-                If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
-                    BackgroundWorkerEnviarTextoPlano.CancelAsync()
-                End If
+        'If BackgroundWorkerEnviarTextoPlano.IsBusy Then
+        'If BackgroundWorkerEnviarTextoPlano.WorkerSupportsCancellation Then
+        'If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+        BackgroundWorkerEnviarTextoPlano.CancelAsync()
+        '        End If
 
-            End If
-        Else
-            If BackgroundWorkerEnviarMultimedia.IsBusy Then
-                If BackgroundWorkerEnviarMultimedia.WorkerSupportsCancellation Then
-                    If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
-                        BackgroundWorkerEnviarMultimedia.CancelAsync()
-                    End If
+        'End If
+        'Else
+        'If BackgroundWorkerEnviarMultimedia.IsBusy Then
+        'If BackgroundWorkerEnviarMultimedia.WorkerSupportsCancellation Then
+        'If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+        BackgroundWorkerEnviarMultimedia.CancelAsync()
+        '            End If
 
-                End If
-            Else
-                If BackgroundWorkerEnviarDocumentos.IsBusy Then
-                    If BackgroundWorkerEnviarDocumentos.WorkerSupportsCancellation Then
-                        If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
-                            BackgroundWorkerEnviarDocumentos.CancelAsync()
-                        End If
+        'End If
+        'Else
+        'If BackgroundWorkerEnviarDocumentos.IsBusy Then
+        'If BackgroundWorkerEnviarDocumentos.WorkerSupportsCancellation Then
+        'If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+        BackgroundWorkerEnviarDocumentos.CancelAsync()
+        '                End If
 
-                    End If
+        'End If
 
-                End If
-            End If
+        'End If
+        'End If
 
-        End If
+        'End If
     End Sub
 
     'MODULO DE ENVÍO DE TEXTO PLANO************************************************************************************************************************************************
@@ -423,7 +423,10 @@ Public Class FormPrincipal
                     Catch ex As Exception
                     End Try
                     'CONTROLO INEXISTENTES///////////////////////////////////////////////////////////////////////////////////////////////
-
+                    If BackgroundWorkerEnviarTextoPlano.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                        e.Cancel = True
+                        Exit For
+                    End If
                     'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
                     Try
                         Dim PaginaOficial As IWebElement
@@ -437,6 +440,10 @@ Public Class FormPrincipal
                         'MessageBox.Show(ex.Message)
                         'MessageBox.Show("Pagina oficial")
                     End Try
+                    If BackgroundWorkerEnviarTextoPlano.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                        e.Cancel = True
+                        Exit For
+                    End If
 
                     'CONTROLAR INVALIDOS Y VÁLIDOS
                     Try
@@ -453,6 +460,10 @@ Public Class FormPrincipal
                                 End If
                             Catch ex As Exception
                             End Try
+                            If BackgroundWorkerEnviarTextoPlano.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                                e.Cancel = True
+                                Exit For
+                            End If
                             'PARA NUMEROS VALIDOS
                             Try
                                 If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then 'Parte del chat
@@ -598,6 +609,7 @@ Public Class FormPrincipal
         Try
             Dim driver As IWebDriver
             driver = New ChromeDriver
+
             driver.Manage().Window.Maximize()
             'CONSTRUIR URL PARA API//////////////////////////////////////////////////////////////////////
             Dim a As String = "https://wa.me/"
@@ -622,26 +634,58 @@ Public Class FormPrincipal
                 Dim totalContactos As Integer = ListBox1.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
                 TamañoProgressBar = totalContactos
-                '///////////////////////////////////////////////////////////////////////////////////////
+                'Variables para llevar la cuenta de numeros de todo tipo
+                Dim cuenta As Integer = 1 'Lleva la cuenta de los elementos recorridos arriba del progressbar
+                Dim cuentaInvalidos As Integer = 0
+                Dim cuentaFallidos As Integer = 0
+                Dim cuentaReenviadosFallidos As Integer = 0
 
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR////////////////////
                 For Each item As Object In ListBox1.Items 'Recorre la lista y envia a los destinatarios en la lista que coinciden con los contactos almacenados
                     LabelStatus.Text = "Enviando mensaje a " + Convert.ToString(item)
+                    Try
+                        If totalContactos > cuenta Then
+                            LabelCuenta.Text = Convert.ToString(cuenta) + "/" + Convert.ToString(totalContactos)
+                        End If
+                    Catch ex As Exception
+
+                    End Try
+
 
                     If BackgroundWorkerEnviarMultimedia.CancellationPending Then
                         e.Cancel = True
                         Exit For
                     End If
 
-                    Try
+                    Try '5xx Server Error
                         Dim url As String = a + item + encabezado + mensaje 'Crea la Url de la api
-                        driver.Navigate().GoToUrl(url)
+                        Try
+                            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(MaskedTextBoxEsperarParteChat.Text)
+                            driver.Navigate().GoToUrl(url)
+
+
+                            'If driver.FindElement(By.XPath("//*[contains(text(), '5xx Server Error')]")).Displayed Then 'Invalido
+                            '    Continue For
+                            'End If
+                            'Dim api As IWebElement
+                            'Dim waitapi As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
+                            'api = waitapi.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='top']/div[2]")))
+                        Catch ex As Exception
+                            cuenta = cuenta + 1
+                            Continue For
+                        End Try
                         Dim send As IWebElement
-                        Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(30))
+                        Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
                         send = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='action-button']")))
                         send.Click()
                     Catch ex As Exception
+                        cuenta = cuenta + 1
+                        Continue For
                     End Try
+                    If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                        e.Cancel = True
+                        Exit For
+                    End If
 
                     'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
                     Try
@@ -650,33 +694,51 @@ Public Class FormPrincipal
                         PaginaOficial = waitPaginaOficial.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='hide_till_load']/div[1]/div[2]")))
                         If PaginaOficial.Displayed Then
                             ListBoxSinWhatsapp.Items.Add(item)
+                            cuentaInvalidos = cuentaInvalidos + 1
+                            LabelCuentaSinWhatsapp.Text = Convert.ToString(cuentaInvalidos)
+                            cuenta = cuenta + 1
                             Continue For
                         End If
                     Catch ex As Exception
-                        'MessageBox.Show(ex.Message)
+                        ' MessageBox.Show(ex.Message)
                         'MessageBox.Show("Pagina oficial")
                     End Try
+                    If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                        e.Cancel = True
+                        Exit For
+                    End If
 
                     'CONTROLAR INVALIDOS Y VÁLIDOS
                     Try
+
                         Dim Interfacewhatsappweb As IWebElement
                         Dim waitInterfacewhatsappweb As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperarParteChat.Text))
                         Interfacewhatsappweb = waitInterfacewhatsappweb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]")))
                         If Interfacewhatsappweb.Displayed Then
                             Threading.Thread.Sleep(1000)
+                            If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                                e.Cancel = True
+                                Exit For
+                            End If
 
                             'PARA NUMEROS INVALIDOS
                             Try
                                 If driver.FindElement(By.XPath("//*[contains(text(), 'El número de teléfono compartido a través de la dirección URL es inválido')]")).Displayed Then 'Invalido
                                     'Agregar a una lista sin whatsapp
                                     ListBoxSinWhatsapp.Items.Add(item)
+                                    cuentaInvalidos = cuentaInvalidos + 1
+                                    LabelCuentaSinWhatsapp.Text = Convert.ToString(cuentaInvalidos)
+                                    cuenta = cuenta + 1
                                     Continue For
                                 End If
                             Catch ex As Exception
-                                'MessageBox.Show(ex.Message)
-                                'MessageBox.Show("NUMEOR INVALIDO")
+                                '          MessageBox.Show(ex.Message)
+                                '         MessageBox.Show("NUMEOR INVALIDO")
                             End Try
-
+                            If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                                e.Cancel = True
+                                Exit For
+                            End If
                             'PARA NUMEROS VALIDOS
                             Try
                                 If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then 'Parte del chat
@@ -691,52 +753,107 @@ Public Class FormPrincipal
                                     Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
                                     adjuntar = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
                                     adjuntar.Click() 'Click en el boton Adjuntar
+                                    If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                                        e.Cancel = True
+                                        Exit For
+                                    End If
                                     'BOTON FOTOS Y VIDEOS
                                     Dim foto As IWebElement
                                     foto = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]/span/div/div/ul/li[1]/button")))
                                     foto.Click() 'Abre el buscador de archivos
                                     Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
-                                    'EXPLORADOR DE ARCHIVOS
-                                    SendKeys.SendWait(TextBoxRuta.Text)
-                                    Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000)
-                                    SendKeys.SendWait("{Enter}") ' Click en Aceptar del explorador
-                                    'Threading.Thread.Sleep(MaskedTextBoxTiempoCargaImagenVideo.Text * 1000) 'Espera que se carguen todas las fotos 'PROBAR DE ESPERAR MAS TIEMPO PARA CARGAR VIDEOS
+                                    If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                                        e.Cancel = True
+                                        Exit For
+                                    End If
 
+                                    Try
+                                        'EXPLORADOR DE ARCHIVOS
+                                        SendKeys.SendWait(TextBoxRuta.Text)
+                                        Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000)
+                                        SendKeys.SendWait("{Enter}") ' Click en Aceptar del explorador
+                                        'Threading.Thread.Sleep(MaskedTextBoxTiempoCargaImagenVideo.Text * 1000) 'Espera que se carguen todas las fotos 'PROBAR DE ESPERAR MAS TIEMPO PARA CARGAR VIDEOS
+                                    Catch ex As Exception
+                                        'MessageBox.Show("Error al apretar enter en explorador de archivos")
+                                        cuenta = cuenta + 1
+                                        cuentaFallidos = cuentaFallidos + 1
+                                        LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                        Continue For
+                                    End Try
+
+                                    If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                                        e.Cancel = True
+                                        Exit For
+                                    End If
                                     'CONTROLAR SI SE CARGÓ UNA IMAGEN
                                     Try
                                         Dim ProcesarImagenVideo As IWebElement
-                                        Dim WaitProcesarImagenVideo As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxTiempoCargaImagenVideo.Text * 1000))
+                                        Dim WaitProcesarImagenVideo As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxTiempoCargaImagenVideo.Text))
                                         ProcesarImagenVideo = WaitProcesarImagenVideo.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div")))
                                         If ProcesarImagenVideo.Displayed Then
-                                            'Pie de foto
-                                            If CheckBoxPieDeFoto.Checked Then
-                                                Dim inputPie As IWebElement
-                                                inputPie = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
-                                                inputPie.SendKeys(RichTextBoxPieDeFoto.Text)
+                                            If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                                                e.Cancel = True
+                                                Exit For
                                             End If
+                                            Try
+                                                If CheckBoxPieDeFoto.Checked Then
+                                                    Dim inputPie As IWebElement
+                                                    inputPie = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
+                                                    inputPie.SendKeys(RichTextBoxPieDeFoto.Text)
+                                                End If
+                                            Catch ex As Exception
+                                                cuenta = cuenta + 1
+                                                cuentaFallidos = cuentaFallidos + 1
+                                                LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                                Continue For
+                                                'MessageBox.Show("No se encontro pie de foto")
+                                            End Try
+                                            'Pie de foto
+
                                             If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
                                                 e.Cancel = True
                                                 Exit For
                                             End If
-                                            'BOTON ENVIAR DE WHATSAPP WEB
-                                            Dim enviarMensaje As IWebElement
-                                            enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                                            'enviarMensaje.Click()
-                                            Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
+                                            Try
+                                                'BOTON ENVIAR DE WHATSAPP WEB
+                                                Dim enviarMensaje As IWebElement
+                                                enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
+                                                'enviarMensaje.Click()
+                                                Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
+                                            Catch ex As Exception
+                                                cuenta = cuenta + 1
+                                                cuentaFallidos = cuentaFallidos + 1
+                                                LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                                'MessageBox.Show("No se encontro el boton de enviar")
+                                            End Try
+
                                         End If
                                     Catch ex As Exception
                                         ListBoxFallidos.Items.Add(item)
+                                        cuentaFallidos = cuentaFallidos + 1
+                                        LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                        cuenta = cuenta + 1
+                                        'MessageBox.Show(ex.Message)
+                                        Continue For
+
                                     End Try
 
                                 End If
                             Catch ex As Exception
                                 ListBoxFallidos.Items.Add(item)
+                                cuentaFallidos = cuentaFallidos + 1
+                                LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                cuenta = cuenta + 1
+                                Continue For
                                 'MessageBox.Show(ex.Message)
-                                ' MessageBox.Show("numero valido")
+                                'MessageBox.Show(" Fallo en numero valido")
                             End Try
                         End If
                     Catch ex As Exception
                         ListBoxFallidos.Items.Add(item)
+                        cuentaFallidos = cuentaFallidos + 1
+                        LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                        cuenta = cuenta + 1
                         Continue For
                     End Try
 
@@ -746,12 +863,13 @@ Public Class FormPrincipal
                     Catch ex As Exception
 
                     End Try
+                    cuenta = cuenta + 1
                 Next
             End If
 
         Catch ex As Exception
-            'MessageBox.Show(ex.Message)
-            'MessageBox.Show("Fallo en try principal del envio de multimedia")
+            MessageBox.Show(ex.Message)
+            MessageBox.Show("Fallo en try principal del envio de multimedia")
         End Try
         RadioButtonQuitar.Enabled = True
         CheckBoxAgregarTodos.Enabled = True
