@@ -31,6 +31,7 @@ Public Class FormPrincipal
             Else
                 Try
                     ButtonCancelarEnvio.Visible = True
+                    ListBoxSinWhatsapp.Items.Clear()
                     ListBoxFallidos.Items.Clear()
                     PictureBoxLoading.Visible = True
                     BackgroundWorkerEnviarTextoPlano.RunWorkerAsync()
@@ -586,6 +587,7 @@ Public Class FormPrincipal
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
+            ButtonReenviarFallidos.Visible = True
             ButtonReenviarFallidos.BackColor = Color.Gold
         End If
         PictureBoxLoading.Visible = False
@@ -719,8 +721,6 @@ Public Class FormPrincipal
                     Catch ex As Exception
 
                     End Try
-
-
                     If BackgroundWorkerEnviarMultimedia.CancellationPending Then
                         e.Cancel = True
                         Exit For
@@ -730,17 +730,14 @@ Public Class FormPrincipal
                         Dim url As String = a + item + encabezado + mensaje 'Crea la Url de la api
                         driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(MaskedTextBoxEsperarParteChat.Text)
                         driver.Navigate().GoToUrl(url)
-
                         Try
-
                             Dim send As IWebElement
                             Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
                             send = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='action-button']")))
                             send.Click()
-
                         Catch ex As Exception
                             cuenta = cuenta + 1
-                            ProgressBar1.Value = ProgressBar1.Value + 1
+                            'ProgressBar1.Value = ProgressBar1.Value + 1
                             Continue For
                         End Try
                         If BackgroundWorkerEnviarMultimedia.CancellationPending Then
@@ -772,7 +769,6 @@ Public Class FormPrincipal
 
                         'CONTROLAR INVALIDOS Y VÁLIDOS
                         Try
-
                             Dim Interfacewhatsappweb As IWebElement
                             Dim waitInterfacewhatsappweb As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperarParteChat.Text))
                             Interfacewhatsappweb = waitInterfacewhatsappweb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]")))
@@ -795,8 +791,8 @@ Public Class FormPrincipal
                                         Continue For
                                     End If
                                 Catch ex As Exception
-                                    '          MessageBox.Show(ex.Message)
-                                    '         MessageBox.Show("NUMEOR INVALIDO")
+                                    'MessageBox.Show(ex.Message)
+                                    'MessageBox.Show("NUMEOR INVALIDO")
                                 End Try
                                 If BackgroundWorkerEnviarMultimedia.CancellationPending Then
                                     e.Cancel = True
@@ -897,7 +893,7 @@ Public Class FormPrincipal
                                                     cuenta = cuenta + 1
                                                     cuentaFallidos = cuentaFallidos + 1
                                                     LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
-                                                    ProgressBar1.Value = ProgressBar1.Value + 1
+                                                    'ProgressBar1.Value = ProgressBar1.Value + 1
                                                     Continue For
                                                     'MessageBox.Show("No se encontro el boton de enviar")
                                                 End Try
@@ -934,21 +930,14 @@ Public Class FormPrincipal
                             ProgressBar1.Value = ProgressBar1.Value + 1
                             Continue For
                         End Try
-
-                        'INCREMENTAR PROGRESSBAR
-                        Try
-                            ProgressBar1.Value = ProgressBar1.Value + 1 'Se va incrementando llenando la barra de progreso
-                        Catch ex As Exception
-
-                        End Try
-                        'Notificar existosos
+                        'EXITOSOS
+                        ProgressBar1.Value = ProgressBar1.Value + 1 'Se va incrementando llenando la barra de progreso
                         cuenta = cuenta + 1
                         cuentaExitosos = cuentaExitosos + 1
                         LabelEnviadosExitosos.Text = "Se enviaron a " + Convert.ToString(cuentaExitosos) + " " + "contactos"
                         ListBoxExitosos.Items.Add(item)
-
-
                     Catch ex As Exception
+                        ProgressBar1.Value = ProgressBar1.Value + 1
                         cuenta = cuenta + 1
                         cuentaFallidos = cuentaFallidos + 1
                         LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
@@ -1287,6 +1276,7 @@ Public Class FormPrincipal
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
+            ButtonReenviarFallidos.Visible = True
             ButtonReenviarFallidos.BackColor = Color.Gold
         End If
         PictureBoxLoading.Visible = False
@@ -1324,6 +1314,7 @@ Public Class FormPrincipal
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
+            ButtonReenviarFallidos.Visible = True
             ButtonReenviarFallidos.BackColor = Color.Gold
         End If
         PictureBoxLoading.Visible = False
@@ -1353,11 +1344,21 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles ButtonReenviarFallidos.Click
-        ListBoxReenviadosFallidos.Items.Clear()
         ListBoxExitosos.Items.Clear()
+        ListBoxSinWhatsapp.Items.Clear()
         ButtonCancelarEnvio.Enabled = False
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarReenvio.Visible = True
+
+
+        If ListBoxReenviadosFallidos.Items.Count <> 0 Then
+            ListBoxFallidos.Items.Clear() 'Limpio fallidos para agregar los reenviados que fallaron en el envio anterior
+            For Each item As String In ListBoxReenviadosFallidos.Items
+                ListBoxFallidos.Items.Add(item)
+            Next
+            ListBoxReenviadosFallidos.Items.Clear() 'Limpio el listbox de reenviados fallidos
+        End If
+
         If RadioButtonTextoPlano.Checked Then
             'PROCESO DE ENVIO DE TEXTO PLANO
             If ListBoxFallidos.Items.Count = 0 Then 'Si la lista esta vacia
@@ -1894,20 +1895,6 @@ Public Class FormPrincipal
         Button2.Enabled = True
         DataGridView1.Enabled = True
 
-        'MsgBox(Join(arrayFallidosExitosos, vbCrLf))
-        'Array.ForEach(arrayFallidosExitosos, New Action(Of String)(Sub(x) ListBoxSinWhatsapp.Items.Add(x)))
-        Dim itemIndex As Integer
-        For n As Integer = ListBoxFallidos.Items.Count - 1 To 0 Step -1
-            itemIndex = ListBoxFallidos.SelectedIndices(n)
-            MessageBox.Show(ListBoxFallidos.Items.Item(n))
-            For Each itemExitoso As String In ListBoxExitosos.Items
-                If ListBoxFallidos.Items(n) = itemExitoso Then
-                    ListBoxFallidos.Items.Remove(n)
-                End If
-            Next
-
-        Next
-
     End Sub
 
     Private Sub BackgroundWorkerFallidosMultimedia_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosMultimedia.RunWorkerCompleted
@@ -2298,5 +2285,9 @@ Public Class FormPrincipal
             End If
 
         End If
+    End Sub
+
+    Private Sub ListBoxFallidos_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBoxFallidos.SelectedIndexChanged
+
     End Sub
 End Class
