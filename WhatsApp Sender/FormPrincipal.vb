@@ -22,6 +22,28 @@ Public Class FormPrincipal
 
 
     Private Sub ButtonEnviarTexto_Click(sender As Object, e As EventArgs) Handles ButtonEnviar.Click
+        'Contadores
+        cuenta = 1 'Lleva la cuenta de los elementos recorridos arriba del progressbar
+        cuentaExitosos = 0
+        cuentaInvalidos = 0
+        cuentaFallidos = 0
+        cuentaReenviadosFallidos = 0
+        'Botones
+        ButtonEnviar.Enabled = False
+        'Labels
+        LabelStatus.ForeColor = Color.Black
+        LabelEnviadosExitosos.Text = "Envíos correctos" 'Reinicia el label
+        LabelCuenta.Text = "0/0"
+        LabelCuentaReenviadosFallidos.Text = "0"
+        LabelCuentaFallidos.Text = "0"
+        LabelCuentaSinWhatsapp.Text = "0"
+        LabelEnviadosExitosos.Text = "Envíos correctos"
+        'Label cabecera Numeros fallidos
+        LabelNumerosFallidos.Text = "Numeros fallidos:"
+        LabelNumerosFallidos.ForeColor = Color.Black
+        'Listbox
+        ListBoxReenviadosFallidos.Items.Clear()
+        ListBoxExitosos.Items.Clear()
 
         If RadioButtonTextoPlano.Checked Then
             'PROCESO DE ENVIO DE TEXTO PLANO
@@ -397,6 +419,7 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub ButtonCancelarEnvío_Click(sender As Object, e As EventArgs) Handles ButtonCancelarEnvio.Click
+        LabelCuenta.Text = "0/0"
         'Cancela el Background Worker
         'If BackgroundWorkerEnviarTextoPlano.IsBusy Then
         'If BackgroundWorkerEnviarTextoPlano.WorkerSupportsCancellation Then
@@ -581,9 +604,9 @@ Public Class FormPrincipal
 
     Private Sub BackgroundWorkerEnviarTextoPlano_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerEnviarTextoPlano.RunWorkerCompleted
         ButtonCancelarEnvio.Enabled = False
-        ButtonCancelarEnvio.Visible = True
+        ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
-
+        ButtonEnviar.Enabled = True
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
@@ -1271,8 +1294,10 @@ Public Class FormPrincipal
 
     Private Sub BackgroundWorkerEnviarMultimedia_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerEnviarMultimedia.RunWorkerCompleted
         ButtonCancelarEnvio.Enabled = False
-        ButtonCancelarEnvio.Visible = True
+        ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
+        ButtonEnviar.Enabled = True
+        LabelCuentaFallidos.Text = ""
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
@@ -1308,9 +1333,9 @@ Public Class FormPrincipal
 
     Private Sub BackgroundWorkerEnviarDocumentos_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerEnviarDocumentos.RunWorkerCompleted
         ButtonCancelarEnvio.Enabled = False
-        ButtonCancelarEnvio.Visible = True
+        ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
-
+        ButtonEnviar.Enabled = True
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
@@ -1344,12 +1369,22 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles ButtonReenviarFallidos.Click
+        'Contadores
+        cuenta = 1 'Lleva la cuenta de los elementos recorridos arriba del progressbar
+        cuentaExitosos = 0
+        cuentaInvalidos = 0
+        cuentaFallidos = 0
+        cuentaReenviadosFallidos = 0
+        'Listbox
         ListBoxExitosos.Items.Clear()
         ListBoxSinWhatsapp.Items.Clear()
+        'Boton cancelar envio
         ButtonCancelarEnvio.Enabled = False
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarReenvio.Visible = True
-
+        'Boton Renviar fallidos
+        ButtonReenviarFallidos.Visible = False
+        PictureBoxLoading.Visible = True
 
         If ListBoxReenviadosFallidos.Items.Count <> 0 Then
             ListBoxFallidos.Items.Clear() 'Limpio fallidos para agregar los reenviados que fallaron en el envio anterior
@@ -1385,7 +1420,6 @@ Public Class FormPrincipal
                     MessageBox.Show("No hay elementos para reenviar")
 
                 Else
-
                     Try
                         If MessageBox.Show("Debe asegurarse que el teléfono y la sesion de whatsapp no sufran problemas de conexion" & vbCrLf & "" & vbCrLf & "Si sigue experimentando problemas de conexion inicie sesión con 4G", "IMPORTANTE!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                         End If
@@ -1554,13 +1588,21 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerFallidosTextoPlano_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosTextoPlano.RunWorkerCompleted
+        'Boton Cancelar Reenvio
         ButtonCancelarReenvio.Enabled = False
-        ButtonReenviarFallidos.Enabled = True
         ButtonCancelarReenvio.Visible = False
         ButtonCancelarReenvio.BackColor = Color.Gray
+        'Boton Reenviar Fallidos
         ButtonReenviarFallidos.Enabled = True
-
+        ButtonReenviarFallidos.Visible = True
+        'PictureBox
         PictureBoxLoading.Visible = False
+        'Label cabecera Numeros fallidos
+        LabelNumerosFallidos.Text = "Numeros fallidos:"
+        LabelNumerosFallidos.ForeColor = Color.Black
+        'Label Status
+        LabelStatus.Text = "0"
+
         If e.Cancelled Then
             LabelStatus.Text = "Reenvío cancelado!"
             ProgressBar1.Value = 0
@@ -1568,9 +1610,17 @@ Public Class FormPrincipal
             If MessageBox.Show("Se cancelaron todos los reenvíos pendientes", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
             End If
         Else
-            LabelStatus.Text = "Reenvío finalizado!"
-            PictureBoxSuccess.Visible = True
-            If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+            If ListBoxReenviadosFallidos.Items.Count > 0 Then
+                LabelStatus.Text = "Reenvío finalizado! Algunos elementos no se reenviaron"
+                PictureBoxSuccess.Visible = True
+                If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                End If
+            Else
+                LabelStatus.Text = "Reenvío finalizado! Todos fueron reenviados exitosamente"
+                ListBoxFallidos.Items.Clear()
+                PictureBoxSuccess.Visible = True
+                If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                End If
             End If
 
         End If
@@ -1581,7 +1631,6 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerFallidosMultimedia_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorkerFallidosMultimedia.DoWork
-
         CheckForIllegalCrossThreadCalls = False 'Se desactiva el checkeo de llamadas ilegales entre los diferentes hilos de ejecucion
         ButtonCancelarReenvio.Enabled = True
         ButtonCancelarReenvio.BackColor = Color.Red
@@ -1600,6 +1649,19 @@ Public Class FormPrincipal
         PictureBoxSuccess.Visible = False
         PictureBoxError.Visible = False
         LabelStatus.Text = "Esperando Inicio de sesión en WhatsApp Web"
+        LabelNumerosFallidos.ForeColor = Color.Red
+        LabelNumerosFallidos.Text = "Reenviando"
+        'Reiniciar variables
+        cuenta = 0
+        cuentaExitosos = 0
+        cuentaInvalidos = 0
+        cuentaFallidos = 0
+        cuentaReenviadosFallidos = 0
+        'Reiniciar labels
+        LabelStatus.Text = "Status"
+        LabelCuenta.Text = "0/0"
+        LabelCuentaReenviadosFallidos.Text = "0"
+        LabelCuentaSinWhatsapp.Text = "0"
         'PROCESO DE ENVÍO////////////////////////////////////////////////////////////////////////////////
         Try
             Dim driver As IWebDriver
@@ -1621,7 +1683,7 @@ Public Class FormPrincipal
                 Try
                     whatsappWebListo = EsperarSesion.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[4]/div/div/div[2]/h1")))
                 Catch ex As Exception
-                    BackgroundWorkerEnviarMultimedia.CancelAsync()
+                    BackgroundWorkerFallidosMultimedia.CancelAsync()
                     If MessageBox.Show("Se detuvo el envío de mensajes despues de 1 minuto", "No se inició sesión en whatsapp web", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                     End If
                 End Try
@@ -1629,8 +1691,8 @@ Public Class FormPrincipal
                 Dim totalContactos As Integer = ListBoxFallidos.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
                 TamañoProgressBar = totalContactos
-                aux = totalContactos
-                ReDim arrayFallidosExitosos(aux - 1)
+
+
 
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR////////////////////
                 For Each item As Object In ListBoxFallidos.Items 'Recorre la lista y envia a los destinatarios en la lista que coinciden con los contactos almacenados
@@ -1642,8 +1704,6 @@ Public Class FormPrincipal
                     Catch ex As Exception
 
                     End Try
-
-
                     If BackgroundWorkerFallidosMultimedia.CancellationPending Then
                         e.Cancel = True
                         Exit For
@@ -1658,7 +1718,6 @@ Public Class FormPrincipal
                             Dim wait As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
                             send = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='action-button']")))
                             send.Click()
-
                         Catch ex As Exception
                             cuenta = cuenta + 1
                             ProgressBar1.Value = ProgressBar1.Value + 1
@@ -1693,7 +1752,6 @@ Public Class FormPrincipal
 
                         'CONTROLAR INVALIDOS Y VÁLIDOS
                         Try
-
                             Dim Interfacewhatsappweb As IWebElement
                             Dim waitInterfacewhatsappweb As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperarParteChat.Text))
                             Interfacewhatsappweb = waitInterfacewhatsappweb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]")))
@@ -1716,8 +1774,8 @@ Public Class FormPrincipal
                                         Continue For
                                     End If
                                 Catch ex As Exception
-                                    '          MessageBox.Show(ex.Message)
-                                    '         MessageBox.Show("NUMEOR INVALIDO")
+                                    'MessageBox.Show(ex.Message)
+                                    'MessageBox.Show("NUMEOR INVALIDO")
                                 End Try
                                 If BackgroundWorkerFallidosMultimedia.CancellationPending Then
                                     e.Cancel = True
@@ -1728,7 +1786,7 @@ Public Class FormPrincipal
                                     If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then 'Parte del chat
                                         Threading.Thread.Sleep(1000)
                                         'PROCESO PARA ADJUNTAR ARCHIVOS//////////////////////////////////////////////////////////////////////////////
-                                        If BackgroundWorkerFallidosMultimedia.CancellationPending Then
+                                        If BackgroundWorkerFallidosMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
                                             e.Cancel = True
                                             Exit For
                                         End If
@@ -1749,8 +1807,9 @@ Public Class FormPrincipal
                                             Threading.Thread.Sleep(MaskedTextBoxExploradorDeArchivos.Text * 1000) 'Esperar lo que se establece en el MaskedTextbox del panel
                                         Catch ex As Exception
                                             cuenta = cuenta + 1
-                                            cuentaFallidos = cuentaFallidos + 1
-                                            LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                            cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
+                                            LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
+
                                             Continue For
                                         End Try
 
@@ -1769,7 +1828,8 @@ Public Class FormPrincipal
                                             'MessageBox.Show("Error al apretar enter en explorador de archivos")
                                             cuenta = cuenta + 1
                                             cuentaFallidos = cuentaFallidos + 1
-                                            LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                            LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
+
                                             ProgressBar1.Value = ProgressBar1.Value + 1
                                             Continue For
                                         End Try
@@ -1796,15 +1856,16 @@ Public Class FormPrincipal
                                                     End If
                                                 Catch ex As Exception
                                                     cuenta = cuenta + 1
-                                                    cuentaFallidos = cuentaFallidos + 1
-                                                    LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                                    cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
+                                                    LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
+
                                                     ProgressBar1.Value = ProgressBar1.Value + 1
                                                     Continue For
                                                     'MessageBox.Show("No se encontro pie de foto")
                                                 End Try
                                                 'Pie de foto
 
-                                                If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                                                If BackgroundWorkerFallidosMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
                                                     e.Cancel = True
                                                     Exit For
                                                 End If
@@ -1816,9 +1877,10 @@ Public Class FormPrincipal
                                                     Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                                                 Catch ex As Exception
                                                     cuenta = cuenta + 1
-                                                    cuentaFallidos = cuentaFallidos + 1
-                                                    LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
-                                                    ProgressBar1.Value = ProgressBar1.Value + 1
+                                                    cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
+                                                    LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
+
+                                                    'ProgressBar1.Value = ProgressBar1.Value + 1
                                                     Continue For
                                                     'MessageBox.Show("No se encontro el boton de enviar")
                                                 End Try
@@ -1826,8 +1888,9 @@ Public Class FormPrincipal
                                             End If
                                         Catch ex As Exception
                                             ListBoxReenviadosFallidos.Items.Add(item)
-                                            cuentaFallidos = cuentaFallidos + 1
-                                            LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                            cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
+                                            LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
+
                                             cuenta = cuenta + 1
                                             ProgressBar1.Value = ProgressBar1.Value + 1
                                             'MessageBox.Show(ex.Message)
@@ -1837,10 +1900,10 @@ Public Class FormPrincipal
 
                                     End If
                                 Catch ex As Exception
-
                                     ListBoxReenviadosFallidos.Items.Add(item)
-                                    cuentaFallidos = cuentaFallidos + 1
-                                    LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                    cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
+                                    LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
+
                                     cuenta = cuenta + 1
                                     ProgressBar1.Value = ProgressBar1.Value + 1
                                     Continue For
@@ -1850,35 +1913,25 @@ Public Class FormPrincipal
                             End If
                         Catch ex As Exception
                             ListBoxReenviadosFallidos.Items.Add(item)
-                            cuentaFallidos = cuentaFallidos + 1
-                            LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                            cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
+                            LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
+
                             cuenta = cuenta + 1
                             ProgressBar1.Value = ProgressBar1.Value + 1
                             Continue For
                         End Try
-
-                        'INCREMENTAR PROGRESSBAR
-                        Try
-                            ProgressBar1.Value = ProgressBar1.Value + 1 'Se va incrementando llenando la barra de progreso
-                        Catch ex As Exception
-
-                        End Try
-
-                        'Notificar existosos
+                        'EXITOSOS
+                        ProgressBar1.Value = ProgressBar1.Value + 1 'Se va incrementando llenando la barra de progreso
                         cuenta = cuenta + 1
                         cuentaExitosos = cuentaExitosos + 1
                         LabelEnviadosExitosos.Text = "Se enviaron a " + Convert.ToString(cuentaExitosos) + " " + "contactos"
                         ListBoxExitosos.Items.Add(item)
-                        ''Array para guardar fallidos que si se enviaron y borrarlos despues de fallidos para no volver a enviar a los mismos
-                        'For i = 0 To arrayFallidosExitosos.Length - 1
-                        '    arrayFallidosExitosos(i) = item
-                        'Next
-                        ''Fin array
-
                     Catch ex As Exception
+                        ProgressBar1.Value = ProgressBar1.Value + 1
                         cuenta = cuenta + 1
-                        cuentaFallidos = cuentaFallidos + 1
-                        LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                        cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
+                        LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
+
                         ListBoxReenviadosFallidos.Items.Add(item)
                     End Try
                 Next
@@ -1904,9 +1957,14 @@ Public Class FormPrincipal
         ButtonCancelarReenvio.BackColor = Color.Gray
         'Boton Reenviar Fallidos
         ButtonReenviarFallidos.Enabled = True
-
+        ButtonReenviarFallidos.Visible = True
         'PictureBox
         PictureBoxLoading.Visible = False
+        'Label cabecera Numeros fallidos
+        LabelNumerosFallidos.Text = "Numeros fallidos:"
+        LabelNumerosFallidos.ForeColor = Color.Black
+        'Label Status
+        LabelStatus.Text = "0"
 
         If e.Cancelled Then
             LabelStatus.Text = "Reenvío cancelado!"
@@ -1915,10 +1973,19 @@ Public Class FormPrincipal
             If MessageBox.Show("Se cancelaron todos los reenvíos pendientes", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
             End If
         Else
-            LabelStatus.Text = "Reenvío finalizado!"
-            PictureBoxSuccess.Visible = True
-            If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+            If ListBoxReenviadosFallidos.Items.Count > 0 Then
+                LabelStatus.Text = "Reenvío finalizado! Algunos elementos no se reenviaron"
+                PictureBoxSuccess.Visible = True
+                If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                End If
+            Else
+                LabelStatus.Text = "Reenvío finalizado! Todos fueron reenviados exitosamente"
+                ListBoxFallidos.Items.Clear()
+                PictureBoxSuccess.Visible = True
+                If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                End If
             End If
+
 
         End If
     End Sub
@@ -2235,11 +2302,21 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerFallidosDocumentos_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosDocumentos.RunWorkerCompleted
+        'Boton Cancelar Reenvio
         ButtonCancelarReenvio.Enabled = False
-        ButtonReenviarFallidos.Enabled = True
-        ButtonCancelarReenvio.BackColor = Color.Gray
         ButtonCancelarReenvio.Visible = False
+        ButtonCancelarReenvio.BackColor = Color.Gray
+        'Boton Reenviar Fallidos
+        ButtonReenviarFallidos.Enabled = True
+        ButtonReenviarFallidos.Visible = True
+        'PictureBox
         PictureBoxLoading.Visible = False
+        'Label cabecera Numeros fallidos
+        LabelNumerosFallidos.Text = "Numeros fallidos:"
+        LabelNumerosFallidos.ForeColor = Color.Black
+        'Label Status
+        LabelStatus.Text = "0"
+
         If e.Cancelled Then
             LabelStatus.Text = "Reenvío cancelado!"
             ProgressBar1.Value = 0
@@ -2247,15 +2324,24 @@ Public Class FormPrincipal
             If MessageBox.Show("Se cancelaron todos los reenvíos pendientes", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
             End If
         Else
-            LabelStatus.Text = "Reenvío finalizado!"
-            PictureBoxSuccess.Visible = True
-            If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+            If ListBoxReenviadosFallidos.Items.Count > 0 Then
+                LabelStatus.Text = "Reenvío finalizado! Algunos elementos no se reenviaron"
+                PictureBoxSuccess.Visible = True
+                If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                End If
+            Else
+                LabelStatus.Text = "Reenvío finalizado! Todos fueron reenviados exitosamente"
+                ListBoxFallidos.Items.Clear()
+                PictureBoxSuccess.Visible = True
+                If MessageBox.Show("Reenvío finalizado", "Fin", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                End If
             End If
 
         End If
     End Sub
 
     Private Sub ButtonCancelarReenvio_Click(sender As Object, e As EventArgs) Handles ButtonCancelarReenvio.Click
+        LabelCuenta.Text = "0/0"
         'Cancela el Background Worker de fallidos
         If BackgroundWorkerFallidosTextoPlano.IsBusy Then
             If BackgroundWorkerFallidosTextoPlano.WorkerSupportsCancellation Then
@@ -2288,6 +2374,10 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub ListBoxFallidos_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBoxFallidos.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub GroupBox3_Enter(sender As Object, e As EventArgs) Handles GroupBox3.Enter
 
     End Sub
 End Class

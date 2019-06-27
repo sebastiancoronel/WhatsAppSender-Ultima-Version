@@ -24,9 +24,9 @@ Partial Class FormPrincipal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPrincipal))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
@@ -79,7 +79,7 @@ Partial Class FormPrincipal
         Me.LabelCuenta = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.LabelNumerosFallidos = New System.Windows.Forms.Label()
         Me.LabelStatus = New System.Windows.Forms.Label()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -533,11 +533,12 @@ Partial Class FormPrincipal
         '
         Me.ButtonReenviarFallidos.BackColor = System.Drawing.Color.Gray
         Me.ButtonReenviarFallidos.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ButtonReenviarFallidos.Enabled = False
         Me.ButtonReenviarFallidos.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonReenviarFallidos.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonReenviarFallidos.Location = New System.Drawing.Point(1011, 114)
+        Me.ButtonReenviarFallidos.Location = New System.Drawing.Point(1011, 110)
         Me.ButtonReenviarFallidos.Name = "ButtonReenviarFallidos"
-        Me.ButtonReenviarFallidos.Size = New System.Drawing.Size(115, 35)
+        Me.ButtonReenviarFallidos.Size = New System.Drawing.Size(115, 99)
         Me.ButtonReenviarFallidos.TabIndex = 69
         Me.ButtonReenviarFallidos.Text = "Reenviar fallidos"
         Me.ToolTip1.SetToolTip(Me.ButtonReenviarFallidos, "Intenta reenviar a los contactos que fallaron. Se mostrarán con rojo en la lista " &
@@ -561,7 +562,6 @@ Partial Class FormPrincipal
         'ListBoxFallidos
         '
         Me.ListBoxFallidos.FormattingEnabled = True
-        Me.ListBoxFallidos.Items.AddRange(New Object() {"543855826093", "543855018113", "543855859440"})
         Me.ListBoxFallidos.Location = New System.Drawing.Point(363, 266)
         Me.ListBoxFallidos.MultiColumn = True
         Me.ListBoxFallidos.Name = "ListBoxFallidos"
@@ -589,9 +589,9 @@ Partial Class FormPrincipal
         Me.ButtonCancelarReenvio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonCancelarReenvio.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCancelarReenvio.ForeColor = System.Drawing.Color.White
-        Me.ButtonCancelarReenvio.Location = New System.Drawing.Point(1011, 159)
+        Me.ButtonCancelarReenvio.Location = New System.Drawing.Point(1011, 110)
         Me.ButtonCancelarReenvio.Name = "ButtonCancelarReenvio"
-        Me.ButtonCancelarReenvio.Size = New System.Drawing.Size(115, 40)
+        Me.ButtonCancelarReenvio.Size = New System.Drawing.Size(115, 99)
         Me.ButtonCancelarReenvio.TabIndex = 74
         Me.ButtonCancelarReenvio.Text = "Cancelar reenvío"
         Me.ToolTip1.SetToolTip(Me.ButtonCancelarReenvio, "Intenta reenviar a los contactos que fallaron. Se mostrarán con rojo en la lista " &
@@ -670,12 +670,13 @@ Partial Class FormPrincipal
         'PictureBox7
         '
         Me.PictureBox7.Image = CType(resources.GetObject("PictureBox7.Image"), System.Drawing.Image)
-        Me.PictureBox7.Location = New System.Drawing.Point(45, 531)
+        Me.PictureBox7.Location = New System.Drawing.Point(12, 504)
         Me.PictureBox7.Name = "PictureBox7"
-        Me.PictureBox7.Size = New System.Drawing.Size(134, 46)
+        Me.PictureBox7.Size = New System.Drawing.Size(220, 78)
         Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox7.TabIndex = 26
         Me.PictureBox7.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox7, "Desarrollados por Sebastian Coronel para Senna Automotores")
         '
         'OpenFileDialogImagenes
         '
@@ -699,9 +700,9 @@ Partial Class FormPrincipal
         Me.TabPage2.Controls.Add(Me.ButtonEnviar)
         Me.TabPage2.Controls.Add(Me.ButtonCancelarEnvio)
         Me.TabPage2.Controls.Add(Me.GroupBoxDocumentos)
-        Me.TabPage2.Controls.Add(Me.GroupBoxTextoPlano)
-        Me.TabPage2.Controls.Add(Me.ButtonReenviarFallidos)
         Me.TabPage2.Controls.Add(Me.ButtonCancelarReenvio)
+        Me.TabPage2.Controls.Add(Me.ButtonReenviarFallidos)
+        Me.TabPage2.Controls.Add(Me.GroupBoxTextoPlano)
         Me.TabPage2.Controls.Add(Me.GroupBoxImagenesYVideo)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
@@ -739,7 +740,7 @@ Partial Class FormPrincipal
         Me.GroupBox3.Controls.Add(Me.ListBoxFallidos)
         Me.GroupBox3.Controls.Add(Me.PictureBoxSuccess)
         Me.GroupBox3.Controls.Add(Me.PictureBoxError)
-        Me.GroupBox3.Controls.Add(Me.Label2)
+        Me.GroupBox3.Controls.Add(Me.LabelNumerosFallidos)
         Me.GroupBox3.Controls.Add(Me.LabelStatus)
         Me.GroupBox3.Controls.Add(Me.ProgressBar1)
         Me.GroupBox3.Location = New System.Drawing.Point(3, 215)
@@ -815,22 +816,22 @@ Partial Class FormPrincipal
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.Black
-        Me.Label19.Location = New System.Drawing.Point(875, 250)
+        Me.Label19.Location = New System.Drawing.Point(872, 250)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(89, 13)
+        Me.Label19.Size = New System.Drawing.Size(92, 13)
         Me.Label19.TabIndex = 73
-        Me.Label19.Text = "Reenvíos fallidos"
+        Me.Label19.Text = "Reenvíos fallidos:"
         '
-        'Label2
+        'LabelNumerosFallidos
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(527, 250)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(87, 13)
-        Me.Label2.TabIndex = 38
-        Me.Label2.Text = "Numeros fallidos:"
+        Me.LabelNumerosFallidos.AutoSize = True
+        Me.LabelNumerosFallidos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelNumerosFallidos.ForeColor = System.Drawing.Color.Black
+        Me.LabelNumerosFallidos.Location = New System.Drawing.Point(527, 250)
+        Me.LabelNumerosFallidos.Name = "LabelNumerosFallidos"
+        Me.LabelNumerosFallidos.Size = New System.Drawing.Size(87, 13)
+        Me.LabelNumerosFallidos.TabIndex = 38
+        Me.LabelNumerosFallidos.Text = "Numeros fallidos:"
         '
         'LabelStatus
         '
@@ -986,9 +987,9 @@ Partial Class FormPrincipal
         Me.ButtonCancelarEnvio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonCancelarEnvio.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCancelarEnvio.ForeColor = System.Drawing.Color.White
-        Me.ButtonCancelarEnvio.Location = New System.Drawing.Point(1013, 159)
+        Me.ButtonCancelarEnvio.Location = New System.Drawing.Point(1011, 110)
         Me.ButtonCancelarEnvio.Name = "ButtonCancelarEnvio"
-        Me.ButtonCancelarEnvio.Size = New System.Drawing.Size(115, 40)
+        Me.ButtonCancelarEnvio.Size = New System.Drawing.Size(115, 99)
         Me.ButtonCancelarEnvio.TabIndex = 34
         Me.ButtonCancelarEnvio.Text = "Cancelar Envíos"
         Me.ButtonCancelarEnvio.UseVisualStyleBackColor = False
@@ -1355,7 +1356,7 @@ Partial Class FormPrincipal
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(51, 580)
+        Me.Label5.Location = New System.Drawing.Point(53, 585)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(122, 13)
         Me.Label5.TabIndex = 25
@@ -1366,37 +1367,37 @@ Partial Class FormPrincipal
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle49.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle49.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle49
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25, Me.Column26, Me.Column27, Me.Column28, Me.Column29, Me.Column30, Me.Column31, Me.Column32, Me.Column33, Me.Column34, Me.Column35, Me.Column36, Me.Column37, Me.Column38, Me.Column39, Me.Column40, Me.Column41, Me.Column42, Me.Column43, Me.Column44, Me.Column45, Me.Column46, Me.Column47, Me.Column48, Me.Column49, Me.Column50})
         Me.DataGridView1.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle50.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle50.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle50.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle50.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle50.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle50
         Me.DataGridView1.GridColor = System.Drawing.Color.Black
         Me.DataGridView1.Location = New System.Drawing.Point(251, 6)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle51.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle51.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle51.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle51.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle51
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect
         Me.DataGridView1.Size = New System.Drawing.Size(714, 600)
@@ -1865,7 +1866,7 @@ Partial Class FormPrincipal
     Friend WithEvents OpenFileDialogDocumentos As OpenFileDialog
     Friend WithEvents BackgroundWorkerEnviarTextoPlano As System.ComponentModel.BackgroundWorker
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents Label2 As Label
+    Friend WithEvents LabelNumerosFallidos As Label
     Friend WithEvents ButtonCancelarEnvio As Button
     Friend WithEvents LabelStatus As Label
     Friend WithEvents GroupBox5 As GroupBox
