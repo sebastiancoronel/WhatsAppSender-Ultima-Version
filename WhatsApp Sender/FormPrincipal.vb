@@ -30,6 +30,8 @@ Public Class FormPrincipal
         cuentaReenviadosFallidos = 0
         'Botones
         ButtonEnviar.Enabled = False
+        ButtonEnviar.Visible = False
+        ButtonReenviarFallidos.Visible = False
         'Labels
         LabelStatus.ForeColor = Color.Black
         LabelEnviadosExitosos.Text = "Envíos correctos" 'Reinicia el label
@@ -38,6 +40,7 @@ Public Class FormPrincipal
         LabelCuentaFallidos.Text = "0"
         LabelCuentaSinWhatsapp.Text = "0"
         LabelEnviadosExitosos.Text = "Envíos correctos"
+        LabelBotonEnviar.Visible = False
         'Label cabecera Numeros fallidos
         LabelNumerosFallidos.Text = "Numeros fallidos:"
         LabelNumerosFallidos.ForeColor = Color.Black
@@ -421,34 +424,34 @@ Public Class FormPrincipal
     Private Sub ButtonCancelarEnvío_Click(sender As Object, e As EventArgs) Handles ButtonCancelarEnvio.Click
         LabelCuenta.Text = "0/0"
         'Cancela el Background Worker
-        'If BackgroundWorkerEnviarTextoPlano.IsBusy Then
-        'If BackgroundWorkerEnviarTextoPlano.WorkerSupportsCancellation Then
-        'If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
-        BackgroundWorkerEnviarTextoPlano.CancelAsync()
-        '        End If
+        If BackgroundWorkerEnviarTextoPlano.IsBusy Then
+            If BackgroundWorkerEnviarTextoPlano.WorkerSupportsCancellation Then
+                If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                    BackgroundWorkerEnviarTextoPlano.CancelAsync()
+                End If
 
-        'End If
-        'Else
-        'If BackgroundWorkerEnviarMultimedia.IsBusy Then
-        'If BackgroundWorkerEnviarMultimedia.WorkerSupportsCancellation Then
-        'If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
-        BackgroundWorkerEnviarMultimedia.CancelAsync()
-        '            End If
+            End If
+        Else
+            If BackgroundWorkerEnviarMultimedia.IsBusy Then
+                If BackgroundWorkerEnviarMultimedia.WorkerSupportsCancellation Then
+                    If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                        BackgroundWorkerEnviarMultimedia.CancelAsync()
+                    End If
 
-        'End If
-        'Else
-        'If BackgroundWorkerEnviarDocumentos.IsBusy Then
-        'If BackgroundWorkerEnviarDocumentos.WorkerSupportsCancellation Then
-        'If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
-        BackgroundWorkerEnviarDocumentos.CancelAsync()
-        '                End If
+                End If
+            Else
+                If BackgroundWorkerEnviarDocumentos.IsBusy Then
+                    If BackgroundWorkerEnviarDocumentos.WorkerSupportsCancellation Then
+                        If MessageBox.Show("¿Está seguro de cancelar todos los envíos?", "ATENCION!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
+                            BackgroundWorkerEnviarDocumentos.CancelAsync()
+                        End If
 
-        'End If
+                    End If
 
-        'End If
-        'End If
+                End If
+            End If
 
-        'End If
+        End If
     End Sub
 
     'MODULO DE ENVÍO DE TEXTO PLANO************************************************************************************************************************************************
@@ -475,7 +478,6 @@ Public Class FormPrincipal
         Try
             Dim driver As IWebDriver
             driver = New ChromeDriver
-
             driver.Manage().Window.Maximize()
             'CONSTRUIR URL PARA API//////////////////////////////////////////////////////////////////////
             Dim a As String = "https://wa.me/"
@@ -672,6 +674,8 @@ Public Class FormPrincipal
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
         ButtonEnviar.Enabled = True
+        ButtonEnviar.Visible = True
+        LabelBotonEnviar.Visible = True
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
@@ -1313,6 +1317,8 @@ Public Class FormPrincipal
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
         ButtonEnviar.Enabled = True
+        ButtonEnviar.Visible = True
+        LabelBotonEnviar.Visible = True
         LabelCuentaFallidos.Text = ""
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
@@ -1352,6 +1358,8 @@ Public Class FormPrincipal
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
         ButtonEnviar.Enabled = True
+        ButtonEnviar.Visible = True
+        LabelBotonEnviar.Visible = True
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
@@ -1398,9 +1406,14 @@ Public Class FormPrincipal
         ButtonCancelarEnvio.Enabled = False
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarReenvio.Visible = True
+        'Boton Enviar
+        ButtonEnviar.Visible = False
         'Boton Renviar fallidos
         ButtonReenviarFallidos.Visible = False
         PictureBoxLoading.Visible = True
+        'Label
+        LabelCuentaFallidos.Text = ""
+        LabelBotonEnviar.Visible = False
 
         If ListBoxReenviadosFallidos.Items.Count <> 0 Then
             ListBoxFallidos.Items.Clear() 'Limpio fallidos para agregar los reenviados que fallaron en el envio anterior
@@ -1413,7 +1426,9 @@ Public Class FormPrincipal
         If RadioButtonTextoPlano.Checked Then
             'PROCESO DE ENVIO DE TEXTO PLANO
             If ListBoxFallidos.Items.Count = 0 Then 'Si la lista esta vacia
+                ButtonReenviarFallidos.Visible = False
                 MessageBox.Show("No hay elementos para reenviar")
+
 
             Else
 
@@ -1422,6 +1437,7 @@ Public Class FormPrincipal
                     If MessageBox.Show("Debe asegurarse que el teléfono y la sesion de whatsapp no sufran problemas de conexion" & vbCrLf & "" & vbCrLf & "Si sigue experimentando problemas de conexion inicie sesión con 4G", "IMPORTANTE!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                     End If
                     ButtonReenviarFallidos.Enabled = False
+                    ButtonReenviarFallidos.Visible = False
                     BackgroundWorkerFallidosTextoPlano.RunWorkerAsync()
                 Catch ex As Exception
 
@@ -1433,6 +1449,7 @@ Public Class FormPrincipal
             If RadioButtonImagenesYVideo.Checked Then
                 'PROCESO DE ENVIO MULTIMEDIA
                 If ListBoxFallidos.Items.Count = 0 Then 'Si la lista esta vacia
+                    ButtonReenviarFallidos.Visible = False
                     MessageBox.Show("No hay elementos para reenviar")
 
                 Else
@@ -1440,6 +1457,7 @@ Public Class FormPrincipal
                         If MessageBox.Show("Debe asegurarse que el teléfono y la sesion de whatsapp no sufran problemas de conexion" & vbCrLf & "" & vbCrLf & "Si sigue experimentando problemas de conexion inicie sesión con 4G", "IMPORTANTE!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                         End If
                         ButtonReenviarFallidos.Enabled = False
+                        ButtonReenviarFallidos.Visible = False
                         BackgroundWorkerFallidosMultimedia.RunWorkerAsync()
                     Catch ex As Exception
 
@@ -1450,6 +1468,7 @@ Public Class FormPrincipal
                 If RadioButtonDocumentos.Checked Then
                     'PROCESO DE ENVIO DOCUMENTOS
                     If ListBoxFallidos.Items.Count = 0 Then 'Si la lista esta vacia
+                        ButtonReenviarFallidos.Visible = False
                         MessageBox.Show("No hay elementos para reenviar")
 
                     Else
@@ -1458,6 +1477,7 @@ Public Class FormPrincipal
                             If MessageBox.Show("Debe asegurarse que el teléfono y la sesion de whatsapp no sufran problemas de conexion" & vbCrLf & "" & vbCrLf & "Si sigue experimentando problemas de conexion inicie sesión con 4G", "IMPORTANTE!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                             End If
                             ButtonReenviarFallidos.Enabled = False
+                            ButtonReenviarFallidos.Visible = False
                             BackgroundWorkerFallidosDocumentos.RunWorkerAsync()
                         Catch ex As Exception
 
@@ -1525,7 +1545,7 @@ Public Class FormPrincipal
                 Try
                     whatsappWebListo = EsperarSesion.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[4]/div/div/div[2]/h1")))
                 Catch ex As Exception
-                    BackgroundWorkerEnviarMultimedia.CancelAsync()
+                    BackgroundWorkerFallidosTextoPlano.CancelAsync()
                     If MessageBox.Show("Se detuvo el envío de mensajes despues de 1 minuto", "No se inició sesión en whatsapp web", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                     End If
                 End Try
@@ -1545,7 +1565,7 @@ Public Class FormPrincipal
                     Catch ex As Exception
 
                     End Try
-                    If BackgroundWorkerEnviarTextoPlano.CancellationPending Then
+                    If BackgroundWorkerFallidosTextoPlano.CancellationPending Then
                         e.Cancel = True
                         Exit For
                     End If
@@ -1564,7 +1584,7 @@ Public Class FormPrincipal
                             ProgressBar1.Value = ProgressBar1.Value + 1
                             Continue For
                         End Try
-                        If BackgroundWorkerEnviarTextoPlano.CancellationPending Then
+                        If BackgroundWorkerFallidosTextoPlano.CancellationPending Then
                             e.Cancel = True
                             Exit For
                         End If
@@ -1586,7 +1606,7 @@ Public Class FormPrincipal
                             ' MessageBox.Show(ex.Message)
                             'MessageBox.Show("Pagina oficial")
                         End Try
-                        If BackgroundWorkerEnviarTextoPlano.CancellationPending Then
+                        If BackgroundWorkerFallidosTextoPlano.CancellationPending Then
                             e.Cancel = True
                             Exit For
                         End If
@@ -1598,7 +1618,8 @@ Public Class FormPrincipal
                             Interfacewhatsappweb = waitInterfacewhatsappweb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]")))
                             If Interfacewhatsappweb.Displayed Then
                                 Threading.Thread.Sleep(1000)
-                                If BackgroundWorkerEnviarTextoPlano.CancellationPending Then
+
+                                If BackgroundWorkerFallidosTextoPlano.CancellationPending Then
                                     e.Cancel = True
                                     Exit For
                                 End If
@@ -1618,7 +1639,7 @@ Public Class FormPrincipal
                                     'MessageBox.Show(ex.Message)
                                     'MessageBox.Show("NUMEOR INVALIDO")
                                 End Try
-                                If BackgroundWorkerEnviarTextoPlano.CancellationPending Then
+                                If BackgroundWorkerFallidosTextoPlano.CancellationPending Then
                                     e.Cancel = True
                                     Exit For
                                 End If
@@ -1627,7 +1648,7 @@ Public Class FormPrincipal
                                     If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then 'Parte del chat
                                         Threading.Thread.Sleep(1000)
                                         'PROCESO PARA ADJUNTAR ARCHIVOS//////////////////////////////////////////////////////////////////////////////
-                                        If BackgroundWorkerEnviarTextoPlano.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                                        If BackgroundWorkerFallidosTextoPlano.CancellationPending Then 'Si cancelo salgo del bucle FOR
                                             e.Cancel = True
                                             Exit For
                                         End If
@@ -1703,6 +1724,11 @@ Public Class FormPrincipal
         'Boton Reenviar Fallidos
         ButtonReenviarFallidos.Enabled = True
         ButtonReenviarFallidos.Visible = True
+        'Label del boton
+        LabelBotonEnviar.Visible = True
+        'Boton Enviar
+        ButtonEnviar.Enabled = True
+        ButtonEnviar.Visible = True
         'PictureBox
         PictureBoxLoading.Visible = False
         'Label cabecera Numeros fallidos
@@ -2062,6 +2088,11 @@ Public Class FormPrincipal
         'Boton Reenviar Fallidos
         ButtonReenviarFallidos.Enabled = True
         ButtonReenviarFallidos.Visible = True
+        'Boton Enviar
+        ButtonEnviar.Enabled = True
+        ButtonEnviar.Visible = True
+        'Label del boton
+        LabelBotonEnviar.Visible = True
         'PictureBox
         PictureBoxLoading.Visible = False
         'Label cabecera Numeros fallidos
@@ -2376,6 +2407,11 @@ Public Class FormPrincipal
         'Boton Reenviar Fallidos
         ButtonReenviarFallidos.Enabled = True
         ButtonReenviarFallidos.Visible = True
+        'Boton Enviar
+        ButtonEnviar.Enabled = True
+        ButtonEnviar.Visible = True
+        'Label del boton
+        LabelBotonEnviar.Visible = True
         'PictureBox
         PictureBoxLoading.Visible = False
         'Label cabecera Numeros fallidos

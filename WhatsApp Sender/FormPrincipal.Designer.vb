@@ -24,9 +24,9 @@ Partial Class FormPrincipal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPrincipal))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
@@ -70,7 +70,7 @@ Partial Class FormPrincipal
         Me.OpenFileDialogDocumentos = New System.Windows.Forms.OpenFileDialog()
         Me.BackgroundWorkerEnviarTextoPlano = New System.ComponentModel.BackgroundWorker()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Label22 = New System.Windows.Forms.Label()
+        Me.LabelBotonEnviar = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.LabelEnviadosExitosos = New System.Windows.Forms.Label()
         Me.LabelCuentaReenviadosFallidos = New System.Windows.Forms.Label()
@@ -536,7 +536,7 @@ Partial Class FormPrincipal
         Me.ButtonReenviarFallidos.Enabled = False
         Me.ButtonReenviarFallidos.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonReenviarFallidos.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ButtonReenviarFallidos.Location = New System.Drawing.Point(1011, 110)
+        Me.ButtonReenviarFallidos.Location = New System.Drawing.Point(1011, 107)
         Me.ButtonReenviarFallidos.Name = "ButtonReenviarFallidos"
         Me.ButtonReenviarFallidos.Size = New System.Drawing.Size(115, 99)
         Me.ButtonReenviarFallidos.TabIndex = 69
@@ -589,9 +589,9 @@ Partial Class FormPrincipal
         Me.ButtonCancelarReenvio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonCancelarReenvio.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCancelarReenvio.ForeColor = System.Drawing.Color.White
-        Me.ButtonCancelarReenvio.Location = New System.Drawing.Point(1011, 110)
+        Me.ButtonCancelarReenvio.Location = New System.Drawing.Point(1011, 3)
         Me.ButtonCancelarReenvio.Name = "ButtonCancelarReenvio"
-        Me.ButtonCancelarReenvio.Size = New System.Drawing.Size(115, 99)
+        Me.ButtonCancelarReenvio.Size = New System.Drawing.Size(115, 203)
         Me.ButtonCancelarReenvio.TabIndex = 74
         Me.ButtonCancelarReenvio.Text = "Cancelar reenvío"
         Me.ToolTip1.SetToolTip(Me.ButtonCancelarReenvio, "Intenta reenviar a los contactos que fallaron. Se mostrarán con rojo en la lista " &
@@ -694,16 +694,16 @@ Partial Class FormPrincipal
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(7, Byte), Integer), CType(CType(94, Byte), Integer), CType(CType(84, Byte), Integer))
-        Me.TabPage2.Controls.Add(Me.Label22)
+        Me.TabPage2.Controls.Add(Me.LabelBotonEnviar)
         Me.TabPage2.Controls.Add(Me.GroupBox3)
         Me.TabPage2.Controls.Add(Me.GroupBox5)
-        Me.TabPage2.Controls.Add(Me.ButtonEnviar)
-        Me.TabPage2.Controls.Add(Me.ButtonCancelarEnvio)
-        Me.TabPage2.Controls.Add(Me.GroupBoxDocumentos)
-        Me.TabPage2.Controls.Add(Me.ButtonCancelarReenvio)
         Me.TabPage2.Controls.Add(Me.ButtonReenviarFallidos)
+        Me.TabPage2.Controls.Add(Me.ButtonEnviar)
+        Me.TabPage2.Controls.Add(Me.GroupBoxDocumentos)
         Me.TabPage2.Controls.Add(Me.GroupBoxTextoPlano)
         Me.TabPage2.Controls.Add(Me.GroupBoxImagenesYVideo)
+        Me.TabPage2.Controls.Add(Me.ButtonCancelarReenvio)
+        Me.TabPage2.Controls.Add(Me.ButtonCancelarEnvio)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -711,17 +711,17 @@ Partial Class FormPrincipal
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "PANEL"
         '
-        'Label22
+        'LabelBotonEnviar
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.ForeColor = System.Drawing.Color.White
-        Me.Label22.Location = New System.Drawing.Point(1045, 83)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(43, 13)
-        Me.Label22.TabIndex = 75
-        Me.Label22.Text = "Enviar"
+        Me.LabelBotonEnviar.AutoSize = True
+        Me.LabelBotonEnviar.BackColor = System.Drawing.Color.FromArgb(CType(CType(37, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.LabelBotonEnviar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelBotonEnviar.ForeColor = System.Drawing.Color.White
+        Me.LabelBotonEnviar.Location = New System.Drawing.Point(1045, 83)
+        Me.LabelBotonEnviar.Name = "LabelBotonEnviar"
+        Me.LabelBotonEnviar.Size = New System.Drawing.Size(43, 13)
+        Me.LabelBotonEnviar.TabIndex = 75
+        Me.LabelBotonEnviar.Text = "Enviar"
         '
         'GroupBox3
         '
@@ -987,9 +987,9 @@ Partial Class FormPrincipal
         Me.ButtonCancelarEnvio.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonCancelarEnvio.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ButtonCancelarEnvio.ForeColor = System.Drawing.Color.White
-        Me.ButtonCancelarEnvio.Location = New System.Drawing.Point(1011, 110)
+        Me.ButtonCancelarEnvio.Location = New System.Drawing.Point(1011, 3)
         Me.ButtonCancelarEnvio.Name = "ButtonCancelarEnvio"
-        Me.ButtonCancelarEnvio.Size = New System.Drawing.Size(115, 99)
+        Me.ButtonCancelarEnvio.Size = New System.Drawing.Size(115, 203)
         Me.ButtonCancelarEnvio.TabIndex = 34
         Me.ButtonCancelarEnvio.Text = "Cancelar Envíos"
         Me.ButtonCancelarEnvio.UseVisualStyleBackColor = False
@@ -1367,37 +1367,37 @@ Partial Class FormPrincipal
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle22
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20, Me.Column21, Me.Column22, Me.Column23, Me.Column24, Me.Column25, Me.Column26, Me.Column27, Me.Column28, Me.Column29, Me.Column30, Me.Column31, Me.Column32, Me.Column33, Me.Column34, Me.Column35, Me.Column36, Me.Column37, Me.Column38, Me.Column39, Me.Column40, Me.Column41, Me.Column42, Me.Column43, Me.Column44, Me.Column45, Me.Column46, Me.Column47, Me.Column48, Me.Column49, Me.Column50})
         Me.DataGridView1.Cursor = System.Windows.Forms.Cursors.Hand
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(241, Byte), Integer))
+        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle23
         Me.DataGridView1.GridColor = System.Drawing.Color.Black
         Me.DataGridView1.Location = New System.Drawing.Point(251, 6)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle24.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle24
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect
         Me.DataGridView1.Size = New System.Drawing.Size(714, 600)
@@ -2013,5 +2013,5 @@ Partial Class FormPrincipal
     Friend WithEvents LabelCuentaSinWhatsapp As Label
     Friend WithEvents LabelEnviadosExitosos As Label
     Friend WithEvents ListBoxExitosos As ListBox
-    Friend WithEvents Label22 As Label
+    Friend WithEvents LabelBotonEnviar As Label
 End Class
