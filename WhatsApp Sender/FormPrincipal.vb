@@ -47,6 +47,7 @@ Public Class FormPrincipal
         'Listbox
         ListBoxReenviadosFallidos.Items.Clear()
         ListBoxExitosos.Items.Clear()
+        ListBoxSinWhatsapp.Items.Clear()
 
         If RadioButtonTextoPlano.Checked Then
             'PROCESO DE ENVIO DE TEXTO PLANO
@@ -1337,7 +1338,7 @@ Public Class FormPrincipal
             If ListBoxFallidos.Items.Count > 0 Then
                 LabelStatus.Text = "Envío finalizado!  Algunos numeros fallaron al enviarse"
                 ProgressBar1.Value = TamañoProgressBar
-                LabelCuenta.Text = Convert.ToString(cuenta - 1) + "/" + Convert.ToString(TamañoProgressBar)
+                LabelCuenta.Text = Convert.ToString(cuenta) + "/" + Convert.ToString(TamañoProgressBar)
                 If MessageBox.Show("Algunos numeros fallaron al enviarse", "Envío finalizado!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                 End If
             Else
@@ -1360,6 +1361,7 @@ Public Class FormPrincipal
         ButtonEnviar.Enabled = True
         ButtonEnviar.Visible = True
         LabelBotonEnviar.Visible = True
+        LabelCuentaFallidos.Text = ""
         'HABILITAR BOTON PARA REENVIAR FALLIDOS
         If ListBoxFallidos.Items.Count > 0 Then
             ButtonReenviarFallidos.Enabled = True
@@ -1377,6 +1379,7 @@ Public Class FormPrincipal
             If ListBoxFallidos.Items.Count > 0 Then
                 LabelStatus.Text = "Envío finalizado!  Algunos numeros fallaron al enviarse"
                 ProgressBar1.Value = TamañoProgressBar
+                LabelCuenta.Text = Convert.ToString(cuenta) + "/" + Convert.ToString(TamañoProgressBar)
                 If MessageBox.Show("Algunos numeros fallaron al enviarse", "Envío finalizado!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                 End If
             Else
@@ -1401,6 +1404,7 @@ Public Class FormPrincipal
         cuentaReenviadosFallidos = 0
         'Listbox
         ListBoxExitosos.Items.Clear()
+        ListBoxSinWhatsapp.Items.Clear()
         ListBoxSinWhatsapp.Items.Clear()
         'Boton cancelar envio
         ButtonCancelarEnvio.Enabled = False
