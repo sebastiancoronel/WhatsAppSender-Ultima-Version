@@ -2149,18 +2149,18 @@ Public Class FormPrincipal
                 Try
                     whatsappWebListo = EsperarSesion.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[4]/div/div/div[2]/h1")))
                 Catch ex As Exception
-                    BackgroundWorkerEnviarDocumentos.CancelAsync()
+                    BackgroundWorkerFallidosDocumentos.CancelAsync()
                     If MessageBox.Show("Se detuvo el envío de mensajes despues de 1 minuto", "No se inició sesión en whatsapp web", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                     End If
                 End Try
                 'PROGRESSBAR/////////////////////////////////////////////////////////////////////////////
-                Dim totalContactos As Integer = ListBox1.Items.Count 'Guardo el total de items de la lista en una variable
+                Dim totalContactos As Integer = ListBoxFallidos.Items.Count 'Guardo el total de items de la lista en una variable
                 ProgressBar1.Maximum = totalContactos
                 TamañoProgressBar = totalContactos
 
 
                 'FOR EACH PARA IR GENERARANDO URL PARA ENVIAR A NUMEROS SIN AGENDAR////////////////////
-                For Each item As Object In ListBox1.Items 'Recorre la lista y envia a los destinatarios en la lista que coinciden con los contactos almacenados
+                For Each item As Object In ListBoxFallidos.Items 'Recorre la lista y envia a los destinatarios en la lista que coinciden con los contactos almacenados
                     LabelStatus.Text = "Enviando mensaje a " + Convert.ToString(item)
                     Try
                         If totalContactos > cuenta Then
@@ -2169,7 +2169,7 @@ Public Class FormPrincipal
                     Catch ex As Exception
 
                     End Try
-                    If BackgroundWorkerEnviarDocumentos.CancellationPending Then
+                    If BackgroundWorkerFallidosDocumentos.CancellationPending Then
                         e.Cancel = True
                         Exit For
                     End If
@@ -2188,7 +2188,7 @@ Public Class FormPrincipal
                             ProgressBar1.Value = ProgressBar1.Value + 1
                             Continue For
                         End Try
-                        If BackgroundWorkerEnviarDocumentos.CancellationPending Then
+                        If BackgroundWorkerFallidosDocumentos.CancellationPending Then
                             e.Cancel = True
                             Exit For
                         End If
@@ -2210,7 +2210,7 @@ Public Class FormPrincipal
                             ' MessageBox.Show(ex.Message)
                             'MessageBox.Show("Pagina oficial")
                         End Try
-                        If BackgroundWorkerEnviarDocumentos.CancellationPending Then
+                        If BackgroundWorkerFallidosDocumentos.CancellationPending Then
                             e.Cancel = True
                             Exit For
                         End If
@@ -2222,7 +2222,7 @@ Public Class FormPrincipal
                             Interfacewhatsappweb = waitInterfacewhatsappweb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]")))
                             If Interfacewhatsappweb.Displayed Then
                                 Threading.Thread.Sleep(1000)
-                                If BackgroundWorkerEnviarDocumentos.CancellationPending Then
+                                If BackgroundWorkerFallidosDocumentos.CancellationPending Then
                                     e.Cancel = True
                                     Exit For
                                 End If
@@ -2242,7 +2242,7 @@ Public Class FormPrincipal
                                     'MessageBox.Show(ex.Message)
                                     'MessageBox.Show("NUMEOR INVALIDO")
                                 End Try
-                                If BackgroundWorkerEnviarDocumentos.CancellationPending Then
+                                If BackgroundWorkerFallidosDocumentos.CancellationPending Then
                                     e.Cancel = True
                                     Exit For
                                 End If
@@ -2251,7 +2251,7 @@ Public Class FormPrincipal
                                     If driver.FindElement(By.XPath("//*[@id='main']/div[1]")).Displayed Then 'Parte del chat
                                         Threading.Thread.Sleep(1000)
                                         'PROCESO PARA ADJUNTAR ARCHIVOS//////////////////////////////////////////////////////////////////////////////
-                                        If BackgroundWorkerEnviarDocumentos.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                                        If BackgroundWorkerFallidosDocumentos.CancellationPending Then 'Si cancelo salgo del bucle FOR
                                             e.Cancel = True
                                             Exit For
                                         End If
@@ -2261,7 +2261,7 @@ Public Class FormPrincipal
                                         adjuntar = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/header/div[3]/div/div[2]")))
                                         adjuntar.Click() 'Click en el boton Adjuntar
 
-                                        If BackgroundWorkerEnviarDocumentos.CancellationPending Then
+                                        If BackgroundWorkerFallidosDocumentos.CancellationPending Then
                                             e.Cancel = True
                                             Exit For
                                         End If
@@ -2278,7 +2278,7 @@ Public Class FormPrincipal
                                             Continue For
                                         End Try
 
-                                        If BackgroundWorkerEnviarDocumentos.CancellationPending Then
+                                        If BackgroundWorkerFallidosDocumentos.CancellationPending Then
                                             e.Cancel = True
                                             Exit For
                                         End If
@@ -2298,7 +2298,7 @@ Public Class FormPrincipal
                                             Continue For
                                         End Try
 
-                                        If BackgroundWorkerEnviarDocumentos.CancellationPending Then
+                                        If BackgroundWorkerFallidosDocumentos.CancellationPending Then
                                             e.Cancel = True
                                             Exit For
                                         End If
