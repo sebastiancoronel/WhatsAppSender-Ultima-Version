@@ -531,7 +531,7 @@ Public Class FormPrincipal
                             send.Click()
                         Catch ex As Exception
                             cuenta = cuenta + 1
-                            'ProgressBar1.Value = ProgressBar1.Value + 1
+                            ProgressBar1.Value = ProgressBar1.Value + 1
                             Continue For
                         End Try
                         If BackgroundWorkerEnviarTextoPlano.CancellationPending Then
@@ -671,6 +671,7 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerEnviarTextoPlano_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerEnviarTextoPlano.RunWorkerCompleted
+        LabelCuenta.Text = Convert.ToString(cuenta - 1) + "/" + Convert.ToString(TamañoProgressBar)
         ButtonCancelarEnvio.Enabled = False
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
@@ -684,6 +685,7 @@ Public Class FormPrincipal
             ButtonReenviarFallidos.BackColor = Color.Gold
         End If
         PictureBoxLoading.Visible = False
+
         If e.Cancelled Then
             LabelStatus.Text = "Envío cancelado!"
             ProgressBar1.Value = 0
@@ -830,7 +832,7 @@ Public Class FormPrincipal
                             send.Click()
                         Catch ex As Exception
                             cuenta = cuenta + 1
-                            'ProgressBar1.Value = ProgressBar1.Value + 1
+                            ProgressBar1.Value = ProgressBar1.Value + 1
                             Continue For
                         End Try
                         If BackgroundWorkerEnviarMultimedia.CancellationPending Then
@@ -1244,21 +1246,63 @@ Public Class FormPrincipal
                                             e.Cancel = True
                                             Exit For
                                         End If
-
-                                        'BOTON ENVIAR DE WHATSAPP WEB
+                                        'CONTROLAR SI SE CARGÓ EL DOCUMENTO
                                         Try
+                                            Dim ProcesarImagenVideo As IWebElement
+                                            Dim WaitProcesarImagenVideo As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxTiempoCargaImagenVideo.Text))
+                                            ProcesarImagenVideo = WaitProcesarImagenVideo.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div")))
+                                            If ProcesarImagenVideo.Displayed Then
+                                                If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                                                    e.Cancel = True
+                                                    Exit For
+                                                End If
+                                                Try
+                                                    If CheckBoxPieDeFoto.Checked Then
+                                                        Dim inputPie As IWebElement
+                                                        inputPie = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
+                                                        inputPie.SendKeys(RichTextBoxPieDeFoto.Text)
+                                                    End If
+                                                Catch ex As Exception
+                                                    cuenta = cuenta + 1
+                                                    cuentaFallidos = cuentaFallidos + 1
+                                                    LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                                    ProgressBar1.Value = ProgressBar1.Value + 1
+                                                    Continue For
+                                                    'MessageBox.Show("No se encontro pie de foto")
+                                                End Try
+                                                'Pie de foto
 
-                                            Dim enviarMensaje As IWebElement
-                                            enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                                            'enviarMensaje.Click()
-                                            Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
+                                                If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                                                    e.Cancel = True
+                                                    Exit For
+                                                End If
+
+                                                'BOTON ENVIAR DE WHATSAPP WEB
+                                                Try
+
+                                                    Dim enviarMensaje As IWebElement
+                                                    enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
+                                                    'enviarMensaje.Click()
+                                                    Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
+                                                Catch ex As Exception
+                                                    cuenta = cuenta + 1
+                                                    cuentaFallidos = cuentaFallidos + 1
+                                                    LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                                    ProgressBar1.Value = ProgressBar1.Value + 1
+                                                    Continue For
+                                                    'MessageBox.Show("No se encontro el boton de enviar")
+                                                End Try
+
+                                            End If
                                         Catch ex As Exception
-                                            cuenta = cuenta + 1
+                                            ListBoxFallidos.Items.Add(item)
                                             cuentaFallidos = cuentaFallidos + 1
                                             LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                            cuenta = cuenta + 1
                                             ProgressBar1.Value = ProgressBar1.Value + 1
+                                            'MessageBox.Show(ex.Message)
                                             Continue For
-                                            'MessageBox.Show("No se encontro el boton de enviar")
+
                                         End Try
 
                                     End If
@@ -1314,6 +1358,7 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerEnviarMultimedia_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerEnviarMultimedia.RunWorkerCompleted
+        LabelCuenta.Text = Convert.ToString(cuenta - 1) + "/" + Convert.ToString(TamañoProgressBar)
         ButtonCancelarEnvio.Enabled = False
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
@@ -1338,7 +1383,6 @@ Public Class FormPrincipal
             If ListBoxFallidos.Items.Count > 0 Then
                 LabelStatus.Text = "Envío finalizado!  Algunos numeros fallaron al enviarse"
                 ProgressBar1.Value = TamañoProgressBar
-                LabelCuenta.Text = Convert.ToString(cuenta) + "/" + Convert.ToString(TamañoProgressBar)
                 If MessageBox.Show("Algunos numeros fallaron al enviarse", "Envío finalizado!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                 End If
             Else
@@ -1355,6 +1399,7 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerEnviarDocumentos_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerEnviarDocumentos.RunWorkerCompleted
+        LabelCuenta.Text = Convert.ToString(cuenta - 1) + "/" + Convert.ToString(TamañoProgressBar)
         ButtonCancelarEnvio.Enabled = False
         ButtonCancelarEnvio.Visible = False
         ButtonCancelarEnvio.BackColor = Color.Gray
@@ -1379,7 +1424,6 @@ Public Class FormPrincipal
             If ListBoxFallidos.Items.Count > 0 Then
                 LabelStatus.Text = "Envío finalizado!  Algunos numeros fallaron al enviarse"
                 ProgressBar1.Value = TamañoProgressBar
-                LabelCuenta.Text = Convert.ToString(cuenta) + "/" + Convert.ToString(TamañoProgressBar)
                 If MessageBox.Show("Algunos numeros fallaron al enviarse", "Envío finalizado!", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) = DialogResult.OK Then
                 End If
             Else
@@ -1721,6 +1765,7 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerFallidosTextoPlano_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosTextoPlano.RunWorkerCompleted
+        LabelCuenta.Text = Convert.ToString(cuenta) + "/" + Convert.ToString(TamañoProgressBar)
         'Boton Cancelar Reenvio
         ButtonCancelarReenvio.Enabled = False
         ButtonCancelarReenvio.Visible = False
@@ -2017,8 +2062,7 @@ Public Class FormPrincipal
                                                     cuenta = cuenta + 1
                                                     cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
                                                     LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
-
-                                                    'ProgressBar1.Value = ProgressBar1.Value + 1
+                                                    ProgressBar1.Value = ProgressBar1.Value + 1
                                                     Continue For
                                                     'MessageBox.Show("No se encontro el boton de enviar")
                                                 End Try
@@ -2085,6 +2129,7 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerFallidosMultimedia_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosMultimedia.RunWorkerCompleted
+        LabelCuenta.Text = Convert.ToString(cuenta) + "/" + Convert.ToString(TamañoProgressBar)
         'Boton Cancelar Reenvio
         ButtonCancelarReenvio.Enabled = False
         ButtonCancelarReenvio.Visible = False
@@ -2337,22 +2382,64 @@ Public Class FormPrincipal
                                             e.Cancel = True
                                             Exit For
                                         End If
-
-                                        'BOTON ENVIAR DE WHATSAPP WEB
+                                        'CONTROLAR SI SE CARGÓ EL DOCUMENTO
                                         Try
+                                            Dim ProcesarImagenVideo As IWebElement
+                                            Dim WaitProcesarImagenVideo As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxTiempoCargaImagenVideo.Text))
+                                            ProcesarImagenVideo = WaitProcesarImagenVideo.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div")))
+                                            If ProcesarImagenVideo.Displayed Then
+                                                If BackgroundWorkerEnviarMultimedia.CancellationPending Then
+                                                    e.Cancel = True
+                                                    Exit For
+                                                End If
+                                                Try
+                                                    If CheckBoxPieDeFoto.Checked Then
+                                                        Dim inputPie As IWebElement
+                                                        inputPie = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/span/div/div[2]/div/div[3]/div[1]/div[2]")))
+                                                        inputPie.SendKeys(RichTextBoxPieDeFoto.Text)
+                                                    End If
+                                                Catch ex As Exception
+                                                    cuenta = cuenta + 1
+                                                    cuentaFallidos = cuentaFallidos + 1
+                                                    LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                                    ProgressBar1.Value = ProgressBar1.Value + 1
+                                                    Continue For
+                                                    'MessageBox.Show("No se encontro pie de foto")
+                                                End Try
+                                                'Pie de foto
 
-                                            Dim enviarMensaje As IWebElement
-                                            enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                                            'enviarMensaje.Click()
-                                            Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
+                                                If BackgroundWorkerEnviarMultimedia.CancellationPending Then 'Si cancelo salgo del bucle FOR
+                                                    e.Cancel = True
+                                                    Exit For
+                                                End If
+
+                                                'BOTON ENVIAR DE WHATSAPP WEB
+                                                Try
+
+                                                    Dim enviarMensaje As IWebElement
+                                                    enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
+                                                    'enviarMensaje.Click()
+                                                    Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
+                                                Catch ex As Exception
+                                                    cuenta = cuenta + 1
+                                                    cuentaFallidos = cuentaFallidos + 1
+                                                    LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
+                                                    ProgressBar1.Value = ProgressBar1.Value + 1
+                                                    Continue For
+                                                    'MessageBox.Show("No se encontro el boton de enviar")
+                                                End Try
+
+                                            End If
                                         Catch ex As Exception
+                                            ListBoxFallidos.Items.Add(item)
+                                            cuentaFallidos = cuentaFallidos + 1
+                                            LabelCuentaFallidos.Text = Convert.ToString(cuentaFallidos)
                                             cuenta = cuenta + 1
-                                            cuentaReenviadosFallidos = cuentaReenviadosFallidos + 1
-                                            LabelCuentaReenviadosFallidos.Text = Convert.ToString(cuentaReenviadosFallidos)
                                             ProgressBar1.Value = ProgressBar1.Value + 1
+                                            'MessageBox.Show(ex.Message)
                                             Continue For
-                                            'MessageBox.Show("No se encontro el boton de enviar")
                                         End Try
+
 
                                     End If
                                 Catch ex As Exception
@@ -2404,6 +2491,7 @@ Public Class FormPrincipal
     End Sub
 
     Private Sub BackgroundWorkerFallidosDocumentos_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorkerFallidosDocumentos.RunWorkerCompleted
+        LabelCuenta.Text = Convert.ToString(cuenta) + "/" + Convert.ToString(TamañoProgressBar)
         'Boton Cancelar Reenvio
         ButtonCancelarReenvio.Enabled = False
         ButtonCancelarReenvio.Visible = False
