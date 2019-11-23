@@ -339,6 +339,7 @@ Public Class FormPrincipal
                     If NumeroApi.First = "5" Then 'Evita que se agregue 5454 (dos veces) la caracteristica 54 a la lista.
                         If ListBox1.Items.Contains(NumeroApi) Then
                             'MessageBox.Show(NumeroApi + " " + "Ya se encuentra en la lista PRIMER IF")
+
                         Else
                             ListBox1.Items.Add(NumeroApi)
 
@@ -349,6 +350,7 @@ Public Class FormPrincipal
                             NumeroApi54 = "54" + NumeroApi
                             If ListBox1.Items.Contains(NumeroApi54) Then
                                 'MessageBox.Show(NumeroApi + " " + "Ya se encuentra en la lista SEGUNDO IF")
+
                             Else
                                 ListBox1.Items.Add(NumeroApi54)
                             End If
@@ -539,6 +541,16 @@ Public Class FormPrincipal
                             Exit For
                         End If
 
+                        'CONTROLAR Clickear opcion para usar la web en vez de descargarlo al escritorio
+                        Try
+                            Dim UsarWhatsAppWeb As IWebElement
+                            Dim waitUsarWhatsAppWeb As New WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            UsarWhatsAppWeb = waitUsarWhatsAppWeb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='fallback_block']/div/div/a")))
+                            UsarWhatsAppWeb.Click()
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message)
+                        End Try
+
                         'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
                         Try
                             Dim PaginaOficial As IWebElement
@@ -606,7 +618,7 @@ Public Class FormPrincipal
                                             Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
                                             Dim enviarMensaje As IWebElement
                                             enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/footer/div[1]/div[3]/button")))
-                                            'enviarMensaje.Click()
+                                            enviarMensaje.Click()
                                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                                         Catch ex As Exception
                                             cuenta = cuenta + 1
@@ -840,6 +852,16 @@ Public Class FormPrincipal
                             Exit For
                         End If
 
+                        'CONTROLAR Clickear opcion para usar la web en vez de descargarlo al escritorio
+                        Try
+                            Dim UsarWhatsAppWeb As IWebElement
+                            Dim waitUsarWhatsAppWeb As New WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            UsarWhatsAppWeb = waitUsarWhatsAppWeb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='fallback_block']/div/div/a")))
+                            UsarWhatsAppWeb.Click()
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message)
+                        End Try
+
                         'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
                         Try
                             Dim PaginaOficial As IWebElement
@@ -984,7 +1006,7 @@ Public Class FormPrincipal
 
                                                     Dim enviarMensaje As IWebElement
                                                     enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                                                    'enviarMensaje.Click()
+                                                    enviarMensaje.Click()
                                                     Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                                                 Catch ex As Exception
                                                     cuenta = cuenta + 1
@@ -1137,6 +1159,16 @@ Public Class FormPrincipal
                             Exit For
                         End If
 
+                        'CONTROLAR Clickear opcion para usar la web en vez de descargarlo al escritorio
+                        Try
+                            Dim UsarWhatsAppWeb As IWebElement
+                            Dim waitUsarWhatsAppWeb As New WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            UsarWhatsAppWeb = waitUsarWhatsAppWeb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='fallback_block']/div/div/a")))
+                            UsarWhatsAppWeb.Click()
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message)
+                        End Try
+
                         'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
                         Try
                             Dim PaginaOficial As IWebElement
@@ -1282,7 +1314,7 @@ Public Class FormPrincipal
 
                                                     Dim enviarMensaje As IWebElement
                                                     enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                                                    'enviarMensaje.Click()
+                                                    enviarMensaje.Click()
                                                     Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                                                 Catch ex As Exception
                                                     cuenta = cuenta + 1
@@ -1637,6 +1669,16 @@ Public Class FormPrincipal
                             Exit For
                         End If
 
+                        'CONTROLAR Clickear opcion para usar la web en vez de descargarlo al escritorio
+                        Try
+                            Dim UsarWhatsAppWeb As IWebElement
+                            Dim waitUsarWhatsAppWeb As New WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            UsarWhatsAppWeb = waitUsarWhatsAppWeb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='fallback_block']/div/div/a")))
+                            UsarWhatsAppWeb.Click()
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message)
+                        End Try
+
                         'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
                         Try
                             Dim PaginaOficial As IWebElement
@@ -1705,7 +1747,7 @@ Public Class FormPrincipal
                                             Dim waitContacto As New WebDriverWait(driver, TimeSpan.FromSeconds(MaskedTextBoxEsperaMaximaDOM.Text))
                                             Dim enviarMensaje As IWebElement
                                             enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='main']/footer/div[1]/div[3]/button")))
-                                            'enviarMensaje.Click()
+                                            enviarMensaje.Click()
                                             Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                                         Catch ex As Exception
                                             cuenta = cuenta + 1
@@ -1912,6 +1954,16 @@ Public Class FormPrincipal
                             Exit For
                         End If
 
+                        'CONTROLAR Clickear opcion para usar la web en vez de descargarlo al escritorio
+                        Try
+                            Dim UsarWhatsAppWeb As IWebElement
+                            Dim waitUsarWhatsAppWeb As New WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            UsarWhatsAppWeb = waitUsarWhatsAppWeb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='fallback_block']/div/div/a")))
+                            UsarWhatsAppWeb.Click()
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message)
+                        End Try
+
                         'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
                         Try
                             Dim PaginaOficial As IWebElement
@@ -2056,7 +2108,7 @@ Public Class FormPrincipal
                                                     'BOTON ENVIAR DE WHATSAPP WEB
                                                     Dim enviarMensaje As IWebElement
                                                     enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                                                    'enviarMensaje.Click()
+                                                    enviarMensaje.Click()
                                                     Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                                                 Catch ex As Exception
                                                     cuenta = cuenta + 1
@@ -2273,6 +2325,16 @@ Public Class FormPrincipal
                             Exit For
                         End If
 
+                        'CONTROLAR Clickear opcion para usar la web en vez de descargarlo al escritorio
+                        Try
+                            Dim UsarWhatsAppWeb As IWebElement
+                            Dim waitUsarWhatsAppWeb As New WebDriverWait(driver, TimeSpan.FromSeconds(3))
+                            UsarWhatsAppWeb = waitUsarWhatsAppWeb.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='fallback_block']/div/div/a")))
+                            UsarWhatsAppWeb.Click()
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message)
+                        End Try
+
                         'CONTROLAR Y SALIR DE PAGINA OFICIAL DE WHATSAPP AL ENTRAR CON CONTACTOS MAL ESCRITOS 
                         Try
                             Dim PaginaOficial As IWebElement
@@ -2418,7 +2480,7 @@ Public Class FormPrincipal
 
                                                     Dim enviarMensaje As IWebElement
                                                     enviarMensaje = waitContacto.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(xpathToFind:="//*[@id='app']/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span[2]/div/div")))
-                                                    'enviarMensaje.Click()
+                                                    enviarMensaje.Click()
                                                     Threading.Thread.Sleep(MaskedTextBoxIntervaloEntreChats.Text * 1000)
                                                 Catch ex As Exception
                                                     cuenta = cuenta + 1
